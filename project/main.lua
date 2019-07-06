@@ -1,5 +1,6 @@
 
 function love.load()
+	gamera = require "gamera"
 	collide=require "collide"
 	control=require "control"
 	draw=require "draw"
@@ -26,18 +27,24 @@ function love.load()
 	X=400
 	Y=300
 	castl,graph,Dours=gra.generate()
+	cam = gamera.new(0,0,siz * n, siz * n)
+	cam:setWindow(0,0,800,600)
 end
 function love.draw()
-	love.graphics.setColor( 255, 255, 255, 255 )
-	love.graphics.print(math.floor(fps),780,0)
-	love.graphics.print(heroId,0,0)
-	love.graphics.print(heroX.." "..heroY,0,10)
-	--love.graphics.print(X2.." "..Y2,0,20)
-	if love.keyboard.isDown("tab") then
-		drawMiniMap.drawMiniMap()
-	else
-		draw.draw(Objects)
-	end
+	
+	cam:draw(function(l,t,w,h)
+ 			love.graphics.setColor( 255, 255, 255, 255 )
+			love.graphics.print(math.floor(fps),780,0)
+			love.graphics.print(heroId,0,0)
+			love.graphics.print(heroX.." "..heroY,0,10)
+			--love.graphics.print(X2.." "..Y2,0,20)
+			if love.keyboard.isDown("tab") then
+				drawMiniMap.drawMiniMap()
+			else
+				draw.draw(Objects)
+			end
+	end)
+
 end
 function love.update(dt)
 	fps=1/dt
@@ -50,4 +57,5 @@ function love.update(dt)
 	heroId=(heroY-1)*n+heroX
 	RoomCollision.dfs(graph,heroId,n,visited,heroX*siz+siz/2,heroY*siz+siz/2,siz,5,3)
 	control.control("keyboard",speed,GrowthSpeed)
+	cam:setPosition(Mous.x, Mous.y)
 end
