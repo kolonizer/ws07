@@ -29,9 +29,9 @@ function love.load()
 	castl,graph,Dours=gra.generate()
 	cam = gamera.new(0,0,siz * n, siz * n)
 	cam:setWindow(0,0,800,600)
+	cam:setScale(4.0) 
 end
 function love.draw()
-	
 	cam:draw(function(l,t,w,h)
  			love.graphics.setColor( 255, 255, 255, 255 )
 			love.graphics.print(math.floor(fps),780,0)
@@ -44,7 +44,6 @@ function love.draw()
 				draw.draw(Objects)
 			end
 	end)
-
 end
 function love.update(dt)
 	fps=1/dt
