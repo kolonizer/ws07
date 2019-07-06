@@ -1,14 +1,16 @@
-collide=require "collide"
-control=require "control"
-draw=require "draw"
-gra=  require "generate"
-RoomCollision=require "RoomCollision"
-drawMiniMap=require "drawMiniMap"
-math.randomseed(os.time())
+
 function love.load()
+	collide=require "collide"
+	control=require "control"
+	draw=require "draw"
+	gra=  require "generate"
+	RoomCollision=require "RoomCollision"
+	drawMiniMap=require "drawMiniMap"
+	math.randomseed(os.time())
+
 	siz =100
-    n=10
-    if n%2==1 then
+	n=10
+	if n%2==1 then
 		id=((n-1)/2)*n+(n+1)/2
 		heroId=((n-1)/2)*n+(n+1)/2
 	else
@@ -23,7 +25,7 @@ function love.load()
 	dourSize=size/5
 	X=400
 	Y=300
-    castl,graph,Dours=gra.generate()
+	castl,graph,Dours=gra.generate()
 end
 function love.draw()
 	love.graphics.setColor( 255, 255, 255, 255 )
@@ -41,8 +43,8 @@ function love.update(dt)
 	fps=1/dt
 	local speed=150*dt
 	local GrowthSpeed=100*dt
-    Objects={Mous}
-    visited={}
+	Objects={Mous}
+	visited={}
 	heroX=(Mous.x-(Mous.x%siz))/siz
 	heroY=(Mous.y-(Mous.y%siz))/siz
 	heroId=(heroY-1)*n+heroX
