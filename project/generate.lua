@@ -183,11 +183,11 @@ function generate()
 		--print(inspect( graph, { depth = 2 } ) )
 	end
 	if n%2==1 then
-		max_vert=startRoom((n-1)/2*(n+1)+1,graph)
+		max_vert1=startRoom((n-1)/2*(n+1)+1,graph)
 	else
-		max_vert=startRoom((n/2-1)*n+n/2,graph)
+		max_vert1=startRoom((n/2-1)*n+n/2,graph)
 	end
-	max_vert=startRoom(				max_vert,graph)
+	max_vert2=startRoom(max_vert1,graph)
 	return castl,graph,Dours
 end
 return {generate=generate}

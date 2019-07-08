@@ -10,7 +10,7 @@ function love.load()
 		
 	math.randomseed(os.time())
 	siz =200
-	n=10
+	n=20
 	if n%2==1 then
 		id=((n-1)/2)*n+(n+1)/2
 		heroId=((n-1)/2)*n+(n+1)/2
@@ -48,6 +48,15 @@ function love.draw()
 		end)
 	end
 end
+function XYfromID(ID)
+	local x=ID%n
+	local y=math.floor(ID/n)-1
+	if x==0 then 
+		x=n
+		y=y-1
+	end
+	return {x,y}
+end
 function love.update(dt)
 	fps=1/dt
 	local speed=300*dt
@@ -60,14 +69,9 @@ function love.update(dt)
 	RoomCollision.dfs(graph,heroId,n,heroX*siz+siz/2,heroY*siz+siz/2,siz,5,3,{255,255,255,255})
 	local A=neighbours(visited)
 	for i=1,#A do
-		local roomX=A[i]%n
-		local roomY=math.floor(A[i]/n)-1
-		if roomX==0 then 
-			roomX=n
-			roomY=roomY-1
-		end
+		--roomX,roomY=XYfromID(A[i])
 		visited={}
-		RoomCollision.dfs(graph,A[i],n,(roomX+0)*siz+siz/2,(roomY+2)*siz+siz/2,siz,5,3,{50,50,50,255})
+		RoomCollision.dfs(graph,A[i],n,(XYfromID(A[i])[1]+0)*siz+siz/2,(XYfromID(A[i])[2]+2)*siz+siz/2,siz,5,3,{50,50,50,255})
 	end
 	--RoomCollision.dfs(graph,heroId,n,heroX*siz+siz/2,heroY*siz+siz/2,siz,5,3,{255,255,255,255})
 	control.control("keyboard",speed,GrowthSpeed)

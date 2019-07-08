@@ -32,7 +32,11 @@ function drawMiniMap()
 	for i=1,#Dours do
 		drawDour(Dours[i][1],Dours[i][2],Dours[i][3])
 	end
-	love.graphics.setColor( 150,150,150,255)
+	love.graphics.setColor( 0,0,0,50)
 	love.graphics.circle("fill",heroX*mapSize-mapSize/2,heroY*mapSize-mapSize/2,mapSize/4)
+	love.graphics.setColor( 0,255,0,100)
+	love.graphics.circle("fill",XYfromID(max_vert1)[1]*mapSize-mapSize/2,(XYfromID(max_vert1)[2]+2)*mapSize-mapSize/2,mapSize/4)
+	love.graphics.setColor( 255,0,0,100)
+	love.graphics.circle("fill",XYfromID(max_vert2)[1]*mapSize-mapSize/2,(XYfromID(max_vert2)[2]+2)*mapSize-mapSize/2,mapSize/4)
 end
 return {drawMiniMap=drawMiniMap}
