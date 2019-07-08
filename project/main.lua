@@ -21,7 +21,7 @@ function love.load()
 	--загрузка ресурсов
 	heroSprite = newSpr("spr/dracula", 50, 50, 0.1, 4, 3)
 	-- таблица главного героя
-	Mous={Type="circle",mode="line", sprite = heroSprite, x=(id%n)*siz+siz/2,y=(id%n)*siz+siz/2,radius=10}
+	Mous={Type="circle",mode="line", sprite = heroSprite, x=(id%n)*siz+siz/2,y=(id%n)*siz+siz/2,radius=10,colour={255,255,255,255}}
 	heroX=id%n
 	heroY=math.floor(id/n)+1
 	height = love.graphics.getHeight()
@@ -32,22 +32,20 @@ function love.load()
 	castl,graph,Dours=gra.generate()
 	cam = gamera.new(0,0,siz * (n+2), siz * (n+2))
 	cam:setWindow(0,0,800,600)
-	cam:setScale(0.3) 
+	cam:setScale(2) 
 end
 function love.draw()
 	if love.keyboard.isDown("tab") then
 		drawMiniMap.drawMiniMap()
 	else
 		cam:draw(function(l,t,w,h)
-				love.graphics.setColor( 255, 255, 255, 255 )
-				love.graphics.print(math.floor(fps),780,0)
-				--love.graphics.print(heroId,0,0)
-				--love.graphics.print(heroX.." "..heroY,0,10)
-				--love.graphics.print(X2.." "..Y2,0,20)
-
-				draw.draw(Objects)
-
-			end)
+			love.graphics.setColor( 255, 255, 255, 255 )
+			love.graphics.print(math.floor(fps),780,0)
+			--love.graphics.print(heroId,0,0)
+			--love.graphics.print(heroX.." "..heroY,0,10)
+			--love.graphics.print(X2.." "..Y2,0,20)
+			draw.draw(Objects)
+		end)
 	end
 end
 function love.update(dt)
@@ -59,7 +57,7 @@ function love.update(dt)
 	heroX=(Mous.x-(Mous.x%siz))/siz
 	heroY=(Mous.y-(Mous.y%siz))/siz
 	heroId=(heroY-1)*n+heroX
-	RoomCollision.dfs(graph,heroId,n,heroX*siz+siz/2,heroY*siz+siz/2,siz,5,3)
+	RoomCollision.dfs(graph,heroId,n,heroX*siz+siz/2,heroY*siz+siz/2,siz,5,3,{255,255,255,255})
 	local A=neighbours(visited)
 	for i=1,#A do
 		local roomX=A[i]%n
@@ -69,8 +67,9 @@ function love.update(dt)
 			roomY=roomY-1
 		end
 		visited={}
-		RoomCollision.dfs(graph,A[i],n,(roomX+0)*siz+siz/2,(roomY+2)*siz+siz/2,siz,5,3)
+		RoomCollision.dfs(graph,A[i],n,(roomX+0)*siz+siz/2,(roomY+2)*siz+siz/2,siz,5,3,{50,50,50,255})
 	end
+	--RoomCollision.dfs(graph,heroId,n,heroX*siz+siz/2,heroY*siz+siz/2,siz,5,3,{255,255,255,255})
 	control.control("keyboard",speed,GrowthSpeed)
 	updateSpr(heroSprite, dt)
 	cam:setPosition(Mous.x, Mous.y)

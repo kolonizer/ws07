@@ -1,4 +1,5 @@
 local function drawUnit(u)
+	love.graphics.setColor(u.colour[1],u.colour[2],u.colour[3],u.colour[4])
 	if u.Type=="rectangle" then
 		love.graphics.rectangle( u.mode, u.x - u.wigth/2, u.y - u.height/2, u.wigth, u.height)
 	elseif u.Type=="circle" then
@@ -10,7 +11,7 @@ local function drawUnit(u)
 	end
 end
 local function draw(o)
-	for i=1,#o do
+	for i=#o,1,-1 do
 		drawUnit( o[i] )	
 	end
 end
