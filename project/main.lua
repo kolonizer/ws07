@@ -20,7 +20,7 @@ function love.load()
 		heroId=(n/2-1)*n+n/2
 	end
 	--загрузка ресурсов
-	heroSprite = newSpr("spr/dracula", 50, 50, 0.1, 4, 3)
+	heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3)
 	-- таблица главного героя
 	Mous={Type="circle",mode="line", sprite = heroSprite, x=(id%n)*siz+siz/2,y=(id%n)*siz+siz/2,radius=10}
 	heroX=id%n
