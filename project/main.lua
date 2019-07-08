@@ -1,4 +1,3 @@
-
 function love.load()
 	gamera = require "gamera"
 	sprite = require "sprite"
@@ -10,7 +9,7 @@ function love.load()
 	drawMiniMap=require "drawMiniMap"
 		
 	math.randomseed(os.time())
-	siz =100
+	siz =200
 	n=10
 	if n%2==1 then
 		id=((n-1)/2)*n+(n+1)/2
@@ -33,7 +32,7 @@ function love.load()
 	castl,graph,Dours=gra.generate()
 	cam = gamera.new(0,0,siz * (n+2), siz * (n+2))
 	cam:setWindow(0,0,800,600)
-	cam:setScale(4.0) 
+	cam:setScale(0.3) 
 end
 function love.draw()
 	if love.keyboard.isDown("tab") then
@@ -53,14 +52,25 @@ function love.draw()
 end
 function love.update(dt)
 	fps=1/dt
-	local speed=150*dt
+	local speed=300*dt
 	local GrowthSpeed=100*dt
 	Objects={Mous}
 	visited={}
 	heroX=(Mous.x-(Mous.x%siz))/siz
 	heroY=(Mous.y-(Mous.y%siz))/siz
 	heroId=(heroY-1)*n+heroX
-	RoomCollision.dfs(graph,heroId,n,visited,heroX*siz+siz/2,heroY*siz+siz/2,siz,5,3)
+	RoomCollision.dfs(graph,heroId,n,heroX*siz+siz/2,heroY*siz+siz/2,siz,5,3)
+	local A=neighbours(visited)
+	for i=1,#A do
+		local roomX=A[i]%n
+		local roomY=math.floor(A[i]/n)-1
+		if roomX==0 then 
+			roomX=n
+			roomY=roomY-1
+		end
+		visited={}
+		RoomCollision.dfs(graph,A[i],n,(roomX+0)*siz+siz/2,(roomY+2)*siz+siz/2,siz,5,3)
+	end
 	control.control("keyboard",speed,GrowthSpeed)
 	updateSpr(heroSprite, dt)
 	cam:setPosition(Mous.x, Mous.y)
