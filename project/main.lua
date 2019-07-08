@@ -1,6 +1,7 @@
 
 function love.load()
 	gamera = require "gamera"
+	sprite = require "sprite"
 	collide=require "collide"
 	control=require "control"
 	draw=require "draw"
