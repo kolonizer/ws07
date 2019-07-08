@@ -8,6 +8,7 @@ function love.load()
 	gra=  require "generate"
 	RoomCollision=require "RoomCollision"
 	drawMiniMap=require "drawMiniMap"
+		
 	math.randomseed(os.time())
 	siz =100
 	n=10
@@ -18,7 +19,10 @@ function love.load()
 		id=(n/2-1)*n+n/2
 		heroId=(n/2-1)*n+n/2
 	end
-	Mous={Type="circle",mode="line",x=(id%n)*siz+siz/2,y=(id%n)*siz+siz/2,radius=10}
+	--загрузка ресурсов
+	heroSprite = newSpr("spr/dracula", 50, 50, 0.1, 4, 3)
+	-- таблица главного героя
+	Mous={Type="circle",mode="line", sprite = heroSprite, x=(id%n)*siz+siz/2,y=(id%n)*siz+siz/2,radius=10}
 	heroX=id%n
 	heroY=math.floor(id/n)+1
 	height = love.graphics.getHeight()
@@ -58,5 +62,6 @@ function love.update(dt)
 	heroId=(heroY-1)*n+heroX
 	RoomCollision.dfs(graph,heroId,n,visited,heroX*siz+siz/2,heroY*siz+siz/2,siz,5,3)
 	control.control("keyboard",speed,GrowthSpeed)
+	updateSpr(heroSprite, dt)
 	cam:setPosition(Mous.x, Mous.y)
 end
