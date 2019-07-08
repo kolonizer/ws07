@@ -21,7 +21,7 @@ function bliz(x,y)
 		end
 		q_y=(norm_id-q_x)/n-1
 		kal=0
-		print(norm_id)
+		--print(norm_id)
 		if q_x>=2 and norm_id-1>0 and norm_id-1<=n*n then
 			if castl[norm_id-1].use then
 				kal=kal+1
