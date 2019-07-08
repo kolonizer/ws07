@@ -20,7 +20,7 @@ function newSpr(name, width, height, delay, view, anima)
 	for i = 1, view do
 		for j = 1, anima do
 			local f = t.viewSprite[i]..j
-			print(name..t.viewSprite[i]..j..".png")
+			--print(name..t.viewSprite[i]..j..".png")
 			t.spr[f] = love.graphics.newImage(name..t.viewSprite[i]..j..".png")
 		end
 	end
@@ -86,11 +86,11 @@ function drawSpr(t, x, y)
 end
 
 function drawSpr2(t, x, y)
-	print(t.curAnim..t.curFrame)
+	--print(t.curAnim..t.curFrame)
 	love.graphics.draw(t.spr[t.curAnim..framesOrderBurn[t.curFrame]], x - t.width / 2, y - t.height / 2)
 end
 
 function drawSpr0(t, x, y)
-	print(t.curAnim..t.curFrame)
+	--print(t.curAnim..t.curFrame)
 	love.graphics.draw(t.spr[t.curAnim..framesOrderItem[t.curFrame]], x - t.width / 2, y - t.height / 2)
 end
