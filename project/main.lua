@@ -8,7 +8,6 @@ function love.load()
 	RoomCollision=require "RoomCollision"
 	drawMiniMap=require "drawMiniMap"
 	math.randomseed(os.time())
-
 	siz =100
 	n=10
 	if n%2==1 then
@@ -22,28 +21,30 @@ function love.load()
 	heroX=id%n
 	heroY=math.floor(id/n)+1
 	height = love.graphics.getHeight()
-	size=height/n
-	dourSize=size/5
+	mapSize=height/n
+	dourSize=mapSize/5
 	X=400
 	Y=300
 	castl,graph,Dours=gra.generate()
-	cam = gamera.new(0,0,siz * n, siz * n)
+	cam = gamera.new(0,0,siz * (n+2), siz * (n+2))
 	cam:setWindow(0,0,800,600)
 	cam:setScale(4.0) 
 end
 function love.draw()
-	cam:draw(function(l,t,w,h)
- 			love.graphics.setColor( 255, 255, 255, 255 )
-			love.graphics.print(math.floor(fps),780,0)
-			love.graphics.print(heroId,0,0)
-			love.graphics.print(heroX.." "..heroY,0,10)
-			--love.graphics.print(X2.." "..Y2,0,20)
-			if love.keyboard.isDown("tab") then
-				drawMiniMap.drawMiniMap()
-			else
+	if love.keyboard.isDown("tab") then
+		drawMiniMap.drawMiniMap()
+	else
+		cam:draw(function(l,t,w,h)
+				love.graphics.setColor( 255, 255, 255, 255 )
+				love.graphics.print(math.floor(fps),780,0)
+				--love.graphics.print(heroId,0,0)
+				--love.graphics.print(heroX.." "..heroY,0,10)
+				--love.graphics.print(X2.." "..Y2,0,20)
+
 				draw.draw(Objects)
-			end
-	end)
+
+			end)
+	end
 end
 function love.update(dt)
 	fps=1/dt
