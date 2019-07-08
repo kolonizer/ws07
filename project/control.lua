@@ -39,6 +39,9 @@ local function control(TypeControl,speed,GrowthSpeed)
 			end
 		end
 	elseif TypeControl=="keyboard" then
+		if love.keyboard.isDown("a","d") and love.keyboard.isDown("s","w")then
+			speed=speed/(math.sqrt(2))
+		end
 		if love.keyboard.isDown("a") then
 			Mous.x=Mous.x-speed
 			if Touch() then
