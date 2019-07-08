@@ -1,3 +1,12 @@
+function XYfromID(ID)
+	local x=ID%n
+	local y=math.floor(ID/n)-1
+	if x==0 then 
+		x=n
+		y=y-1
+	end
+	return {x,y}
+end
 function love.load()
 	gamera = require "gamera"
 	sprite = require "sprite"
@@ -10,26 +19,28 @@ function love.load()
 		
 	math.randomseed(os.time())
 	siz =200
-	n=20
-	if n%2==1 then
+	n=10
+	--[[if n%2==1 then
 		id=((n-1)/2)*n+(n+1)/2
 		heroId=((n-1)/2)*n+(n+1)/2
 	else
 		id=(n/2-1)*n+n/2
 		heroId=(n/2-1)*n+n/2
-	end
+	end--]]
 	--загрузка ресурсов
 	heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3)
 	-- таблица главного героя
-	Mous={Type="circle",mode="line", sprite = heroSprite, x=(id%n)*siz+siz/2,y=(id%n)*siz+siz/2,radius=10,colour={255,255,255,255}}
-	heroX=id%n
-	heroY=math.floor(id/n)+1
 	height = love.graphics.getHeight()
 	mapSize=height/n
 	dourSize=mapSize/5
 	X=400
 	Y=300
 	castl,graph,Dours=gra.generate()
+	Mous={Type="circle",mode="line", sprite = heroSprite, x=XYfromID(max_vert1)[1]*siz+siz/2,y=(XYfromID(max_vert1)[2]+2)*siz+siz/2,radius=10,colour={255,255,255,255}}
+	id=max_vert1
+	heroId=id
+	heroX=id%n
+	heroY=math.floor(id/n)+1
 	cam = gamera.new(0,0,siz * (n+2), siz * (n+2))
 	cam:setWindow(0,0,800,600)
 	cam:setScale(3.0) 
@@ -47,15 +58,6 @@ function love.draw()
 			draw.draw(Objects)
 		end)
 	end
-end
-function XYfromID(ID)
-	local x=ID%n
-	local y=math.floor(ID/n)-1
-	if x==0 then 
-		x=n
-		y=y-1
-	end
-	return {x,y}
 end
 function love.update(dt)
 	fps=1/dt
