@@ -1,8 +1,9 @@
+
 inspect=require "inspect"
 --gra="GraphFunctions"
 --level=gra.graphInit('level')
 
-function bliz(x,y)
+function bliz(x,y,castl)
 	while true do
 		local A={}
 		local number=(y-1)*n+x
@@ -21,7 +22,7 @@ function bliz(x,y)
 		end
 		q_y=(norm_id-q_x)/n-1
 		kal=0
-		--print(norm_id)
+		print(norm_id)
 		if q_x>=2 and norm_id-1>0 and norm_id-1<=n*n then
 			if castl[norm_id-1].use then
 				kal=kal+1
@@ -65,7 +66,7 @@ function bliz(x,y)
 	end
 end
 
-function schet()
+function schet(castl)
 	local q=0
 	for i=1,#castl do
 		if castl[i].use then
@@ -75,7 +76,7 @@ function schet()
 	return q
 end
 
-function poisk(w)
+function poisk(w,castl)
 	--print("!!!")
 	local q=0
 	for i=1,#castl do
@@ -91,9 +92,56 @@ function poisk(w)
 	return -1, -1, -1
 end
 
+function dfsGenerate(id,m,graph)
+	w_x=id%n
+	if w_x==0 then
+		w_x=n
+	end
+	w_y=(id-w_x)/n-1
+	visitedGenerate[#visitedGenerate+1]=id
+	for i=1,#graph[id] do
+		if graph[id][i]~=0 and containElem(visitedGenerate,i)==false then
+			dfsGenerate(i,m+1,graph)
+			
+		end
+	end
+
+--	if id-1>=0 and w_x>=2  and graph[id][id-1]~=0 and containElem(visitedGenerate,id-1)==false then
+--	qz	dfsGenerate(id-1,m+1)
+--	end
+--	if id+1<=n^2 and w_x<=n-1 and graph[id][id+1]~=0 and containElem(visitedGenerate,id+1)==false then
+--		dfsGenerate(id+1,m+1)
+--	end
+--	if id-n>=0 and w_y>=2 and graph[id][id-n]~=0 and containElem(visitedGenerate,id-n)==false then
+--		dfsGenerate(id-n,m+1)
+--	end
+--	if id+n<=n^2 and w_y<=n-1 and graph[id][id+n]~=0 and containElem(visitedGenerate,id+n)==false then
+--		dfsGenerate(id+n,m+1)
+--	end
+	if m==maxGenerate then
+		max_vertex[#max_vertex+1]=id
+	end
+	if m>maxGenerate then
+		maxGenerate=m
+		max_vertex={id}
+		vertexGenerate=id
+	end
+end
+function startRoom(idGenerate,graph)
+	visitedGenerate={}
+	max_vertex={}
+	maxGenerate=0
+	vertexGenerate=0
+	dfsGenerate(idGenerate,0,graph)
+	print(inspect( max_vertex, { depth = 2 } ) )
+	local q=max_vertex[math.random(#max_vertex)]
+	print(q)
+	return q--,max_vertex
+end
+
 function generate()
-	castl={}
-	graph={}
+	local castl={}
+	local graph={}
 
 	for yc=1,n do
 	    for xc=1,n do
@@ -111,11 +159,11 @@ function generate()
 	else
 		castl[(n/2-1)*n+n/2].use=true
 	end
-	Dours={}
+	local Dours={}
 	for i=1,math.random((n-4)*(n-3),(n-3)*(n-3)),1 do
 		while true do
-			local verch,wx,wy=poisk(math.random(1,schet()))
-			local q_id=bliz(castl[verch].x,castl[verch].y)
+			local verch,wx,wy=poisk(math.random(1,schet(castl)),castl)
+			local q_id=bliz(castl[verch].x,castl[verch].y,castl)
 			if graph[verch][q_id]==0 then
 				if (castl[q_id].use and math.random(1,4)==1) or castl[q_id].use==false  then
 					if math.random(1,4)==1 then
@@ -134,6 +182,12 @@ function generate()
 		end
 		--print(inspect( graph, { depth = 2 } ) )
 	end
+	if n%2==1 then
+		max_vert=startRoom((n-1)/2*(n+1)+1,graph)
+	else
+		max_vert=startRoom((n/2-1)*n+n/2,graph)
+	end
+	max_vert=startRoom(				max_vert,graph)
 	return castl,graph,Dours
 end
 return {generate=generate}

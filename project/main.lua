@@ -32,7 +32,7 @@ function love.load()
 	castl,graph,Dours=gra.generate()
 	cam = gamera.new(0,0,siz * (n+2), siz * (n+2))
 	cam:setWindow(0,0,800,600)
-	cam:setScale(2) 
+	cam:setScale(3.0) 
 end
 function love.draw()
 	if love.keyboard.isDown("tab") then
