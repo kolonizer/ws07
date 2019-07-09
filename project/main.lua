@@ -19,7 +19,9 @@ function love.load()
     size = 403
     n = 11
     --загрузка ресурсов
-    heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3)
+    heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3, {1, 2, 3, 2})
+	woodTable = newSpr("spr/woodTable", 50, 50, 0, 1, 1, nil)
+	candle = newSpr("spr/candels", 30, 30, 0.2, 1, 2, {1, 2})
     -- таблица главного героя
     height = love.graphics.getHeight()
     mapSize = height / n

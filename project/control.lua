@@ -12,24 +12,28 @@ local function control(TypeControl, person, speed, GrowthSpeed)
         if collide.CollideWith(person.name) then
             person.x = person.x + speed
         end
+		heroSprite.curAnim = "Left" 
     end
     if love.keyboard.isDown(TypeControl[4]) then
         person.x = person.x + speed
         if collide.CollideWith(person.name) then
             person.x = person.x - speed
         end
+		heroSprite.curAnim = "Right"
     end
     if love.keyboard.isDown(TypeControl[2]) then
         person.y = person.y - speed
         if collide.CollideWith(person.name) then
             person.y = person.y + speed
         end
+		heroSprite.curAnim = "Up"
     end
     if love.keyboard.isDown(TypeControl[3]) then
         person.y = person.y + speed
         if collide.CollideWith(person.name) then
             person.y = person.y - speed
         end
+		heroSprite.curAnim = "Down"
     end
     if love.keyboard.isDown(TypeControl[5]) then
         if person.Type == "circle" then
