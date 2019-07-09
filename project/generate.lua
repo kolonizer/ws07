@@ -1,3 +1,4 @@
+-- Генерация лабиринта (замка, данжа)
 inspect = require "inspect"
 --gra="GraphFunctions"
 --level=gra.graphInit('level')

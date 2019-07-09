@@ -1,3 +1,6 @@
+-- ГРАФство. Процедурно генерируемый лабиринт
+-- ws07 мастерская № 7. ЛШЮП 2019
+
 function love.load()
     gamera = require "gamera"
     sprite = require "sprite"

@@ -1,3 +1,4 @@
+-- Отрисовка всех юнитов
 local function drawUnit(u)
     love.graphics.setColor(u.colour[1], u.colour[2], u.colour[3], u.colour[4])
     if u.Type == "rectangle" then
