@@ -25,13 +25,22 @@ function drawMiniMap()
 				love.graphics.rectangle("fill",x,y,mapSize,mapSize)
 				love.graphics.setColor( 0,0,0,255)
 				love.graphics.rectangle("line",x,y,mapSize,mapSize)
-				--love.graphics.print(casts[q].rast,(x+x+1)/2,(y+y+1)/2)
 			end
 		end
 	end
 	love.graphics.setColor( 200,200,200,255)
 	for i=1,#Dours do
 		drawDour(Dours[i][1],Dours[i][2],Dours[i][3])
+	end
+	love.graphics.setColor( 0,0,0,255)
+	q=0
+	for y=0,(n-1)*mapSize,mapSize do
+		for x=0,(n-1)*mapSize,mapSize do
+			q=q+1
+			if castl[q].use then
+				love.graphics.print(q,(x+x+1)/2,(y+y+1)/2)
+			end
+		end
 	end
 	love.graphics.setColor( 0,0,0,50)
 	love.graphics.circle("fill",heroX*mapSize-mapSize/2,heroY*mapSize-mapSize/2,mapSize/4)
