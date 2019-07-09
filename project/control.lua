@@ -10,35 +10,7 @@ local function control(TypeControl, speed, GrowthSpeed)
     if love.keyboard.isDown("escape") then
         love.event.quit()
     end
-    if TypeControl == "mous" then
-        cursor = love.mouse.getCursor()
-        X, Y = love.mouse.getPosition()
-        local q = math.sqrt((Y - Hero.y) ^ 2 + (X - Hero.x) ^ 2) / speed
-        local qx = math.abs(X - Hero.x) / q
-        local qy = math.abs(Y - Hero.y) / q
-        if X - speed > Hero.x then
-            Hero.x = Hero.x + qx
-            if Touch() then
-                Hero.x = Hero.x - qx
-            end
-        elseif X + speed < Hero.x then
-            Hero.x = Hero.x - qx
-            if Touch() then
-                Hero.x = Hero.x + qx
-            end
-        end
-        if Y - speed > Hero.y then
-            Hero.y = Hero.y + qy
-            if Touch() then
-                Hero.y = Hero.y - qy
-            end
-        elseif Y + speed < Hero.y then
-            Hero.y = Hero.y - qy
-            if Touch() then
-                Hero.y = Hero.y + qy
-            end
-        end
-    elseif TypeControl == "keyboard" then
+    if TypeControl == "keyboard" then
         if love.keyboard.isDown("a", "d") and love.keyboard.isDown("s", "w") then
             speed = speed / (math.sqrt(2))
         end
