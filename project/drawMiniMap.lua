@@ -1,8 +1,6 @@
 -- отрисовка мини-карты
 
 local function drawDour(d1, d2, Type)
-	local mapSize = love.graphics.getHeight() / n
-    local dourSize = mapSize / 5
     local x1 = d1 % n
 	local y1 = math.floor(d1 / n) + 1
     local x2 = d2 % n
@@ -21,7 +19,6 @@ local function drawDour(d1, d2, Type)
     end
 end
 local function drawMiniMap(castl)
-	local mapSize = love.graphics.getHeight() / n
     love.graphics.clear(255, 255, 255)
     q = 0
     for y = 0, (n - 1) * mapSize, mapSize do

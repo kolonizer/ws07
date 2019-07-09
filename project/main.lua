@@ -18,6 +18,8 @@ function love.load()
 	ws=5
     size = 403
     n = 10
+	mapSize = love.graphics.getHeight() / n
+    dourSize = mapSize / 5
     --загрузка ресурсов
     heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3, {1, 2, 3, 2})
 	woodTable = newSpr("spr/woodTable", 50, 50, 0, 1, 1, nil)
