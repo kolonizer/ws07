@@ -8,18 +8,11 @@ function containElem(g, n)
 end
 function neighbours(g, graph)
     local A = {}
-    for i = 1, #g do
-        if g[i] - 1 >= 0 and graph[g[i]][g[i] - 1] ~= 0 and containElem(A, g[i] - 1) == false then
-            A[#A + 1] = g[i] - 1
-        end
-        if g[i] + 1 <= n ^ 2 and graph[g[i]][g[i] + 1] ~= 0 and containElem(A, g[i] + 1) == false then
-            A[#A + 1] = g[i] + 1
-        end
-        if g[i] - n >= 0 and graph[g[i]][g[i] - n] ~= 0 and containElem(A, g[i] - n) == false then
-            A[#A + 1] = g[i] - n
-        end
-        if g[i] + n <= n ^ 2 and graph[g[i]][g[i] + n] ~= 0 and containElem(A, g[i] + n) == false then
-            A[#A + 1] = g[i] + n
+	for j = 1, #A do
+        for i = 1, #graph do
+            if graph[i][A[j]] ~= 0 and containElem(A, i) == false and containElem(distantRooms, i) == false then
+                distantRooms[#distantRooms + 1] = i
+            end
         end
     end
     return A
