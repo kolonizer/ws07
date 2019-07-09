@@ -6,6 +6,7 @@ local function drawUnit(u)
     elseif u.Type == "circle" then
         love.graphics.circle(u.mode, u.x, u.y, u.radius)
         -- если у этого объекта естьполе sprite то рисуем его
+		love.graphics.setColor(255,255,255,255)
         if u.sprite then
             drawSpr(u.sprite, u.x, u.y)
         end

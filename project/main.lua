@@ -23,20 +23,18 @@ function love.load()
 	woodTable = newSpr("spr/woodTable", 50, 50, 0, 1, 1, nil)
 	candle = newSpr("spr/candels", 30, 30, 0.2, 1, 2, {1, 2})
     -- таблица главного героя
-    mapSize = love.graphics.getHeight() / n
-    dourSize = mapSize / 5
     X = 400
     Y = 300
     castl, graph, Dours = gra.generate()
 	id = max_vert1
 	for p=1,#castl do
-		print(p,castl[p].tip)
+		--print(p,castl[p].tip)
 		if castl[p].tip=='treasure' then
 			spawn.AddLotLoot(p,castl)
 		end
 	end
-	print(inspect( castl, { depth = 4 } ) )
-    Hero = {id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name="Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 255 } }
+	--print(inspect( castl, { depth = 4 } ) )
+    Hero = {id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name="Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 } }
     cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
     cam:setWindow(0, 0, 800, 600)
     cam:setScale(1.4)
@@ -55,8 +53,8 @@ function love.draw()
 		end
     else
         cam:draw(function(l, t, w, h)
-            love.graphics.setColor(255, 255, 255, 255)
 			spawn.drawLoot(v,castl)
+            love.graphics.setColor(255, 255, 255, 255)
             love.graphics.print(math.floor(fps), l, t)
             draw.draw(Objects)
         end)
