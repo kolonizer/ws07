@@ -2,6 +2,7 @@
 -- ws07 мастерская № 7. ЛШЮП 2019
 
 function love.load()
+	inspect = require "inspect"
     gamera = require "gamera"
     sprite = require "sprite"
     collide = require "collide"
@@ -27,7 +28,7 @@ function love.load()
     Hero = {id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name="Hero", Type = "circle", mode = "line", sprite = heroSprite, x = XYfromID(max_vert1)[1] * size + size / 2, y = (XYfromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 255 } }
     cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
     cam:setWindow(0, 0, 800, 600)
-    cam:setScale(2)
+    cam:setScale(0.5)
 end
 function love.draw()
     if love.keyboard.isDown("tab") then

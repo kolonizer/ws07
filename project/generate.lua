@@ -113,13 +113,7 @@ function distantRoom(q, graph, castl)
             break
         end
         distantRooms = {}
-        for j = 1, #A do
-            for i = 1, #graph do
-                if graph[i][A[j]] ~= 0 and containElem(A, i) == false and containElem(distantRooms, i) == false then
-                    distantRooms[#distantRooms + 1] = i
-                end
-            end
-        end
+        distantRooms=neighbours(A,graph)
     end
     return distantRooms[math.random(#distantRooms)]
 end

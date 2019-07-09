@@ -11,10 +11,10 @@ function containElem(g, n)
 end
 function neighbours(g, graph)
     local A = {}
-	for j = 1, #A do
+	for j = 1, #g do
         for i = 1, #graph do
-            if graph[i][A[j]] ~= 0 and containElem(A, i) == false and containElem(distantRooms, i) == false then
-                distantRooms[#distantRooms + 1] = i
+            if graph[i][g[j]] ~= 0 and containElem(A, i) == false and containElem(g, i) == false then
+                A[#A + 1] = i
             end
         end
     end
