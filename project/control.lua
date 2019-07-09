@@ -37,7 +37,7 @@ local function control(TypeControl, person, speed, GrowthSpeed)
         elseif person.Type == "rectangle" then
             person.wigth, person.height = person.wigth + GrowthSpeed, person.height + GrowthSpeed * person.height / person.wigth
         end
-        if CollideWith(person.name) then
+        if collide.CollideWith(person.name) then
             if person.Type == "circle" then
                 person.radius = person.radius - GrowthSpeed
             elseif person.Type == "rectangle" then
@@ -51,7 +51,7 @@ local function control(TypeControl, person, speed, GrowthSpeed)
         elseif person.Type == "rectangle" and person.wigth > GrowthSpeed and person.height > GrowthSpeed then
             person.wigth, person.height = person.wigth - GrowthSpeed, person.height - GrowthSpeed * person.height / person.wigth
         end
-        if CollideWith(person.name) then
+        if collide.CollideWith(person.name) then
             if person.Type == "circle" then
                 person.radius = person.radius + GrowthSpeed
             elseif person.Type == "rectangle" then

@@ -11,10 +11,13 @@ function love.load()
     gra = require "generate"
     RoomCollision = require "RoomCollision"
     drawMiniMap = require "drawMiniMap"
+	spawn = require "spawn"
 
     math.randomseed(os.time())
+	Ls=31
+	ws=5
     size = 403
-    n = 10
+    n = 11
     --загрузка ресурсов
     heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3)
     -- таблица главного героя
@@ -25,12 +28,20 @@ function love.load()
     Y = 300
     castl, graph, Dours = gra.generate()
 	id = max_vert1
+	for p=1,#castl do
+		print(p,castl[p].tip)
+		if castl[p].tip=='treasure' then
+			spawn.AddLotLoot(p,castl)
+		end
+	end
+	print(inspect( castl, { depth = 4 } ) )
     Hero = {id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name="Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 255 } }
     cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
     cam:setWindow(0, 0, 800, 600)
-    cam:setScale(0.5)
+    cam:setScale(1.4)
 end
 function love.draw()
+	love.graphics.clear(0,0,0)
     if love.keyboard.isDown("tab") then
         drawMiniMap.drawMiniMap(castl)
     else
@@ -38,6 +49,7 @@ function love.draw()
             love.graphics.setColor(255, 255, 255, 255)
             love.graphics.print(math.floor(fps), l, t)
             draw.draw(Objects)
+			spawn.drawLoot(v,castl)
         end)
     end
 end
@@ -49,6 +61,7 @@ function love.update(dt)
     Hero.cellY = (Hero.y - (Hero.y % size)) / size
     Hero.id = (Hero.cellY - 1) * n + Hero.cellX
     RoomCollision.dfs(graph, Hero.id, n, Hero.cellX * size + size / 2, Hero.cellY * size + size / 2, size, 5, 3, { 255, 255, 255, 255 })
+	v=visited
     local A = RoomCollision.neighbours(visited, graph)
     for i = 1, #A do
         visited = {}

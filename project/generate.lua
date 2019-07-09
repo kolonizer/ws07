@@ -122,7 +122,7 @@ local function generate()
     local graph = {}
     for yc = 1, n do
         for xc = 1, n do
-            castl[(yc - 1) * n + xc] = { x_pix = xc * mapSize, y_pix = yc * mapSize, loot = {}, x = xc, y = yc, tip = "", id = (yc - 1) * n + xc, use = false }--{xc,yc,-1,(xc-1)*n+yc,false}
+            castl[(yc - 1) * n + xc] = {T={}, x_pix = xc * size, y_pix = yc * size, loot = {}, x = xc, y = yc, tip = "", id = (yc - 1) * n + xc, use = false }--{xc,yc,-1,(xc-1)*n+yc,false}
         end
     end
     for xc = 1, #castl, 1 do
