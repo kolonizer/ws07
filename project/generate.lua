@@ -170,6 +170,17 @@ function generate()
         max_vert1 = distantRoom((n / 2 - 1) * n + n / 2, graph, castl)
     end
     max_vert2 = distantRoom(max_vert1, graph, castl)
+	castl[max_vert1].tip='start'
+	castl[max_vert2].tip='boss'
+	for p=1,math.random(n-4,n-2) do
+		while true do
+			qwerty=math.random(1,#castl)
+			if castl[qwerty].use and castl[qwerty].tip==-1 then
+				castl[qwerty].tip='treasure'
+				break
+			end
+		end
+	end
     return castl, graph, Dours
 end
 return { generate = generate }

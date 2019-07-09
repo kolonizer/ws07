@@ -14,7 +14,7 @@ function drawDour(d1, d2, Type)
         love.graphics.rectangle("fill", (x1 + x2) / 2 * mapSize - mapSize + widthLine, (y1 + y2) / 2 * mapSize - mapSize + widthLine, mapSize - widthLine*2, mapSize - widthLine*2)
     end
 end
-function drawMiniMap()
+function drawMiniMap(castl)
     love.graphics.clear(255, 255, 255)
     q = 0
     for y = 0, (n - 1) * mapSize, mapSize do
@@ -25,6 +25,7 @@ function drawMiniMap()
                 love.graphics.rectangle("fill", x, y, mapSize, mapSize)
                 love.graphics.setColor(0, 0, 0, 255)
                 love.graphics.rectangle("line", x, y, mapSize, mapSize)
+				love.graphics.print(castl[q].tip,(x+x+1)/2,(y+y+1)/2)
             end
         end
     end

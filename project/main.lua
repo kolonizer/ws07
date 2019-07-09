@@ -9,7 +9,7 @@ function love.load()
     drawMiniMap = require "drawMiniMap"
 
     math.randomseed(os.time())
-    size = 200
+    size = 403
     n = 10
     --загрузка ресурсов
     heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3)
@@ -28,7 +28,7 @@ function love.load()
 end
 function love.draw()
     if love.keyboard.isDown("tab") then
-        drawMiniMap.drawMiniMap()
+        drawMiniMap.drawMiniMap(castl)
     else
         cam:draw(function(l, t, w, h)
             love.graphics.setColor(255, 255, 255, 255)
