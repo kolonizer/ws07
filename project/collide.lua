@@ -1,3 +1,13 @@
+function CollideWith(person)
+    if person=="Hero" then
+		for i = 1, #Objects do
+            if collide.collide(Objects[i], Hero) then
+			    return true
+            end
+		end
+		return false
+    end
+end
 local function collide(O, M)
     if O == M then
         return false

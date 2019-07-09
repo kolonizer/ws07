@@ -11,7 +11,7 @@ function drawDour(d1, d2, Type)
     if Type == 1 then
         love.graphics.rectangle("fill", (x1 + x2) / 2 * mapSize - dourSize / 2 - mapSize / 2, (y1 + y2) / 2 * mapSize - dourSize / 2 - mapSize / 2, dourSize, dourSize)
     elseif Type == 2 then
-        love.graphics.rectangle("fill", (x1 + x2) / 2 * mapSize - mapSize + 1, (y1 + y2) / 2 * mapSize - mapSize + 1, mapSize - 2, mapSize - 2)
+        love.graphics.rectangle("fill", (x1 + x2) / 2 * mapSize - mapSize + widthLine, (y1 + y2) / 2 * mapSize - mapSize + widthLine, mapSize - widthLine*2, mapSize - widthLine*2)
     end
 end
 function drawMiniMap(castl)

@@ -29,7 +29,7 @@ function love.load()
     X = 400
     Y = 300
     castl, graph, Dours = gra.generate()
-    Hero = { Type = "circle", mode = "line", sprite = heroSprite, x = XYfromID(max_vert1)[1] * size + size / 2, y = (XYfromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 255 } }
+    Hero = {name="Hero", Type = "circle", mode = "line", sprite = heroSprite, x = XYfromID(max_vert1)[1] * size + size / 2, y = (XYfromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 255 } }
     id = max_vert1
     heroId = id
     heroX = id % n
@@ -44,7 +44,7 @@ function love.draw()
     else
         cam:draw(function(l, t, w, h)
             love.graphics.setColor(255, 255, 255, 255)
-            love.graphics.print(math.floor(fps), 780, 0)
+            love.graphics.print(math.floor(fps), l, t)
             --love.graphics.print(heroId,0,0)
             --love.graphics.print(heroX.." "..heroY,0,10)
             --love.graphics.print(X2.." "..Y2,0,20)
@@ -69,7 +69,7 @@ function love.update(dt)
         RoomCollision.dfs(graph, A[i], n, (XYfromID(A[i])[1] + 0) * size + size / 2, (XYfromID(A[i])[2] + 2) * size + size / 2, size, 5, 3, { 50, 50, 50, 255 })
     end
     --RoomCollision.dfs(graph,heroId,n,heroX*size+size/2,heroY*size+size/2,size,5,3,{255,255,255,255})
-    control.control("keyboard", speed, GrowthSpeed)
+    control.control({"a","w","s","d","q","e"}, Hero, speed, GrowthSpeed)
     updateSpr(heroSprite, dt)
     cam:setPosition(Hero.x, Hero.y)
 end
