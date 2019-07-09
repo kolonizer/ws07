@@ -1,7 +1,7 @@
 -- добавляет в Objects все стены комнат
 -- TODO таблица visited сейчас глобальная. Не хорошо. И не инициализируется здесь.
 -- 3 функции в этом модуле глобальные. а файл модуль. они не передаются в return модуля а используются напрямую. плохо
-function containElem(g, n)
+local function containElem(g, n)
     for i = 1, #g do
         if g[i] == n then
             return true
@@ -9,7 +9,7 @@ function containElem(g, n)
     end
     return false
 end
-function neighbours(g, graph)
+local function neighbours(g, graph)
     local A = {}
 	for j = 1, #g do
         for i = 1, #graph do
@@ -63,4 +63,4 @@ local function dfs(graph, id, n, x, y, size, w, q, colour)
         dfs(graph, id + n, n, x, y + size, size, w, q, colour)
     end
 end
-return { dfs = dfs }
+return { dfs = dfs, neighbours=neighbours}

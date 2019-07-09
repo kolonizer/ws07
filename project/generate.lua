@@ -3,7 +3,7 @@ inspect = require "inspect"
 --gra="GraphFunctions"
 --level=gra.graphInit('level')
 
-function bliz(x, y, castl)
+local function bliz(x, y, castl)
     while true do
         local A = {}
         local number = (y - 1) * n + x
@@ -70,7 +70,7 @@ function bliz(x, y, castl)
     end
 end
 
-function schet(castl)
+local function schet(castl)
     local q = 0
     for i = 1, #castl do
         if castl[i].use then
@@ -80,7 +80,7 @@ function schet(castl)
     return q
 end
 
-function poisk(w, castl)
+local function poisk(w, castl)
     --print("!!!")
     local q = 0
     for i = 1, #castl do
@@ -96,7 +96,7 @@ function poisk(w, castl)
     return -1, -1, -1
 end
 
-function distantRoom(q, graph, castl)
+local function distantRoom(q, graph, castl)
     local distantRooms = {}
     local A = { q }
     local u = 0
@@ -113,11 +113,11 @@ function distantRoom(q, graph, castl)
             break
         end
         distantRooms = {}
-        distantRooms=neighbours(A,graph)
+        distantRooms=RoomCollision.neighbours(A,graph)
     end
     return distantRooms[math.random(#distantRooms)]
 end
-function generate()
+local function generate()
     local castl = {}
     local graph = {}
     for yc = 1, n do

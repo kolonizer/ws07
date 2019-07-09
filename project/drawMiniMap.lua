@@ -1,6 +1,6 @@
 -- отрисовка мини-карты
 
-function drawDour(d1, d2, Type)
+local function drawDour(d1, d2, Type)
     x1, y1 = d1 % n, math.floor(d1 / n) + 1
     x2, y2 = d2 % n, math.floor(d2 / n) + 1
     if x1 == 0 then
@@ -16,7 +16,7 @@ function drawDour(d1, d2, Type)
         love.graphics.rectangle("fill", (x1 + x2) / 2 * mapSize - mapSize + widthLine, (y1 + y2) / 2 * mapSize - mapSize + widthLine, mapSize - widthLine*2, mapSize - widthLine*2)
     end
 end
-function drawMiniMap(castl)
+local function drawMiniMap(castl)
     love.graphics.clear(255, 255, 255)
     q = 0
     for y = 0, (n - 1) * mapSize, mapSize do
@@ -48,8 +48,8 @@ function drawMiniMap(castl)
     love.graphics.setColor(0, 0, 0, 50)
     love.graphics.circle("fill", Hero.cellX * mapSize - mapSize / 2, Hero.cellY * mapSize - mapSize / 2, mapSize / 4)
     love.graphics.setColor(0, 255, 0, 100)
-    love.graphics.circle("fill", XYfromID(max_vert1)[1] * mapSize - mapSize / 2, (XYfromID(max_vert1)[2] + 2) * mapSize - mapSize / 2, mapSize / 4)
+    love.graphics.circle("fill", collide.XYFromID(max_vert1)[1] * mapSize - mapSize / 2, (collide.XYFromID(max_vert1)[2] + 2) * mapSize - mapSize / 2, mapSize / 4)
     love.graphics.setColor(255, 0, 0, 100)
-    love.graphics.circle("fill", XYfromID(max_vert2)[1] * mapSize - mapSize / 2, (XYfromID(max_vert2)[2] + 2) * mapSize - mapSize / 2, mapSize / 4)
+    love.graphics.circle("fill", collide.XYFromID(max_vert2)[1] * mapSize - mapSize / 2, (collide.XYFromID(max_vert2)[2] + 2) * mapSize - mapSize / 2, mapSize / 4)
 end
 return { drawMiniMap = drawMiniMap }

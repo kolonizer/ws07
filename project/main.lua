@@ -25,7 +25,7 @@ function love.load()
     Y = 300
     castl, graph, Dours = gra.generate()
 	id = max_vert1
-    Hero = {id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name="Hero", Type = "circle", mode = "line", sprite = heroSprite, x = XYfromID(max_vert1)[1] * size + size / 2, y = (XYfromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 255 } }
+    Hero = {id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name="Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 255 } }
     cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
     cam:setWindow(0, 0, 800, 600)
     cam:setScale(0.5)
@@ -43,20 +43,18 @@ function love.draw()
 end
 function love.update(dt)
     fps = 1 / dt
-    local speed = 300 * dt
-    local GrowthSpeed = 100 * dt
     Objects = { Hero }
     visited = {}
     Hero.cellX = (Hero.x - (Hero.x % size)) / size
     Hero.cellY = (Hero.y - (Hero.y % size)) / size
     Hero.id = (Hero.cellY - 1) * n + Hero.cellX
     RoomCollision.dfs(graph, Hero.id, n, Hero.cellX * size + size / 2, Hero.cellY * size + size / 2, size, 5, 3, { 255, 255, 255, 255 })
-    local A = neighbours(visited, graph)
+    local A = RoomCollision.neighbours(visited, graph)
     for i = 1, #A do
         visited = {}
-        RoomCollision.dfs(graph, A[i], n, (XYfromID(A[i])[1] + 0) * size + size / 2, (XYfromID(A[i])[2] + 2) * size + size / 2, size, 5, 3, { 50, 50, 50, 255 })
+        RoomCollision.dfs(graph, A[i], n, (collide.XYFromID(A[i])[1] + 0) * size + size / 2, (collide.XYFromID(A[i])[2] + 2) * size + size / 2, size, 5, 3, { 50, 50, 50, 255 })
     end
-    control.control({"a","w","s","d","q","e"}, Hero, speed, GrowthSpeed)
+    control.control({"a","w","s","d","q","e"}, Hero, 300 * dt, 100 * dt)
     updateSpr(heroSprite, dt)
     cam:setPosition(Hero.x, Hero.y)
 end

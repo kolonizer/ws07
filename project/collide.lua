@@ -1,5 +1,5 @@
 -- проверка на столкновение
-function CollideWith(person)
+local function CollideWith(person)
     if person=="Hero" then
 		for i = 1, #Objects do
             if collide.collide(Objects[i], Hero) then
@@ -9,7 +9,7 @@ function CollideWith(person)
 		return false
     end
 end
-function XYfromID(ID)
+local function XYFromID(ID)
     local x = ID % n
     local y = math.floor(ID / n) - 1
     if x == 0 then
@@ -53,4 +53,4 @@ local function collide(O, M)
     end
     return false
 end
-return { collide = collide }
+return { collide = collide, CollideWith = CollideWith, XYFromID = XYFromID}

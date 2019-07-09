@@ -1,4 +1,5 @@
 -- Ввод данных и управление с клавиатуры
+collide = require "collide"
 local function control(TypeControl, person, speed, GrowthSpeed)
     if love.keyboard.isDown("escape") then
         love.event.quit()
@@ -8,25 +9,25 @@ local function control(TypeControl, person, speed, GrowthSpeed)
     end
     if love.keyboard.isDown(TypeControl[1]) then
         person.x = person.x - speed
-        if CollideWith(person.name) then
+        if collide.CollideWith(person.name) then
             person.x = person.x + speed
         end
     end
     if love.keyboard.isDown(TypeControl[4]) then
         person.x = person.x + speed
-        if CollideWith(person.name) then
+        if collide.CollideWith(person.name) then
             person.x = person.x - speed
         end
     end
     if love.keyboard.isDown(TypeControl[2]) then
         person.y = person.y - speed
-        if CollideWith(person.name) then
+        if collide.CollideWith(person.name) then
             person.y = person.y + speed
         end
     end
     if love.keyboard.isDown(TypeControl[3]) then
         person.y = person.y + speed
-        if CollideWith(person.name) then
+        if collide.CollideWith(person.name) then
             person.y = person.y - speed
         end
     end
