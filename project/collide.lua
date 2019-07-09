@@ -1,3 +1,4 @@
+-- проверка на столкновение
 function CollideWith(person)
     if person=="Hero" then
 		for i = 1, #Objects do

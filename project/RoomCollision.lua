@@ -1,3 +1,6 @@
+-- добавляет в Objects все стены комнат
+-- TODO таблица visited сейчас глобальная. Не хорошо. И не инициализируется здесь.
+-- 3 функции в этом модуле глобальные. а файл модуль. они не передаются в return модуля а используются напрямую. плохо
 function containElem(g, n)
     for i = 1, #g do
         if g[i] == n then
@@ -24,7 +27,7 @@ function neighbours(g, graph)
     end
     return A
 end
-function dfs(graph, id, n, x, y, size, w, q, colour)
+local function dfs(graph, id, n, x, y, size, w, q, colour)
     visited[#visited + 1] = id
     if (id - 1 >= 1 and graph[id][id - 1] == 0 and containElem(visited, id - 1) == false) or id % n == 1 then
         Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x - size / 2, y = y, wigth = w, height = size + w, colour = colour }

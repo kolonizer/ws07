@@ -1,3 +1,5 @@
+-- отрисовка мини-карты
+
 function drawDour(d1, d2, Type)
     x1, y1 = d1 % n, math.floor(d1 / n) + 1
     x2, y2 = d2 % n, math.floor(d2 / n) + 1

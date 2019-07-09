@@ -1,3 +1,4 @@
+-- Ввод данных и управление с клавиатуры
 local function control(TypeControl, person, speed, GrowthSpeed)
     if love.keyboard.isDown("escape") then
         love.event.quit()
