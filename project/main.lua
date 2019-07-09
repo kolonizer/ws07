@@ -1,12 +1,3 @@
-function XYfromID(ID)
-    local x = ID % n
-    local y = math.floor(ID / n) - 1
-    if x == 0 then
-        x = n
-        y = y - 1
-    end
-    return { x, y }
-end
 function love.load()
     gamera = require "gamera"
     sprite = require "sprite"
@@ -29,14 +20,11 @@ function love.load()
     X = 400
     Y = 300
     castl, graph, Dours = gra.generate()
-    Hero = {name="Hero", Type = "circle", mode = "line", sprite = heroSprite, x = XYfromID(max_vert1)[1] * size + size / 2, y = (XYfromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 255 } }
-    id = max_vert1
-    heroId = id
-    heroX = id % n
-    heroY = math.floor(id / n) + 1
+	id = max_vert1
+    Hero = {id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name="Hero", Type = "circle", mode = "line", sprite = heroSprite, x = XYfromID(max_vert1)[1] * size + size / 2, y = (XYfromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 255 } }
     cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
     cam:setWindow(0, 0, 800, 600)
-    cam:setScale(0.5)
+    cam:setScale(2)
 end
 function love.draw()
     if love.keyboard.isDown("tab") then
@@ -45,9 +33,6 @@ function love.draw()
         cam:draw(function(l, t, w, h)
             love.graphics.setColor(255, 255, 255, 255)
             love.graphics.print(math.floor(fps), l, t)
-            --love.graphics.print(heroId,0,0)
-            --love.graphics.print(heroX.." "..heroY,0,10)
-            --love.graphics.print(X2.." "..Y2,0,20)
             draw.draw(Objects)
         end)
     end
@@ -58,17 +43,15 @@ function love.update(dt)
     local GrowthSpeed = 100 * dt
     Objects = { Hero }
     visited = {}
-    heroX = (Hero.x - (Hero.x % size)) / size
-    heroY = (Hero.y - (Hero.y % size)) / size
-    heroId = (heroY - 1) * n + heroX
-    RoomCollision.dfs(graph, heroId, n, heroX * size + size / 2, heroY * size + size / 2, size, 5, 3, { 255, 255, 255, 255 })
+    Hero.cellX = (Hero.x - (Hero.x % size)) / size
+    Hero.cellY = (Hero.y - (Hero.y % size)) / size
+    Hero.id = (Hero.cellY - 1) * n + Hero.cellX
+    RoomCollision.dfs(graph, Hero.id, n, Hero.cellX * size + size / 2, Hero.cellY * size + size / 2, size, 5, 3, { 255, 255, 255, 255 })
     local A = neighbours(visited, graph)
     for i = 1, #A do
-        --roomX,roomY=XYfromID(A[i])
         visited = {}
         RoomCollision.dfs(graph, A[i], n, (XYfromID(A[i])[1] + 0) * size + size / 2, (XYfromID(A[i])[2] + 2) * size + size / 2, size, 5, 3, { 50, 50, 50, 255 })
     end
-    --RoomCollision.dfs(graph,heroId,n,heroX*size+size/2,heroY*size+size/2,size,5,3,{255,255,255,255})
     control.control({"a","w","s","d","q","e"}, Hero, speed, GrowthSpeed)
     updateSpr(heroSprite, dt)
     cam:setPosition(Hero.x, Hero.y)
