@@ -8,6 +8,7 @@ function XYfromID(ID)
     return { x, y }
 end
 function love.load()
+	spawn = require 'spawn_v1_0'
     gamera = require "gamera"
     sprite = require "sprite"
     collide = require "collide"
@@ -18,7 +19,7 @@ function love.load()
     drawMiniMap = require "drawMiniMap"
 
     math.randomseed(os.time())
-    size = 200
+    size = 403
     n = 10
     --загрузка ресурсов
     heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3)
