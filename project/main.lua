@@ -40,7 +40,7 @@ function love.load()
 end
 function love.draw()
     if love.keyboard.isDown("tab") then
-        drawMiniMap.drawMiniMap()
+        drawMiniMap.drawMiniMap(castl)
     else
         cam:draw(function(l, t, w, h)
             love.graphics.setColor(255, 255, 255, 255)
