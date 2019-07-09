@@ -40,8 +40,8 @@ local function drawMiniMap(castl)
         for x = 0, (n - 1) * mapSize, mapSize do
             q = q + 1
             if castl[q].use then
-				love.graphics.print(castl[q].tip,x,y+mapSize-13)
-                love.graphics.print(q, x, y)
+				love.graphics.print(castl[q].tip,x,y+mapSize-13*mapSize/60,0,mapSize/60,mapSize/60)
+                love.graphics.print(q, x, y,0,mapSize/60,mapSize/60)
             end
         end
     end

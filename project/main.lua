@@ -17,14 +17,13 @@ function love.load()
 	Ls=31
 	ws=5
     size = 403
-    n = 11
+    n = 10
     --загрузка ресурсов
     heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3, {1, 2, 3, 2})
 	woodTable = newSpr("spr/woodTable", 50, 50, 0, 1, 1, nil)
 	candle = newSpr("spr/candels", 30, 30, 0.2, 1, 2, {1, 2})
     -- таблица главного героя
-    height = love.graphics.getHeight()
-    mapSize = height / n
+    mapSize = love.graphics.getHeight() / n
     dourSize = mapSize / 5
     X = 400
     Y = 300
@@ -46,12 +45,20 @@ function love.draw()
 	love.graphics.clear(0,0,0)
     if love.keyboard.isDown("tab") then
         drawMiniMap.drawMiniMap(castl)
+		MousX, MousY = love.mouse.getPosition()
+		if love.mouse.isDown(1) and MousX < 600 then
+			Hero.cellX = math.floor(MousX / mapSize) + 2
+			Hero.cellY = math.floor(MousY / mapSize) + 2
+			Hero.id = (Hero.cellY - 1) * n + Hero.cellX
+			Hero.x = Hero.cellX * size - size / 2
+			Hero.y = Hero.cellY * size - size / 2
+		end
     else
         cam:draw(function(l, t, w, h)
             love.graphics.setColor(255, 255, 255, 255)
+			spawn.drawLoot(v,castl)
             love.graphics.print(math.floor(fps), l, t)
             draw.draw(Objects)
-			spawn.drawLoot(v,castl)
         end)
     end
 end
