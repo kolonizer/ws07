@@ -8,6 +8,15 @@ function CollideWith(person)
 		return false
     end
 end
+function XYfromID(ID)
+    local x = ID % n
+    local y = math.floor(ID / n) - 1
+    if x == 0 then
+        x = n
+        y = y - 1
+    end
+    return { x, y }
+end
 local function collide(O, M)
     if O == M then
         return false
