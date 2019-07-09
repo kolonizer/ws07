@@ -43,7 +43,7 @@ function drawMiniMap()
         end
     end
     love.graphics.setColor(0, 0, 0, 50)
-    love.graphics.circle("fill", heroX * mapSize - mapSize / 2, heroY * mapSize - mapSize / 2, mapSize / 4)
+    love.graphics.circle("fill", Hero.cellX * mapSize - mapSize / 2, Hero.cellY * mapSize - mapSize / 2, mapSize / 4)
     love.graphics.setColor(0, 255, 0, 100)
     love.graphics.circle("fill", XYfromID(max_vert1)[1] * mapSize - mapSize / 2, (XYfromID(max_vert1)[2] + 2) * mapSize - mapSize / 2, mapSize / 4)
     love.graphics.setColor(255, 0, 0, 100)
