@@ -127,7 +127,7 @@ function generate()
     local graph = {}
     for yc = 1, n do
         for xc = 1, n do
-            castl[(yc - 1) * n + xc] = { x_pix = xc * mapSize, y_pix = yc * mapSize, loot = {}, x = xc, y = yc, tip = -1, id = (yc - 1) * n + xc, use = false }--{xc,yc,-1,(xc-1)*n+yc,false}
+            castl[(yc - 1) * n + xc] = { x_pix = xc * mapSize, y_pix = yc * mapSize, loot = {}, x = xc, y = yc, tip = "", id = (yc - 1) * n + xc, use = false }--{xc,yc,-1,(xc-1)*n+yc,false}
         end
     end
     for xc = 1, #castl, 1 do
@@ -175,7 +175,7 @@ function generate()
 	for p=1,math.random(n-4,n-2) do
 		while true do
 			qwerty=math.random(1,#castl)
-			if castl[qwerty].use and castl[qwerty].tip==-1 then
+			if castl[qwerty].use and castl[qwerty].tip=="" then
 				castl[qwerty].tip='treasure'
 				break
 			end

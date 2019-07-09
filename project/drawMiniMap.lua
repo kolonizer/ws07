@@ -25,7 +25,6 @@ function drawMiniMap(castl)
                 love.graphics.rectangle("fill", x, y, mapSize, mapSize)
                 love.graphics.setColor(0, 0, 0, 255)
                 love.graphics.rectangle("line", x, y, mapSize, mapSize)
-				love.graphics.print(castl[q].tip,(x+x+1)/2,(y+y+1)/2)
             end
         end
     end
@@ -39,7 +38,8 @@ function drawMiniMap(castl)
         for x = 0, (n - 1) * mapSize, mapSize do
             q = q + 1
             if castl[q].use then
-                love.graphics.print(q, (x + x + 1) / 2, (y + y + 1) / 2)
+				love.graphics.print(castl[q].tip,x,y+mapSize-13)
+                love.graphics.print(q, x, y)
             end
         end
     end
