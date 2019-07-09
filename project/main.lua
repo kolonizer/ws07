@@ -29,7 +29,7 @@ function love.load()
     X = 400
     Y = 300
     castl, graph, Dours = gra.generate()
-    Mous = { Type = "circle", mode = "line", sprite = heroSprite, x = XYfromID(max_vert1)[1] * size + size / 2, y = (XYfromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 255 } }
+    Hero = { Type = "circle", mode = "line", sprite = heroSprite, x = XYfromID(max_vert1)[1] * size + size / 2, y = (XYfromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 255 } }
     id = max_vert1
     heroId = id
     heroX = id % n
@@ -56,10 +56,10 @@ function love.update(dt)
     fps = 1 / dt
     local speed = 300 * dt
     local GrowthSpeed = 100 * dt
-    Objects = { Mous }
+    Objects = { Hero }
     visited = {}
-    heroX = (Mous.x - (Mous.x % size)) / size
-    heroY = (Mous.y - (Mous.y % size)) / size
+    heroX = (Hero.x - (Hero.x % size)) / size
+    heroY = (Hero.y - (Hero.y % size)) / size
     heroId = (heroY - 1) * n + heroX
     RoomCollision.dfs(graph, heroId, n, heroX * size + size / 2, heroY * size + size / 2, size, 5, 3, { 255, 255, 255, 255 })
     local A = neighbours(visited, graph)
@@ -71,5 +71,5 @@ function love.update(dt)
     --RoomCollision.dfs(graph,heroId,n,heroX*size+size/2,heroY*size+size/2,size,5,3,{255,255,255,255})
     control.control("keyboard", speed, GrowthSpeed)
     updateSpr(heroSprite, dt)
-    cam:setPosition(Mous.x, Mous.y)
+    cam:setPosition(Hero.x, Hero.y)
 end

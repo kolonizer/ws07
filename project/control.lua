@@ -1,6 +1,6 @@
 local function Touch()
     for i = 1, #Objects do
-        if collide.collide(Objects[i], Mous) then
+        if collide.collide(Objects[i], Hero) then
             return true
         end
     end
@@ -13,29 +13,29 @@ local function control(TypeControl, speed, GrowthSpeed)
     if TypeControl == "mous" then
         cursor = love.mouse.getCursor()
         X, Y = love.mouse.getPosition()
-        local q = math.sqrt((Y - Mous.y) ^ 2 + (X - Mous.x) ^ 2) / speed
-        local qx = math.abs(X - Mous.x) / q
-        local qy = math.abs(Y - Mous.y) / q
-        if X - speed > Mous.x then
-            Mous.x = Mous.x + qx
+        local q = math.sqrt((Y - Hero.y) ^ 2 + (X - Hero.x) ^ 2) / speed
+        local qx = math.abs(X - Hero.x) / q
+        local qy = math.abs(Y - Hero.y) / q
+        if X - speed > Hero.x then
+            Hero.x = Hero.x + qx
             if Touch() then
-                Mous.x = Mous.x - qx
+                Hero.x = Hero.x - qx
             end
-        elseif X + speed < Mous.x then
-            Mous.x = Mous.x - qx
+        elseif X + speed < Hero.x then
+            Hero.x = Hero.x - qx
             if Touch() then
-                Mous.x = Mous.x + qx
+                Hero.x = Hero.x + qx
             end
         end
-        if Y - speed > Mous.y then
-            Mous.y = Mous.y + qy
+        if Y - speed > Hero.y then
+            Hero.y = Hero.y + qy
             if Touch() then
-                Mous.y = Mous.y - qy
+                Hero.y = Hero.y - qy
             end
-        elseif Y + speed < Mous.y then
-            Mous.y = Mous.y - qy
+        elseif Y + speed < Hero.y then
+            Hero.y = Hero.y - qy
             if Touch() then
-                Mous.y = Mous.y + qy
+                Hero.y = Hero.y + qy
             end
         end
     elseif TypeControl == "keyboard" then
@@ -43,55 +43,55 @@ local function control(TypeControl, speed, GrowthSpeed)
             speed = speed / (math.sqrt(2))
         end
         if love.keyboard.isDown("a") then
-            Mous.x = Mous.x - speed
+            Hero.x = Hero.x - speed
             if Touch() then
-                Mous.x = Mous.x + speed
+                Hero.x = Hero.x + speed
             end
         end
         if love.keyboard.isDown("d") then
-            Mous.x = Mous.x + speed
+            Hero.x = Hero.x + speed
             if Touch() then
-                Mous.x = Mous.x - speed
+                Hero.x = Hero.x - speed
             end
         end
         if love.keyboard.isDown("w") then
-            Mous.y = Mous.y - speed
+            Hero.y = Hero.y - speed
             if Touch() then
-                Mous.y = Mous.y + speed
+                Hero.y = Hero.y + speed
             end
         end
         if love.keyboard.isDown("s") then
-            Mous.y = Mous.y + speed
+            Hero.y = Hero.y + speed
             if Touch() then
-                Mous.y = Mous.y - speed
+                Hero.y = Hero.y - speed
             end
         end
     end
     if love.keyboard.isDown("q") then
-        if Mous.Type == "circle" then
-            Mous.radius = Mous.radius + GrowthSpeed
-        elseif Mous.Type == "rectangle" then
-            Mous.wigth, Mous.height = Mous.wigth + GrowthSpeed, Mous.height + GrowthSpeed * Mous.height / Mous.wigth
+        if Hero.Type == "circle" then
+            Hero.radius = Hero.radius + GrowthSpeed
+        elseif Hero.Type == "rectangle" then
+            Hero.wigth, Hero.height = Hero.wigth + GrowthSpeed, Hero.height + GrowthSpeed * Hero.height / Hero.wigth
         end
         if Touch() then
-            if Mous.Type == "circle" then
-                Mous.radius = Mous.radius - GrowthSpeed
-            elseif Mous.Type == "rectangle" then
-                Mous.wigth, Mous.height = Mous.wigth - GrowthSpeed, Mous.height - GrowthSpeed * Mous.height / Mous.wigth
+            if Hero.Type == "circle" then
+                Hero.radius = Hero.radius - GrowthSpeed
+            elseif Hero.Type == "rectangle" then
+                Hero.wigth, Hero.height = Hero.wigth - GrowthSpeed, Hero.height - GrowthSpeed * Hero.height / Hero.wigth
             end
         end
     end
     if love.keyboard.isDown("e") then
-        if Mous.Type == "circle" and Mous.radius > GrowthSpeed then
-            Mous.radius = Mous.radius - GrowthSpeed
-        elseif Mous.Type == "rectangle" and Mous.wigth > GrowthSpeed and Mous.height > GrowthSpeed then
-            Mous.wigth, Mous.height = Mous.wigth - GrowthSpeed, Mous.height - GrowthSpeed * Mous.height / Mous.wigth
+        if Hero.Type == "circle" and Hero.radius > GrowthSpeed then
+            Hero.radius = Hero.radius - GrowthSpeed
+        elseif Hero.Type == "rectangle" and Hero.wigth > GrowthSpeed and Hero.height > GrowthSpeed then
+            Hero.wigth, Hero.height = Hero.wigth - GrowthSpeed, Hero.height - GrowthSpeed * Hero.height / Hero.wigth
         end
         if Touch() then
-            if Mous.Type == "circle" then
-                Mous.radius = Mous.radius + GrowthSpeed
-            elseif Mous.Type == "rectangle" then
-                Mous.wigth, Mous.height = Mous.wigth + GrowthSpeed, Mous.height + GrowthSpeed * Mous.height / Mous.wigth
+            if Hero.Type == "circle" then
+                Hero.radius = Hero.radius + GrowthSpeed
+            elseif Hero.Type == "rectangle" then
+                Hero.wigth, Hero.height = Hero.wigth + GrowthSpeed, Hero.height + GrowthSpeed * Hero.height / Hero.wigth
             end
         end
     end
