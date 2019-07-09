@@ -1,73 +1,59 @@
-local function Touch()
-    for i = 1, #Objects do
-        if collide.collide(Objects[i], Hero) then
-            return true
-        end
-    end
-    return false
-end
-local function control(TypeControl, speed, GrowthSpeed)
+local function control(TypeControl, person, speed, GrowthSpeed)
     if love.keyboard.isDown("escape") then
         love.event.quit()
     end
-    if TypeControl == "keyboard" then
-        if love.keyboard.isDown("a", "d") and love.keyboard.isDown("s", "w") then
-            speed = speed / (math.sqrt(2))
-        end
-        if love.keyboard.isDown("a") then
-            Hero.x = Hero.x - speed
-            if Touch() then
-                Hero.x = Hero.x + speed
-            end
-			heroSprite.curAnim = "Left"
-        end
-        if love.keyboard.isDown("d") then
-            Hero.x = Hero.x + speed
-            if Touch() then
-                Hero.x = Hero.x - speed
-            end
-			heroSprite.curAnim = "Right"
-        end
-        if love.keyboard.isDown("w") then
-            Hero.y = Hero.y - speed
-            if Touch() then
-                Hero.y = Hero.y + speed
-            end
-			heroSprite.curAnim = "Up"
-        end
-        if love.keyboard.isDown("s") then
-            Hero.y = Hero.y + speed
-            if Touch() then
-                Hero.y = Hero.y - speed
-            end
-			heroSprite.curAnim = "Down"
+    if love.keyboard.isDown(TypeControl[1], TypeControl[4]) and love.keyboard.isDown(TypeControl[3], TypeControl[2]) then
+        speed = speed / (math.sqrt(2))
+    end
+    if love.keyboard.isDown(TypeControl[1]) then
+        person.x = person.x - speed
+        if CollideWith(person.name) then
+            person.x = person.x + speed
         end
     end
-    if love.keyboard.isDown("q") then
-        if Hero.Type == "circle" then
-            Hero.radius = Hero.radius + GrowthSpeed
-        elseif Hero.Type == "rectangle" then
-            Hero.wigth, Hero.height = Hero.wigth + GrowthSpeed, Hero.height + GrowthSpeed * Hero.height / Hero.wigth
+    if love.keyboard.isDown(TypeControl[4]) then
+        person.x = person.x + speed
+        if CollideWith(person.name) then
+            person.x = person.x - speed
         end
-        if Touch() then
-            if Hero.Type == "circle" then
-                Hero.radius = Hero.radius - GrowthSpeed
-            elseif Hero.Type == "rectangle" then
-                Hero.wigth, Hero.height = Hero.wigth - GrowthSpeed, Hero.height - GrowthSpeed * Hero.height / Hero.wigth
+    end
+    if love.keyboard.isDown(TypeControl[2]) then
+        person.y = person.y - speed
+        if CollideWith(person.name) then
+            person.y = person.y + speed
+        end
+    end
+    if love.keyboard.isDown(TypeControl[3]) then
+        person.y = person.y + speed
+        if CollideWith(person.name) then
+            person.y = person.y - speed
+        end
+    end
+    if love.keyboard.isDown(TypeControl[5]) then
+        if person.Type == "circle" then
+            person.radius = person.radius + GrowthSpeed
+        elseif person.Type == "rectangle" then
+            person.wigth, person.height = person.wigth + GrowthSpeed, person.height + GrowthSpeed * person.height / person.wigth
+        end
+        if CollideWith(person.name) then
+            if person.Type == "circle" then
+                person.radius = person.radius - GrowthSpeed
+            elseif person.Type == "rectangle" then
+                person.wigth, person.height = person.wigth - GrowthSpeed, person.height - GrowthSpeed * person.height / person.wigth
             end
         end
     end
-    if love.keyboard.isDown("e") then
-        if Hero.Type == "circle" and Hero.radius > GrowthSpeed then
-            Hero.radius = Hero.radius - GrowthSpeed
-        elseif Hero.Type == "rectangle" and Hero.wigth > GrowthSpeed and Hero.height > GrowthSpeed then
-            Hero.wigth, Hero.height = Hero.wigth - GrowthSpeed, Hero.height - GrowthSpeed * Hero.height / Hero.wigth
+    if love.keyboard.isDown(TypeControl[6]) then
+        if person.Type == "circle" and person.radius > GrowthSpeed then
+            person.radius = person.radius - GrowthSpeed
+        elseif person.Type == "rectangle" and person.wigth > GrowthSpeed and person.height > GrowthSpeed then
+            person.wigth, person.height = person.wigth - GrowthSpeed, person.height - GrowthSpeed * person.height / person.wigth
         end
-        if Touch() then
-            if Hero.Type == "circle" then
-                Hero.radius = Hero.radius + GrowthSpeed
-            elseif Hero.Type == "rectangle" then
-                Hero.wigth, Hero.height = Hero.wigth + GrowthSpeed, Hero.height + GrowthSpeed * Hero.height / Hero.wigth
+        if CollideWith(person.name) then
+            if person.Type == "circle" then
+                person.radius = person.radius + GrowthSpeed
+            elseif person.Type == "rectangle" then
+                person.wigth, person.height = person.wigth + GrowthSpeed, person.height + GrowthSpeed * person.height / person.wigth
             end
         end
     end
