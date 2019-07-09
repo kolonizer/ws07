@@ -37,7 +37,8 @@ function love.load()
 	end
 	--print(inspect( castl, { depth = 4 } ) )
     Hero = {id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name="Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 } }
-    cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
+    Inventory = {}
+	cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
     cam:setWindow(0, 0, 800, 600)
     cam:setScale(1.4)
 end

@@ -1,5 +1,16 @@
 -- отрисовка мини-карты
 
+local function drawInventory()
+	love.graphics.setColor(0, 0, 0, 255)
+	love.graphics.print("INVENTORY", 600 ,20 ,0 ,3 ,3)
+	for y = 1, 5 do
+		for x = 1, 2 do
+		    love.graphics.setColor(0, 0, 0, 255)
+		    love.graphics.rectangle("line", 500 + x * 100, y * 100, 100, 100)
+			love.graphics.rectangle("line", 505 + x * 100, y * 100 + 5, 90, 90)
+		end
+	end
+end
 local function drawDour(d1, d2, Type)
     local x1 = d1 % n
 	local y1 = math.floor(d1 / n) + 1
@@ -53,5 +64,6 @@ local function drawMiniMap(castl)
     love.graphics.circle("fill", collide.XYFromID(max_vert1)[1] * mapSize - mapSize / 2, (collide.XYFromID(max_vert1)[2] + 2) * mapSize - mapSize / 2, mapSize / 4)
     love.graphics.setColor(255, 0, 0, 100)
     love.graphics.circle("fill", collide.XYFromID(max_vert2)[1] * mapSize - mapSize / 2, (collide.XYFromID(max_vert2)[2] + 2) * mapSize - mapSize / 2, mapSize / 4)
+	drawInventory()
 end
 return { drawMiniMap = drawMiniMap }
