@@ -19,24 +19,28 @@ local function control(TypeControl, speed, GrowthSpeed)
             if Touch() then
                 Hero.x = Hero.x + speed
             end
+			heroSprite.curAnim = "Left"
         end
         if love.keyboard.isDown("d") then
             Hero.x = Hero.x + speed
             if Touch() then
                 Hero.x = Hero.x - speed
             end
+			heroSprite.curAnim = "Right"
         end
         if love.keyboard.isDown("w") then
             Hero.y = Hero.y - speed
             if Touch() then
                 Hero.y = Hero.y + speed
             end
+			heroSprite.curAnim = "Up"
         end
         if love.keyboard.isDown("s") then
             Hero.y = Hero.y + speed
             if Touch() then
                 Hero.y = Hero.y - speed
             end
+			heroSprite.curAnim = "Down"
         end
     end
     if love.keyboard.isDown("q") then
