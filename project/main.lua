@@ -20,13 +20,6 @@ function love.load()
 	math.randomseed(os.time())
 	siz =200
 	n=10
-	--[[if n%2==1 then
-		id=((n-1)/2)*n+(n+1)/2
-		heroId=((n-1)/2)*n+(n+1)/2
-	else
-		id=(n/2-1)*n+n/2
-		heroId=(n/2-1)*n+n/2
-	end--]]
 	--загрузка ресурсов
 	heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3)
 	-- таблица главного героя
@@ -43,7 +36,7 @@ function love.load()
 	heroY=math.floor(id/n)+1
 	cam = gamera.new(0,0,siz * (n+2), siz * (n+2))
 	cam:setWindow(0,0,800,600)
-	cam:setScale(3.0) 
+	cam:setScale(0.5) 
 end
 function love.draw()
 	if love.keyboard.isDown("tab") then
@@ -69,7 +62,7 @@ function love.update(dt)
 	heroY=(Mous.y-(Mous.y%siz))/siz
 	heroId=(heroY-1)*n+heroX
 	RoomCollision.dfs(graph,heroId,n,heroX*siz+siz/2,heroY*siz+siz/2,siz,5,3,{255,255,255,255})
-	local A=neighbours(visited)
+	local A=neighbours(visited,graph)
 	for i=1,#A do
 		--roomX,roomY=XYfromID(A[i])
 		visited={}

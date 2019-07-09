@@ -22,7 +22,7 @@ function bliz(x,y,castl)
 		end
 		q_y=(norm_id-q_x)/n-1
 		kal=0
-		print(norm_id)
+		--print(norm_id)
 		if q_x>=2 and norm_id-1>0 and norm_id-1<=n*n then
 			if castl[norm_id-1].use then
 				kal=kal+1
@@ -92,57 +92,36 @@ function poisk(w,castl)
 	return -1, -1, -1
 end
 
-function dfsGenerate(id,m,graph)
-	w_x=id%n
-	if w_x==0 then
-		w_x=n
-	end
-	w_y=(id-w_x)/n-1
-	visitedGenerate[#visitedGenerate+1]=id
-	for i=1,#graph[id] do
-		if graph[id][i]~=0 and containElem(visitedGenerate,i)==false then
-			dfsGenerate(i,m+1,graph)
-			
+function distantRoom(q,graph,castl)
+	local distantRooms={}
+	local A={q}
+	local u=0
+	for i=1,#castl do
+		if castl[i].use==true then
+			u=u+1
 		end
 	end
-
---	if id-1>=0 and w_x>=2  and graph[id][id-1]~=0 and containElem(visitedGenerate,id-1)==false then
---	qz	dfsGenerate(id-1,m+1)
---	end
---	if id+1<=n^2 and w_x<=n-1 and graph[id][id+1]~=0 and containElem(visitedGenerate,id+1)==false then
---		dfsGenerate(id+1,m+1)
---	end
---	if id-n>=0 and w_y>=2 and graph[id][id-n]~=0 and containElem(visitedGenerate,id-n)==false then
---		dfsGenerate(id-n,m+1)
---	end
---	if id+n<=n^2 and w_y<=n-1 and graph[id][id+n]~=0 and containElem(visitedGenerate,id+n)==false then
---		dfsGenerate(id+n,m+1)
---	end
-	if m==maxGenerate then
-		max_vertex[#max_vertex+1]=id
+	while true do
+		for i=1,#distantRooms do
+			A[#A+1]=distantRooms[i]
+		end
+		if u==#A then
+			break
+		end
+		distantRooms={}
+		for j=1,#A do
+		    for i=1,#graph do
+			    if graph[i][A[j]]~=0 and containElem(A,i)==false and containElem(distantRooms,i)==false then
+				    distantRooms[#distantRooms+1]=i
+			    end
+		   end
+		end
 	end
-	if m>maxGenerate then
-		maxGenerate=m
-		max_vertex={id}
-		vertexGenerate=id
-	end
+	return distantRooms[math.random(#distantRooms)]
 end
-function startRoom(idGenerate,graph)
-	visitedGenerate={}
-	max_vertex={}
-	maxGenerate=0
-	vertexGenerate=0
-	dfsGenerate(idGenerate,0,graph)
-	print(inspect( max_vertex, { depth = 2 } ) )
-	local q=max_vertex[math.random(#max_vertex)]
-	print(q)
-	return q--,max_vertex
-end
-
 function generate()
 	local castl={}
 	local graph={}
-
 	for yc=1,n do
 	    for xc=1,n do
 	    	castl[(yc-1)*n+xc]={x_pix=xc*mapSize,y_pix=yc*mapSize,loot={},x=xc,y=yc,tip=-1,id=(yc-1)*n+xc,use=false}--{xc,yc,-1,(xc-1)*n+yc,false}
@@ -183,11 +162,11 @@ function generate()
 		--print(inspect( graph, { depth = 2 } ) )
 	end
 	if n%2==1 then
-		max_vert1=startRoom((n-1)/2*(n+1)+1,graph)
+		max_vert1=distantRoom((n-1)/2*(n+1)+1,graph,castl)
 	else
-		max_vert1=startRoom((n/2-1)*n+n/2,graph)
+		max_vert1=distantRoom((n/2-1)*n+n/2,graph,castl)
 	end
-	max_vert2=startRoom(max_vert1,graph)
+	max_vert2=distantRoom(max_vert1,graph,castl)
 	return castl,graph,Dours
 end
 return {generate=generate}

@@ -25,6 +25,7 @@ function drawMiniMap()
 				love.graphics.rectangle("fill",x,y,mapSize,mapSize)
 				love.graphics.setColor( 0,0,0,255)
 				love.graphics.rectangle("line",x,y,mapSize,mapSize)
+				--love.graphics.print(casts[q].rast,(x+x+1)/2,(y+y+1)/2)
 			end
 		end
 	end
