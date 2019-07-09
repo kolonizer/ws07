@@ -8,7 +8,6 @@ function XYfromID(ID)
     return { x, y }
 end
 function love.load()
-	spawn = require 'spawn_v1_0'
     gamera = require "gamera"
     sprite = require "sprite"
     collide = require "collide"
