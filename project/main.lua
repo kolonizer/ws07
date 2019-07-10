@@ -4,11 +4,11 @@
 function love.load()
 	love.window.setTitle( "Граф ДРАКУЛА. Мастерская № 7. ЛШЮП 2019. Управление WASD и Tab" )
     love.graphics.setDefaultFilter("nearest", "nearest")
-	inspect = require "inspect"
-    gamera = require "gamera"
-    sprite = require "sprite"
-    collide = require "collide"
-    control = require "control"
+	inspect = require "inspect"	-- для печати в консоли содержимого таблиц
+    gamera = require "gamera" -- библиотека камеры (показывать фрагмент уровня)
+    sprite = require "sprite" -- загрузка картинок, рисование спрайтов
+    collide = require "collide" --
+    control = require "control"	-- управление с клавиатуры
     draw = require "draw"
     gra = require "generate"
     RoomCollision = require "RoomCollision"
@@ -92,7 +92,7 @@ chans={{Key,'Key',20},
     -- таблица главного героя
     --X = 400
     --Y = 300
-    castl, graph, Doors = gra.generate()
+    Rooms, graph, Doors = gra.generate()
 	id = max_vert1
 	for p=1,#castl do
 		--print(p,castl[p].tip)
