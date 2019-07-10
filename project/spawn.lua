@@ -1,7 +1,4 @@
-math.randomseed(os.time())
-inspect=require "inspect"
-gen=require "generate"
-collide=require "collide"
+-- Разбросать вещи в комнате
 local function AddLotLoot(id,castl)
 	k = (size-2*ws)/Ls
 	local Q={}
