@@ -13,12 +13,19 @@ local function drawUnit(u)
         end
     end
 end
+local function drawDoor(x)
+	if collide.collide(x,Hero)==false then
+	    if x.colour[1]==255 and x.colour[2]==255 and x.colour[3]==255 and x.colour[4]==255 then
+			love.graphics.setColor(100,100,255,255)
+		else
+			love.graphics.setColor(x.colour[1],x.colour[2],x.colour[3],x.colour[4])
+		end
+	    love.graphics.rectangle("line", x.x - x.wigth / 2, x.y - x.height / 2, x.wigth, x.height)
+	end
+end
 local function draw(o)
 	for i=#DoorsOfRoom,1,-1 do
-		if collide.collide(DoorsOfRoom[i],Hero)==false then
-		    love.graphics.setColor(DoorsOfRoom[i].colour[1],DoorsOfRoom[i].colour[2],DoorsOfRoom[i].colour[3],DoorsOfRoom[i].colour[4])
-		    love.graphics.rectangle("line", DoorsOfRoom[i].x - DoorsOfRoom[i].wigth / 2, DoorsOfRoom[i].y - DoorsOfRoom[i].height / 2, DoorsOfRoom[i].wigth, DoorsOfRoom[i].height)
-		end
+		drawDoor(DoorsOfRoom[i])
 	end
     for i = #o, 1, -1 do
         drawUnit(o[i])

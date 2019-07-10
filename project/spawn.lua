@@ -31,8 +31,8 @@ local function drawLoot(tab,castl)
 			end
 			local e_y= ((castl[tab[i]].loot[o].id-e_x-1)/k)*Ls        --y
 			e_x=(e_x-1)*Ls
-			e_x=e_x+castl[tab[i]].x_pix +ws
-			e_y=e_y+castl[tab[i]].y_pix +2*ws
+			e_x=e_x+castl[tab[i]].x_pix +ws+15
+			e_y=e_y+castl[tab[i]].y_pix +2*ws+15
 			drawSpr(range[castl[tab[i]].loot[o].number][1],e_x,e_y)
 		end
 	end
