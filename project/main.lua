@@ -82,7 +82,7 @@ chans={{Key,'Key',20},
 	Ls=31
 	ws=3
     size = 403+2*ws
-    n = 7						
+    n = 10						
 	mapSize = love.graphics.getHeight() / n
     doorSize = mapSize / 5
     --загрузка ресурсов
@@ -104,7 +104,7 @@ chans={{Key,'Key',20},
 	end
 	--print(inspect( castl, { depth = 4 } ) )
     Hero = {id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name="Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 } }
-    Inventory = {1,2,3,4,5,6,7,8,9}
+    Inventory = {1,2,3,4,5,6,7,8,9,10}
 	cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
     cam:setWindow(0, 0, 800, 600)
     cam:setScale(1.2)

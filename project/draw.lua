@@ -23,7 +23,14 @@ local function drawDoor(x)
 	    love.graphics.rectangle("line", x.x - x.wigth / 2, x.y - x.height / 2, x.wigth, x.height)
 	end
 end
+local function drawFloor()
+	love.graphics.setColor(50,50,50,255)
+	for i=1,#v do
+		love.graphics.rectangle("fill",(collide.XYFromID(v[i])[1])*size-2.5,(collide.XYFromID(v[i])[2]+2)*size-2.5,size+5,size+5)
+	end
+end
 local function draw(o)
+	drawFloor()
 	for i=#DoorsOfRoom,1,-1 do
 		drawDoor(DoorsOfRoom[i])
 	end
