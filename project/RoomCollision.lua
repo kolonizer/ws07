@@ -23,35 +23,35 @@ end
 local function dfs(graph, id, n, x, y, size, w, q, colour)
     visited[#visited + 1] = id
     if (id - 1 >= 1 and graph[id][id - 1] == 0 and containElem(visited, id - 1) == false) or id % n == 1 then
-        Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x - size / 2, y = y, wigth = w, height = size + w, colour = colour }
+        Objects[#Objects + 1] = { name = "wall", Type = "rectangle", mode = "line", x = x - size / 2, y = y, wigth = w, height = size + w, colour = colour }
     end
     if (id + 1 <= n ^ 2 and graph[id][id + 1] == 0 and containElem(visited, id + 1) == false) or id % n == 0 then
-        Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x + size / 2, y = y, wigth = w, height = size + w, colour = colour }
+        Objects[#Objects + 1] = { name = "wall", Type = "rectangle", mode = "line", x = x + size / 2, y = y, wigth = w, height = size + w, colour = colour }
     end
     if (id - n >= 1 and graph[id][id - n] == 0 and containElem(visited, id - n) == false) or id <= n then
-        Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x, y = y - size / 2, wigth = size + w, height = w, colour = colour }
+        Objects[#Objects + 1] = { name = "wall", Type = "rectangle", mode = "line", x = x, y = y - size / 2, wigth = size + w, height = w, colour = colour }
     end
     if (id + n <= n ^ 2 and graph[id][id + n] == 0 and containElem(visited, id + n) == false) or id >= n * (n - 1) + 1 then
-        Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x, y = y + size / 2, wigth = size + w, height = w, colour = colour }
+        Objects[#Objects + 1] = { name = "wall", Type = "rectangle", mode = "line", x = x, y = y + size / 2, wigth = size + w, height = w, colour = colour }
     end
     if id - 1 >= 1 and graph[id][id - 1] == 1 and containElem(visited, id - 1) == false then
-        Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x - size / 2, y = y - size * (q + 1) / 4 / q, wigth = w, height = size * (q - 1) / 2 / q + w, colour = colour }
-        Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x - size / 2, y = y + size * (q + 1) / 4 / q, wigth = w, height = size * (q - 1) / 2 / q + w, colour = colour }
+        Objects[#Objects + 1] = { name = "wall", Type = "rectangle", mode = "line", x = x - size / 2, y = y - size * (q + 1) / 4 / q, wigth = w, height = size * (q - 1) / 2 / q + w, colour = colour }
+        Objects[#Objects + 1] = { name = "wall", Type = "rectangle", mode = "line", x = x - size / 2, y = y + size * (q + 1) / 4 / q, wigth = w, height = size * (q - 1) / 2 / q + w, colour = colour }
 		DoorsOfRoom[#DoorsOfRoom+1]={Type=0, v1=id, v2=id-1, x=x-size/2, y=y, wigth=w, height=size/q-w-4,colour=colour}
     end
     if id + 1 <= n ^ 2 and graph[id][id + 1] == 1 and containElem(visited, id + 1) == false then
-        Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x + size / 2, y = y - size * (q + 1) / 4 / q, wigth = w, height = size * (q - 1) / 2 / q + w, colour = colour }
-        Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x + size / 2, y = y + size * (q + 1) / 4 / q, wigth = w, height = size * (q - 1) / 2 / q + w, colour = colour }
+        Objects[#Objects + 1] = { name = "wall", Type = "rectangle", mode = "line", x = x + size / 2, y = y - size * (q + 1) / 4 / q, wigth = w, height = size * (q - 1) / 2 / q + w, colour = colour }
+        Objects[#Objects + 1] = { name = "wall", Type = "rectangle", mode = "line", x = x + size / 2, y = y + size * (q + 1) / 4 / q, wigth = w, height = size * (q - 1) / 2 / q + w, colour = colour }
 		DoorsOfRoom[#DoorsOfRoom+1]={Type=0, v1=id, v2=id+1, x=x+size/2, y=y, wigth=w, height=size/q-w-4,colour=colour}
     end
     if id - n >= 1 and graph[id][id - n] == 1 and containElem(visited, id - n) == false then
-        Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x - size * (q + 1) / 4 / q, y = y - size / 2, wigth = size * (q - 1) / 2 / q + w, height = w, colour = colour }
-        Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x + size * (q + 1) / 4 / q, y = y - size / 2, wigth = size * (q - 1) / 2 / q + w, height = w, colour = colour }
+        Objects[#Objects + 1] = { name = "wall", Type = "rectangle", mode = "line", x = x - size * (q + 1) / 4 / q, y = y - size / 2, wigth = size * (q - 1) / 2 / q + w, height = w, colour = colour }
+        Objects[#Objects + 1] = { name = "wall", Type = "rectangle", mode = "line", x = x + size * (q + 1) / 4 / q, y = y - size / 2, wigth = size * (q - 1) / 2 / q + w, height = w, colour = colour }
 		DoorsOfRoom[#DoorsOfRoom+1]={Type=0, v1=id, v2=id-n, x=x, y=y-size/2, wigth=size/q-w-4, height=w,colour=colour}
     end
     if id + n <= n ^ 2 and graph[id][id + n] == 1 and containElem(visited, id + n) == false then
-        Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x - size * (q + 1) / 4 / q, y = y + size / 2, wigth = size * (q - 1) / 2 / q + w, height = w, colour = colour }
-        Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x + size * (q + 1) / 4 / q, y = y + size / 2, wigth = size * (q - 1) / 2 / q + w, height = w, colour = colour }
+        Objects[#Objects + 1] = { name = "wall", Type = "rectangle", mode = "line", x = x - size * (q + 1) / 4 / q, y = y + size / 2, wigth = size * (q - 1) / 2 / q + w, height = w, colour = colour }
+        Objects[#Objects + 1] = { name = "wall", Type = "rectangle", mode = "line", x = x + size * (q + 1) / 4 / q, y = y + size / 2, wigth = size * (q - 1) / 2 / q + w, height = w, colour = colour }
 		DoorsOfRoom[#DoorsOfRoom+1]={Type=0, v1=id, v2=id+n, x=x, y=y+size/2, wigth=size/q-w-4, height=w,colour=colour}
     end
     if id - 1 >= 1 and graph[id][id - 1] == 2 and containElem(visited, id - 1) == false then

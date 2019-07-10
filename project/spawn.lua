@@ -20,7 +20,7 @@ local function AddLotLoot(id,castl)
 		d=math.random(((size-2*ws)/Ls)*((size-2*ws)/Ls))
 	end
 	castl[id].T[d]=1	
-	castl[id].loot[#castl[id].loot+1]={id=d,number=qwer,tip=range[qwer][2]}
+	castl[id].loot[#castl[id].loot+1]={id=d,number=qwer,tip=rand[qwer][2]}
 end
 local function drawLoot(tab,castl) 
 	for i=1,#tab do
@@ -33,7 +33,7 @@ local function drawLoot(tab,castl)
 			e_x=(e_x-1)*Ls
 			e_x=e_x+castl[tab[i]].x_pix +ws
 			e_y=e_y+castl[tab[i]].y_pix +2*ws
-			drawSpr(range[castl[tab[i]].loot[o].number][1],e_x,e_y)
+			drawSpr(rand[castl[tab[i]].loot[o].number][1],e_x,e_y)
 		end
 	end
 end
