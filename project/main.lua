@@ -2,6 +2,7 @@
 -- ws07 мастерская № 7. ЛШЮП 2019
 
 function love.load()
+    love.graphics.setDefaultFilter("nearest", "nearest")
 	inspect = require "inspect"
     gamera = require "gamera"
     sprite = require "sprite"
