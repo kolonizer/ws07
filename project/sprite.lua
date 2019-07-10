@@ -34,6 +34,9 @@ function newSpr(name, width, height, delay, view, anima, framesOrder)
 			elseif i == nil and j ~= nil then
 				t.spr[j] = love.graphics.newImage(name .. j .. ".png")
 				print(name .. j .. ".png")
+			elseif i ~= nil and j == nil then
+				t.spr[j] = love.graphics.newImage(name .. j .. ".png")
+				print(name .. t.viewSprite[i] .. ".png")
 			end
 		end
 	end
