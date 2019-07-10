@@ -2,6 +2,7 @@
 -- ws07 мастерская № 7. ЛШЮП 2019
 
 function love.load()
+	love.window.setTitle( "Граф ДРАКУЛА. Мастерская № 7. ЛШЮП 2019. Управление WASD и Tab" )
     love.graphics.setDefaultFilter("nearest", "nearest")
 	inspect = require "inspect"
     gamera = require "gamera"
