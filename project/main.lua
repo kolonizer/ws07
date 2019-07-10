@@ -13,7 +13,6 @@ function love.load()
     RoomCollision = require "RoomCollision"
     drawMiniMap = require "drawMiniMap"
 	spawn = require "spawn"
-	DoorsOfRoom={}
     math.randomseed(os.time())
 	Ls=31
 	ws=5
@@ -26,8 +25,8 @@ function love.load()
 	woodTable = newSpr("spr/woodTable", 50, 50, 0, 1, 1, nil)
 	candle = newSpr("spr/candels", 30, 30, 0.2, 1, 2, {1, 2})
     -- таблица главного героя
-    X = 400
-    Y = 300
+    --X = 400
+    --Y = 300
     castl, graph, Doors = gra.generate()
 	id = max_vert1
 	for p=1,#castl do
@@ -67,6 +66,7 @@ end
 function love.update(dt)
     fps = 1 / dt
     Objects = { Hero }
+	DoorsOfRoom={}
     visited = {}
     Hero.cellX = (Hero.x - (Hero.x % size)) / size
     Hero.cellY = (Hero.y - (Hero.y % size)) / size
