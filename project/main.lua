@@ -123,6 +123,7 @@ function love.draw()
 		end
     else
         cam:draw(function(l, t, w, h)
+			draw.drawFloor()
 			spawn.drawLoot(v, Rooms)
             love.graphics.setColor(255, 255, 255, 255)
 			spawn.drawLoot(v, Rooms)

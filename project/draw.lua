@@ -30,7 +30,7 @@ local function drawFloor()
 	end
 end
 local function draw(o)
-	drawFloor()
+	--drawFloor()
 	for i=#DoorsOfRoom,1,-1 do
 		drawDoor(DoorsOfRoom[i])
 	end
@@ -38,4 +38,4 @@ local function draw(o)
         drawUnit(o[i])
     end
 end
-return { draw = draw }
+return { draw = draw, drawFloor = drawFloor }
