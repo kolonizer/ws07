@@ -94,11 +94,11 @@ chans={{Key,'Key',20},
     --Y = 300
     Rooms, graph, Doors = gra.generate()
 	id = max_vert1
-	for p=1,#castl do
+	for p=1,#Rooms do
 		--print(p,castl[p].tip)
-		if castl[p].tip=='treasure' then
+		if Rooms[p].tip=='treasure' then
 			for i=1,169,1 do
-				spawn.AddLotLoot(p,castl)
+				spawn.AddLotLoot(p, Rooms)
 			end
 		end
 	end
@@ -112,7 +112,7 @@ end
 function love.draw()
 	love.graphics.clear(0,0,0)
     if love.keyboard.isDown("tab") then
-        drawMiniMap.drawMiniMap(castl)
+        drawMiniMap.drawMiniMap(Rooms)
 		MousX, MousY = love.mouse.getPosition()
 		if love.mouse.isDown(1) and MousX < 600 then
 			Hero.cellX = math.floor(MousX / mapSize) + 2
@@ -123,9 +123,9 @@ function love.draw()
 		end
     else
         cam:draw(function(l, t, w, h)
-			spawn.drawLoot(v,castl)
+			spawn.drawLoot(v, Rooms)
             love.graphics.setColor(255, 255, 255, 255)
-			spawn.drawLoot(v,castl)
+			spawn.drawLoot(v, Rooms)
             love.graphics.print(math.floor(fps), l, t)
             draw.draw(Objects)
         end)
