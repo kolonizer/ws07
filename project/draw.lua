@@ -24,7 +24,7 @@ local function drawDoor(x)
 	end
 end
 local function drawFloor()
-	love.graphics.setColor(50,50,50,255)
+	love.graphics.setColor(30,30,30,255)
 	for i=1,#v do
 		love.graphics.rectangle("fill",(collide.XYFromID(v[i])[1])*size-2.5,(collide.XYFromID(v[i])[2]+2)*size-2.5,size+5,size+5)
 	end
