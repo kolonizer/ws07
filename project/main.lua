@@ -2,6 +2,7 @@
 -- ws07 мастерская № 7. ЛШЮП 2019
 
 function love.load()
+    love.graphics.setDefaultFilter("nearest", "nearest")
 	inspect = require "inspect"
     gamera = require "gamera"
     sprite = require "sprite"
@@ -12,7 +13,7 @@ function love.load()
     RoomCollision = require "RoomCollision"
     drawMiniMap = require "drawMiniMap"
 	spawn = require "spawn"
-	
+	DoorsOfRoom={}
 	--загрузка ресурсов
     heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3, {1, 2, 3, 2})
 	woodTable = newSpr("spr/woodTable", 50, 50, 0, 1, 1, nil)
@@ -81,29 +82,29 @@ chans={{Key,'Key',20},
 	ws=3
     size = 403+2*ws
     n = 7						
+	mapSize = love.graphics.getHeight() / n
+    doorSize = mapSize / 5
     --загрузка ресурсов
     heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3, {1, 2, 3, 2})
 	woodTable = newSpr("spr/woodTable", 50, 50, 0, 1, 1, nil)
 	candle = newSpr("spr/candels", 30, 30, 0.2, 1, 2, {1, 2})
     -- таблица главного героя
-    height = love.graphics.getHeight()
-    mapSize = height / n
-    dourSize = mapSize / 5
     X = 400
     Y = 300
-    castl, graph, Dours = gra.generate()
+    castl, graph, Doors = gra.generate()
 	id = max_vert1
 	for p=1,#castl do
-		print(p,castl[p].tip)
+		--print(p,castl[p].tip)
 		if castl[p].tip=='treasure' then
 			for i=1,169,1 do
 				spawn.AddLotLoot(p,castl)
 			end
 		end
 	end
-	print(inspect( castl, { depth = 4 } ) )
-    Hero = {id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name="Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 255 } }
-    cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
+	--print(inspect( castl, { depth = 4 } ) )
+    Hero = {id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name="Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 } }
+    Inventory = {1,2,3,4,5,6,7,8,9}
+	cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
     cam:setWindow(0, 0, 800, 600)
     cam:setScale(1.2)
 end
@@ -111,8 +112,17 @@ function love.draw()
 	love.graphics.clear(0,0,0)
     if love.keyboard.isDown("tab") then
         drawMiniMap.drawMiniMap(castl)
+		MousX, MousY = love.mouse.getPosition()
+		if love.mouse.isDown(1) and MousX < 600 then
+			Hero.cellX = math.floor(MousX / mapSize) + 2
+			Hero.cellY = math.floor(MousY / mapSize) + 2
+			Hero.id = (Hero.cellY - 1) * n + Hero.cellX
+			Hero.x = Hero.cellX * size - size / 2
+			Hero.y = Hero.cellY * size - size / 2
+		end
     else
         cam:draw(function(l, t, w, h)
+			spawn.drawLoot(v,castl)
             love.graphics.setColor(255, 255, 255, 255)
 			spawn.drawLoot(v,castl)
             love.graphics.print(math.floor(fps), l, t)

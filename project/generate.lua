@@ -136,7 +136,7 @@ local function generate()
     else
         castl[(n / 2 - 1) * n + n / 2].use = true
     end
-    local Dours = {}
+    local Doors = {}
     for i = 1, math.random((n - 4) * (n - 3), (n - 3) * (n - 3)), 1 do
         while true do
             local verch, wx, wy = poisk(math.random(1, schet(castl)), castl)
@@ -150,7 +150,7 @@ local function generate()
                         graph[verch][q_id] = 1
                         graph[q_id][verch] = 1
                     end
-                    Dours[#Dours + 1] = { verch, q_id, graph[verch][q_id] }
+                    Doors[#Doors + 1] = { v1=verch, v2=q_id, Type=graph[verch][q_id] }
                     --print(verch,q_id,graph[verch][q_id])
                     castl[q_id].use = true
                     break
@@ -176,6 +176,6 @@ local function generate()
 			end
 		end
 	end
-    return castl, graph, Dours
+    return castl, graph, Doors
 end
 return { generate = generate }

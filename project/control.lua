@@ -35,7 +35,7 @@ local function control(TypeControl, person, speed, GrowthSpeed)
         end
 		heroSprite.curAnim = "Down"
     end
-    if love.keyboard.isDown(TypeControl[5]) then
+    --[[if love.keyboard.isDown(TypeControl[5]) then
         if person.Type == "circle" then
             person.radius = person.radius + GrowthSpeed
         elseif person.Type == "rectangle" then
@@ -62,6 +62,6 @@ local function control(TypeControl, person, speed, GrowthSpeed)
                 person.wigth, person.height = person.wigth + GrowthSpeed, person.height + GrowthSpeed * person.height / person.wigth
             end
         end
-    end
+    end--]]
 end
 return { control = control }
