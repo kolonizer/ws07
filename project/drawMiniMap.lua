@@ -1,7 +1,7 @@
 -- отрисовка мини-карты
 
 local function drawInventory()
-	if love.mouse.isDown(1) and MousX > 600 and MousY > 100 then
+	--[[if love.mouse.isDown(1) and MousX > 600 and MousY > 100 then
 		local inventoryID=math.floor((MousX-600)/100)*5+math.floor(MousY/100)
 		Inventory[inventoryID]=nil
 		for i=inventoryID,9 do
@@ -9,12 +9,12 @@ local function drawInventory()
 				break
 			else
 				Inventory[i]=Inventory[i+1]
+				Inventory[i+1]=nil
 			end
 		end
-		--[[repeat
-			
-		until love.mouse.isDown(1)--]]
-	end
+		repeat
+		until not love.mouse.isDown(1)
+	end--]]
 	love.graphics.setColor(0, 0, 0, 255)
 	love.graphics.print("INVENTORY", 600 ,60 ,0 ,3 ,3)
 	for y = 1, 5 do
@@ -30,7 +30,7 @@ local function drawInventory()
 		end
 	end
 end
-local function drawDour(d1, d2, Type)
+local function drawDoor(d1, d2, Type)
     local x1 = d1 % n
 	local y1 = math.floor(d1 / n) + 1
     local x2 = d2 % n
@@ -43,7 +43,7 @@ local function drawDour(d1, d2, Type)
     end
     local widthLine = love.graphics.getLineWidth()
     if Type == 1 then
-        love.graphics.rectangle("fill", (x1 + x2) / 2 * mapSize - dourSize / 2 - mapSize / 2, (y1 + y2) / 2 * mapSize - dourSize / 2 - mapSize / 2, dourSize, dourSize)
+        love.graphics.rectangle("fill", (x1 + x2) / 2 * mapSize - doorSize / 2 - mapSize / 2, (y1 + y2) / 2 * mapSize - doorSize / 2 - mapSize / 2, doorSize, doorSize)
     elseif Type == 2 then
         love.graphics.rectangle("fill", (x1 + x2) / 2 * mapSize - mapSize + widthLine, (y1 + y2) / 2 * mapSize - mapSize + widthLine, mapSize - widthLine*2, mapSize - widthLine*2)
     end
@@ -63,8 +63,8 @@ local function drawMiniMap(castl)
         end
     end
     love.graphics.setColor(200, 200, 200, 255)
-    for i = 1, #Dours do
-        drawDour(Dours[i][1], Dours[i][2], Dours[i][3])
+    for i = 1, #Doors do
+        drawDoor(Doors[i].v1, Doors[i].v2, Doors[i].Type)
     end
     love.graphics.setColor(0, 0, 0, 255)
     q = 0

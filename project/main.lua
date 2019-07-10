@@ -19,7 +19,7 @@ function love.load()
     size = 403
     n = 10
 	mapSize = love.graphics.getHeight() / n
-    dourSize = mapSize / 5
+    doorSize = mapSize / 5
     --загрузка ресурсов
     heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3, {1, 2, 3, 2})
 	woodTable = newSpr("spr/woodTable", 50, 50, 0, 1, 1, nil)
@@ -27,7 +27,7 @@ function love.load()
     -- таблица главного героя
     X = 400
     Y = 300
-    castl, graph, Dours = gra.generate()
+    castl, graph, Doors = gra.generate()
 	id = max_vert1
 	for p=1,#castl do
 		--print(p,castl[p].tip)
