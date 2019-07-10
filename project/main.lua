@@ -12,12 +12,75 @@ function love.load()
     RoomCollision = require "RoomCollision"
     drawMiniMap = require "drawMiniMap"
 	spawn = require "spawn"
+	
+	--загрузка ресурсов
+    heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3, {1, 2, 3, 2})
+	woodTable = newSpr("spr/woodTable", 50, 50, 0, 1, 1, nil)
+	candle = newSpr("spr/candels", 30, 30, 0.2, 1, 2, {1, 2})
+	MP=newSpr("spr/item.MP", 31, 31, 1, 1, 1)
+	Quiver1=newSpr("spr/item.Quiver1", 31, 31, 1, 1, 1)
+	Shield1=newSpr("spr/item.Shield1", 31, 31, 1, 1, 1)
+	Ax1=newSpr("spr/itemAx1", 31, 31, 1, 1, 1)
+	Bow1=newSpr("spr/itemBow1", 31, 31, 1, 1, 1)
+	HP1=newSpr("spr/itemHP1", 31, 31, 1, 1, 1)
+	LongSword1=newSpr("spr/itemLongSword1", 31, 31, 1, 1, 1)
+	Rod1=newSpr("spr/itemRod1", 31, 31, 1, 1, 1)
+	Rod2=newSpr("spr/itemRod2", 31, 31, 1, 1, 1)
+	Shield2=newSpr("spr/itemShield2", 31, 31, 1, 1, 1)
+	Shield3=newSpr("spr/itemShield3", 31, 31, 1, 1, 1)
+	Sword1=newSpr("spr/itemSword1", 31, 31, 1, 1, 1)
+	Sword2=newSpr("spr/itemSword2", 31, 31, 1, 1, 1)
+	IronHelmet=newSpr("spr/itemIronHelmet", 31, 31, 1, 1, 1)
+	IronJacket=newSpr("spr/itemIronJacket", 31, 31, 1, 1, 1)
+	IronPants=newSpr("spr/itemIronPants", 31, 31, 1, 1, 1)
+	MailHelmet=newSpr("spr/itemMailHelmet", 31, 31, 1, 1, 1)
+	MailJacket=newSpr("spr/itemMailJacket", 31, 31, 1, 1, 1)
+	MailPants=newSpr("spr/itemMailPants", 31, 31, 1, 1, 1)
+	
+	Gold=newSpr("spr/itemGold", 31, 31, 1, 1, 1)
+	Key=newSpr("spr/itemKey", 31, 31, 1, 1, 1)
+	KeyBlue=newSpr("spr/itemKeyBlue", 31, 31, 1, 1, 1)
+	KeyGreen=newSpr("spr/itemKeyGreen", 31, 31, 1, 1, 1)
+	KeyRed=newSpr("spr/itemKeyRed", 31, 31, 1, 1, 1)
+
+chans={{Key,'Key',20},
+	{KeyBlue,'KeyBlue',20},
+	{KeyGreen,'KeyGreen',20},
+	{KeyRed,'KeyRed',20},
+	{Gold,'Gold',20}}
+--	{MP,'MP',5},
+--	{Quiver1,'Quiver1',5},
+--	{Shield1,'Shield1',5},
+--	{Ax1,'Ax1',5},
+--	{Bow1,'Bow1',5},
+--	{HP1,'HP1',5},
+--	{LongSword1,'LongSword1',5},
+--	{Rod1,'Rod1',5},
+--	{Rod2,'Rod2',5},
+--	{Shield2,'Shield2',5},
+--	{Shield3,'Shield3',5},
+--	{Sword1,'Sword1',5},
+--	{Sword2,'Sword2',5},
+--	{IronHelmet,'IronHelmet',5},
+--	{IronJacket,'IronJacket',6},
+--	{IronPants,'IronPants',6},
+--	{MailHelmet,'MailHelmet',6},
+--	{MailJacket,'MailJacket',6},
+--	{MailPants,'MailPants',6}
+	
+	range={}
+	for ch=1,#chans do
+		for f=1,chans[ch][3] do
+			range[#range+1]=chans[ch]
+		end
+	end
+	--print(inspect( range, { depth = 4 } ) )
 
     math.randomseed(os.time())
 	Ls=31
-	ws=5
-    size = 403
-    n = 11
+	ws=3
+    size = 403+2*ws
+    n = 7						
     --загрузка ресурсов
     heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3, {1, 2, 3, 2})
 	woodTable = newSpr("spr/woodTable", 50, 50, 0, 1, 1, nil)
@@ -33,14 +96,16 @@ function love.load()
 	for p=1,#castl do
 		print(p,castl[p].tip)
 		if castl[p].tip=='treasure' then
-			spawn.AddLotLoot(p,castl)
+			for i=1,169,1 do
+				spawn.AddLotLoot(p,castl)
+			end
 		end
 	end
 	print(inspect( castl, { depth = 4 } ) )
     Hero = {id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name="Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 255 } }
     cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
     cam:setWindow(0, 0, 800, 600)
-    cam:setScale(1.4)
+    cam:setScale(1.2)
 end
 function love.draw()
 	love.graphics.clear(0,0,0)
@@ -49,9 +114,9 @@ function love.draw()
     else
         cam:draw(function(l, t, w, h)
             love.graphics.setColor(255, 255, 255, 255)
+			spawn.drawLoot(v,castl)
             love.graphics.print(math.floor(fps), l, t)
             draw.draw(Objects)
-			spawn.drawLoot(v,castl)
         end)
     end
 end
