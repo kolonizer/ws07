@@ -13,7 +13,7 @@ function love.load()
     RoomCollision = require "RoomCollision"
     drawMiniMap = require "drawMiniMap"
 	spawn = require "spawn"
-
+	DoorsOfRoom={}
     math.randomseed(os.time())
 	Ls=31
 	ws=5

@@ -37,18 +37,22 @@ local function dfs(graph, id, n, x, y, size, w, q, colour)
     if id - 1 >= 1 and graph[id][id - 1] == 1 and containElem(visited, id - 1) == false then
         Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x - size / 2, y = y - size * (q + 1) / 4 / q, wigth = w, height = size * (q - 1) / 2 / q + w, colour = colour }
         Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x - size / 2, y = y + size * (q + 1) / 4 / q, wigth = w, height = size * (q - 1) / 2 / q + w, colour = colour }
+
     end
     if id + 1 <= n ^ 2 and graph[id][id + 1] == 1 and containElem(visited, id + 1) == false then
         Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x + size / 2, y = y - size * (q + 1) / 4 / q, wigth = w, height = size * (q - 1) / 2 / q + w, colour = colour }
         Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x + size / 2, y = y + size * (q + 1) / 4 / q, wigth = w, height = size * (q - 1) / 2 / q + w, colour = colour }
+		
     end
     if id - n >= 1 and graph[id][id - n] == 1 and containElem(visited, id - n) == false then
         Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x - size * (q + 1) / 4 / q, y = y - size / 2, wigth = size * (q - 1) / 2 / q + w, height = w, colour = colour }
         Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x + size * (q + 1) / 4 / q, y = y - size / 2, wigth = size * (q - 1) / 2 / q + w, height = w, colour = colour }
+		
     end
     if id + n <= n ^ 2 and graph[id][id + n] == 1 and containElem(visited, id + n) == false then
         Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x - size * (q + 1) / 4 / q, y = y + size / 2, wigth = size * (q - 1) / 2 / q + w, height = w, colour = colour }
         Objects[#Objects + 1] = { Type = "rectangle", mode = "line", x = x + size * (q + 1) / 4 / q, y = y + size / 2, wigth = size * (q - 1) / 2 / q + w, height = w, colour = colour }
+		
     end
     if id - 1 >= 1 and graph[id][id - 1] == 2 and containElem(visited, id - 1) == false then
         dfs(graph, id - 1, n, x - size, y, size, w, q, colour)
