@@ -1,7 +1,8 @@
 -- Библиотека загрузки и рисования спрайтов
 
-function newSpr(name, width, height, delay, view, anima, framesOrder)
-	-- view- (ракурс 1 или 4), anima - кол-во фреймов в анимации
+function newSpr(name, width, height, delay, nViews, nFramesPerAnimation, framesOrder)
+	-- nViews - (ракурс 1 или 4)
+	-- nFramesPerAnimation - кол-во фреймов в анимации (идет вправо - 3 файла)
     local t = {
         name = name,
         width = width,
@@ -14,12 +15,12 @@ function newSpr(name, width, height, delay, view, anima, framesOrder)
         curDelay = 0, -- сколько осталось времени до переключения на новый кадр анимации
 		framesOrder = framesOrder or {1}
     }
-    for i = 1, view do
-        for j = 1, anima do
-			if view == 1 then
+    for i = 1, nViews do
+        for j = 1, nFramesPerAnimation do
+			if nViews == 1 then
 				i = nil
 			end
-			if anima == 1 then
+			if nFramesPerAnimation == 1 then
 				j = nil
 			end
             --local f = t.viewSprite[i] .. j
@@ -44,6 +45,7 @@ function newSpr(name, width, height, delay, view, anima, framesOrder)
 end
 
 function setSprAnim(t, anim)
+	-- поменять направление спрайта (куда он смотрит Up Down Left Right)
     t.curAnim = anim
 end
 
