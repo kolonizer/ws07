@@ -39,27 +39,27 @@ local function control(TypeControl, person, speed, GrowthSpeed)
         if person.Type == "circle" then
             person.radius = person.radius + GrowthSpeed
         elseif person.Type == "rectangle" then
-            person.wigth, person.height = person.wigth + GrowthSpeed, person.height + GrowthSpeed * person.height / person.wigth
+            person.width, person.height = person.width + GrowthSpeed, person.height + GrowthSpeed * person.height / person.width
         end
         if collide.CollideWith(person.name) then
             if person.Type == "circle" then
                 person.radius = person.radius - GrowthSpeed
             elseif person.Type == "rectangle" then
-                person.wigth, person.height = person.wigth - GrowthSpeed, person.height - GrowthSpeed * person.height / person.wigth
+                person.width, person.height = person.width - GrowthSpeed, person.height - GrowthSpeed * person.height / person.width
             end
         end
     end
     if love.keyboard.isDown(TypeControl[6]) then
         if person.Type == "circle" and person.radius > GrowthSpeed then
             person.radius = person.radius - GrowthSpeed
-        elseif person.Type == "rectangle" and person.wigth > GrowthSpeed and person.height > GrowthSpeed then
-            person.wigth, person.height = person.wigth - GrowthSpeed, person.height - GrowthSpeed * person.height / person.wigth
+        elseif person.Type == "rectangle" and person.width > GrowthSpeed and person.height > GrowthSpeed then
+            person.width, person.height = person.width - GrowthSpeed, person.height - GrowthSpeed * person.height / person.width
         end
         if collide.CollideWith(person.name) then
             if person.Type == "circle" then
                 person.radius = person.radius + GrowthSpeed
             elseif person.Type == "rectangle" then
-                person.wigth, person.height = person.wigth + GrowthSpeed, person.height + GrowthSpeed * person.height / person.wigth
+                person.width, person.height = person.width + GrowthSpeed, person.height + GrowthSpeed * person.height / person.width
             end
         end
     end--]]
