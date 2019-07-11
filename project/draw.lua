@@ -3,7 +3,7 @@ collide=require "collide"
 local function drawUnit(u)
     love.graphics.setColor(u.colour[1], u.colour[2], u.colour[3], u.colour[4])
     if u.Type == "rectangle" then
-        love.graphics.rectangle(u.mode, u.x - u.wigth / 2, u.y - u.height / 2, u.wigth, u.height)
+        love.graphics.rectangle(u.mode, u.x - u.width / 2, u.y - u.height / 2, u.width, u.height)
     elseif u.Type == "circle" then
         love.graphics.circle(u.mode, u.x, u.y, u.radius)
         -- если у этого объекта естьполе sprite то рисуем его
@@ -20,7 +20,7 @@ local function drawDoor(x)
 		else
 			love.graphics.setColor(x.colour[1],x.colour[2],x.colour[3],x.colour[4])
 		end
-	    love.graphics.rectangle("line", x.x - x.wigth / 2, x.y - x.height / 2, x.wigth, x.height)
+	    love.graphics.rectangle("line", x.x - x.width / 2, x.y - x.height / 2, x.width, x.height)
 	end
 end
 local function drawFloor()
