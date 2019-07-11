@@ -19,7 +19,7 @@ function love.load()
     --загрузка ресурсов
     heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3, { 1, 2, 3, 2 })
     woodTable = newSpr("spr/woodTable", 50, 50, 0, 1, 1, nil)
-    candle = newSpr("spr/candels", 30, 30, 0.2, 1, 2, { 1, 2 })
+    candle = newSpr("spr/candles", 30, 30, 0.2, 1, 2, { 1, 2 })
     MP = newSpr("spr/item.MP", 31, 31, 1, 1, 1)
     Quiver1 = newSpr("spr/item.Quiver1", 31, 31, 1, 1, 1)
     Shield1 = newSpr("spr/item.Shield1", 31, 31, 1, 1, 1)
@@ -86,10 +86,6 @@ function love.load()
     n = 7
     mapSize = love.graphics.getHeight() / n
     doorSize = mapSize / 5
-    --загрузка ресурсов
-    heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3, { 1, 2, 3, 2 })
-    woodTable = newSpr("spr/woodTable", 50, 50, 0, 1, 1, nil)
-    candle = newSpr("spr/candels", 30, 30, 0.2, 1, 2, { 1, 2 })
     -- таблица главного героя
     --X = 400
 
