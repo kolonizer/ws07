@@ -31,11 +31,12 @@ local function drawFloor()
 end
 local function draw(o)
 	--drawFloor()
+	roomCollision=require "roomCollision"
 	for i=#DoorsOfRoom,1,-1 do
 		drawDoor(DoorsOfRoom[i])
 	end
     for i = #o, 1, -1 do
-        if o[i].name~="Oboltus" then
+        if (o[i].name=="Hero" or o[i].name=="wall" or roomCollision.containElem(v,Objects[i].id)) and o[i].name~="Oboltus" then
 			drawUnit(o[i])
 		end
     end
