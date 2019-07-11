@@ -16,7 +16,7 @@ local function AddLotLoot(id, rooms)
         d = math.random(((size - 2 * ws) / Ls) * ((size - 2 * ws) / Ls))
     end
     rooms[id].T[d] = 1
-    rooms[id].loot[#rooms[id].loot + 1] = { id = d, number = rand100, tip = range[rand100][2] }
+    rooms[id].loot[#rooms[id].loot + 1] = { id = d, number = rand100, tip = rand[rand100][2] }
 end
 local function drawLoot(tab, rooms)
     local k = (size - 2 * ws) / Ls
@@ -30,7 +30,7 @@ local function drawLoot(tab, rooms)
             e_x = (e_x - 1) * Ls
             e_x = e_x + rooms[tab[i]].x_pix + ws + 15
             e_y = e_y + rooms[tab[i]].y_pix + 2 * ws + 15
-            drawSpr(range[rooms[tab[i]].loot[o].number][1], e_x, e_y)
+            drawSpr(rand[rooms[tab[i]].loot[o].number][1], e_x, e_y)
         end
     end
 end

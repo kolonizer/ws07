@@ -14,6 +14,7 @@ function love.load()
     RoomCollision = require "RoomCollision"
     drawMiniMap = require "drawMiniMap"
 	spawn = require "spawn"
+	monstor= require "Monstor"
 	DoorsOfRoom={}
 	--загрузка ресурсов
     heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3, {1, 2, 3, 2})
@@ -44,36 +45,36 @@ function love.load()
 	KeyBlue=newSpr("spr/itemKeyBlue", 31, 31, 1, 1, 1)
 	KeyGreen=newSpr("spr/itemKeyGreen", 31, 31, 1, 1, 1)
 	KeyRed=newSpr("spr/itemKeyRed", 31, 31, 1, 1, 1)
-
-chans={{Key,'Key',20},
-	{KeyBlue,'KeyBlue',20},
-	{KeyGreen,'KeyGreen',20},
-	{KeyRed,'KeyRed',20},
-	{Gold,'Gold',20}}
---	{MP,'MP',5},
---	{Quiver1,'Quiver1',5},
---	{Shield1,'Shield1',5},
---	{Ax1,'Ax1',5},
---	{Bow1,'Bow1',5},
---	{HP1,'HP1',5},
---	{LongSword1,'LongSword1',5},
---	{Rod1,'Rod1',5},
---	{Rod2,'Rod2',5},
---	{Shield2,'Shield2',5},
---	{Shield3,'Shield3',5},
---	{Sword1,'Sword1',5},
---	{Sword2,'Sword2',5},
---	{IronHelmet,'IronHelmet',5},
---	{IronJacket,'IronJacket',6},
---	{IronPants,'IronPants',6},
---	{MailHelmet,'MailHelmet',6},
---	{MailJacket,'MailJacket',6},
---	{MailPants,'MailPants',6}
 	
-	range={}
+chans={{Key,'Key',0},
+	{KeyBlue,'KeyBlue',0},
+	{KeyGreen,'KeyGreen',0},
+	{KeyRed,'KeyRed',0},
+	{Gold,'Gold',10},
+	{MP,'MP',5},
+	{Quiver1,'Quiver1',5},
+	{Shield1,'Shield1',5},
+	{Ax1,'Ax1',5},
+	{Bow1,'Bow1',5},
+	{HP1,'HP1',5},
+	{LongSword1,'LongSword1',5},
+	{Rod1,'Rod1',5},
+	{Rod2,'Rod2',5},
+	{Shield2,'Shield2',5},
+	{Shield3,'Shield3',5},
+	{Sword1,'Sword1',5},
+	{Sword2,'Sword2',5},
+	{IronHelmet,'IronHelmet',5},
+	{IronJacket,'IronJacket',4},
+	{IronPants,'IronPants',4},
+	{MailHelmet,'MailHelmet',4},
+	{MailJacket,'MailJacket',4},
+	{MailPants,'MailPants',4}}
+	
+	rand={}
 	for ch=1,#chans do
 		for f=1,chans[ch][3] do
-			range[#range+1]=chans[ch]
+			rand[#rand+1]=chans[ch]
 		end
 	end
 	--print(inspect( range, { depth = 4 } ) )
@@ -82,7 +83,7 @@ chans={{Key,'Key',20},
 	Ls=31
 	ws=3
     size = 403+2*ws
-    n = 7				
+    n = 10						
 	mapSize = love.graphics.getHeight() / n
     doorSize = mapSize / 5
     --загрузка ресурсов
@@ -91,6 +92,16 @@ chans={{Key,'Key',20},
 	candle = newSpr("spr/candels", 30, 30, 0.2, 1, 2, {1, 2})
     -- таблица главного героя
     --X = 400
+	
+	--гриб на месте
+		
+	--призрак через стены
+	
+	--волк догоняет
+	
+	--змея так змея
+	
+	--орк 
     --Y = 300
     Rooms, graph, Doors = gra.generate()
 	id = max_vert1
@@ -105,6 +116,8 @@ chans={{Key,'Key',20},
 	--print(inspect( castl, { depth = 4 } ) )
     Hero = {id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name="Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 } }
     Inventory = {1,2,3,4,5,6,7,8,9,10}
+	Objects={Hero}
+	monstor.CreateMonstr(max_vert2,'Wolf')
 	cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
     cam:setWindow(0, 0, 800, 600)
     cam:setScale(1.2)
@@ -133,8 +146,14 @@ function love.draw()
     end
 end
 function love.update(dt)
+	DT=dt
     fps = 1 / dt
-    Objects = { Hero }
+	local lenObjects=#Objects
+	for i=lenObjects,1,-1 do
+		if Objects[i].name=="wall" then
+			table.remove(Objects,i)
+		end
+	end
 	DoorsOfRoom={}
     visited = {}
     Hero.cellX = (Hero.x - (Hero.x % size)) / size
@@ -148,6 +167,7 @@ function love.update(dt)
         RoomCollision.dfs(graph, A[i], n, (collide.XYFromID(A[i])[1] + 0) * size + size / 2, (collide.XYFromID(A[i])[2] + 2) * size + size / 2, size, 5, 3, { 50, 50, 50, 255 })
     end
     control.control({"a","w","s","d","q","e"}, Hero, 300 * dt, 100 * dt)
+	monstor.UpdateMonstr()
     updateSpr(heroSprite, dt)
     cam:setPosition(Hero.x, Hero.y)
 end

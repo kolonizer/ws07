@@ -1,13 +1,11 @@
 -- проверка на столкновение
 local function CollideWith(person)
-    if person=="Hero" then
-		for i = 1, #Objects do
-            if collide.collide(Objects[i], Hero) then
-			    return true
-            end
+	for i = 1, #Objects do
+        if collide.collide(Objects[i], person) then
+		    return true
 		end
-		return false
-    end
+	end
+	return false
 end
 local function XYFromID(ID)
     local x = ID % n

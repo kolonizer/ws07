@@ -151,7 +151,6 @@ local function generate()
                         graph[q_id][verch] = 1
                     end
                     Doors[#Doors + 1] = { v1=verch, v2=q_id, Type=graph[verch][q_id] }
-                    --print(verch,q_id,graph[verch][q_id])
                     castl[q_id].use = true
                     break
                 end
