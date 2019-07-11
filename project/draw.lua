@@ -37,5 +37,11 @@ local function draw(o)
     for i = #o, 1, -1 do
         drawUnit(o[i])
     end
+	if Hero.hit.visibility==true then
+		love.graphics.setColor(Hero.hit.colour[1],Hero.hit.colour[2],Hero.hit.colour[3],Hero.hit.colour[4])
+	else
+		love.graphics.setColor(Hero.hit.colour[1],Hero.hit.colour[2],Hero.hit.colour[3],0)
+	end
+	love.graphics.circle("line",Hero.x,Hero.y,Hero.hit.radius)
 end
 return { draw = draw, drawFloor = drawFloor }
