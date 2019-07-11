@@ -11,7 +11,7 @@ local function AddLotLoot(id, rooms)
     Q.h = size      -- длина
     local rand100 = math.random(1, 100)
     local d = math.random(((size - 2 * ws) / Ls) * ((size - 2 * ws) / Ls))
-    while (rooms[id].T[d] == 1) do
+    while rooms[id].T[d] == 1 do
         d = math.random(((size - 2 * ws) / Ls) * ((size - 2 * ws) / Ls))
     end
 	

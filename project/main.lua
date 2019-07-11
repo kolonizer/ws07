@@ -110,7 +110,7 @@ function love.load()
     for p = 1, #Rooms do
         --print(p,castl[p].tip)
         if Rooms[p].tip == 'treasure' then
-            for i = 1, 5, 1 do
+            for i = 1, 2, 1 do
                 spawn.AddLotLoot(p, Rooms)
             end
         end
@@ -122,7 +122,50 @@ function love.load()
     Hero = { damage=1,id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 },hit={cd=0.6,visCd=0.2,radius=40,colour={255,255,255,255},visibility=false,x=0,y=0,Type="circle"}}
 	Inventory = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
     Objects = { Hero }
-    monster.CreateMonster(max_vert2, 'Slime')
+	for r=1,#Rooms do
+		if Rooms[r].use then
+			if Rooms[r].tip=='' then
+				m = { { 'Ghost', 20 },
+                { 'Wolf', 20 },
+                { 'Skelet', 20 },
+                { 'Mushroom', 20 },
+                { 'Snake', 10 },
+                { 'Slime', 10}}
+					
+			
+				mobs = {}
+				for ch = 1, #m do
+					for f = 1, m[ch][2] do
+						mobs[#mobs + 1] = m[ch]
+					end
+				end
+				for i=1,math.random(1,4) do
+					monster.CreateMonster(r,mobs[math.random(1,100)][1])
+				end
+			end
+			if Rooms[r].tip=='boss' then
+				monster.CreateMonster(max_vert2, 'Drakula')
+			end
+			if Rooms[r].tip=='treasure' then
+				m = { { 'Ghost', 20 },
+                { 'Wolf', 20 },
+                { 'Skelet', 20 },
+                { 'Mushroom', 20 },
+                { 'Snake', 10 },
+                { 'Slime', 10}}
+					
+				mobs = {}
+				for ch = 1, #m do
+					for f = 1, m[ch][2] do
+						mobs[#mobs + 1] = m[ch]
+					end
+				end
+				for i=1,math.random(1,4) do
+					monster.CreateMonster(r,mobs[math.random(1,100)][1])
+				end
+			end
+		end
+	end
     cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
     cam:setWindow(0, 0, 1600, 900)
     cam:setScale(1.6)

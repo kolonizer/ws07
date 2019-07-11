@@ -1,15 +1,15 @@
 function CreateMonster(id, tip)
 	local k = (size - 2 * ws) / Ls -- кол-во клеток в высоту комнаты, в которые спавнят вещи
 	local d=math.random(((size - 2 * ws) / Ls) * ((size - 2 * ws) / Ls))
-	while Rooms[id].T[d] == 1 do
+	while not Rooms[id].T[d] == 1 do
 		local d=math.random(((size - 2 * ws) / Ls) * ((size - 2 * ws) / Ls))
-		Rooms[id].T[d]=1
 	end
+	Rooms[id].T[d]=1
 	local e_x = (d % k)  --x
 	if e_x == 0 then
 		e_x = k
 	end
-	local e_y = ((d - e_x - 1) / k) * Ls+15        --y
+	local e_y = ((d - e_x - 1) / k) * Ls+36       --y
 	e_x = (e_x - 1) * Ls+15
     if tip == 'Skelet' then
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
@@ -20,6 +20,12 @@ function CreateMonster(id, tip)
     if tip == 'Slime' then
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
 		name = "Slime", Type = "circle", mode = "line", sprite = heroSprite,
+		x = collide.XYFromID(id)[1] * size + e_x, y = (collide.XYFromID(id)[2] + 2) * size + e_y,
+		radius = 30, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, Hit = 1, Range = 30, speed = 50,cooldawn=1,Time=0  }
+    end
+	if tip == 'Drakula' then
+        Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
+		name = "Drakula", Type = "circle", mode = "line", sprite = heroSprite,
 		x = collide.XYFromID(id)[1] * size + e_x, y = (collide.XYFromID(id)[2] + 2) * size + e_y,
 		radius = 30, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, Hit = 1, Range = 30, speed = 50,cooldawn=1,Time=0  }
     end
@@ -58,7 +64,7 @@ function UpdateMonster(dt)
         --print(Objects[i].x,Objects[i].y)
         --print(Objects[i].name)
 		
-        if Objects[i].name == "Skelet" or Objects[i].name == "Slime" or Objects[i].name == "Mushroom" or Objects[i].name == "Snake" then
+        if Objects[i].name == "Skelet" or Objects[i].name == "Slime" or Objects[i].name == "Mushroom" or Objects[i].name == "Snake" or Objects[i].name=='Drakula' then
             Objects[i].cellX = (Objects[i].x - (Objects[i].x % size)) / size
             Objects[i].cellY = (Objects[i].y - (Objects[i].y % size)) / size
             Objects[i].id = (Objects[i].cellY - 1) * n + Objects[i].cellX
