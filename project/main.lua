@@ -11,7 +11,7 @@ function love.load()
     control = require "control"	-- управление с клавиатуры
     draw = require "draw"
     gra = require "generate"
-    RoomCollision = require "RoomCollision"
+    roomCollision = require "roomCollision"
     drawMiniMap = require "drawMiniMap"
 	spawn = require "spawn"
 	monstor= require "Monstor"
@@ -159,12 +159,12 @@ function love.update(dt)
     Hero.cellX = (Hero.x - (Hero.x % size)) / size
     Hero.cellY = (Hero.y - (Hero.y % size)) / size
     Hero.id = (Hero.cellY - 1) * n + Hero.cellX
-    RoomCollision.dfs(graph, Hero.id, n, Hero.cellX * size + size / 2, Hero.cellY * size + size / 2, size, 5, 3, { 255, 255, 255, 255 })
+    roomCollision.dfs(graph, Hero.id, n, Hero.cellX * size + size / 2, Hero.cellY * size + size / 2, size, 5, 3, { 255, 255, 255, 255 })
 	v=visited
-    local A = RoomCollision.neighbours(visited, graph)
+    local A = roomCollision.neighbours(visited, graph)
     for i = 1, #A do
         visited = {}
-        RoomCollision.dfs(graph, A[i], n, (collide.XYFromID(A[i])[1] + 0) * size + size / 2, (collide.XYFromID(A[i])[2] + 2) * size + size / 2, size, 5, 3, { 50, 50, 50, 255 })
+        roomCollision.dfs(graph, A[i], n, (collide.XYFromID(A[i])[1] + 0) * size + size / 2, (collide.XYFromID(A[i])[2] + 2) * size + size / 2, size, 5, 3, { 50, 50, 50, 255 })
     end
     control.control({"a","w","s","d","q","e"}, Hero, 300 * dt, 100 * dt)
 	monstor.UpdateMonstr()
