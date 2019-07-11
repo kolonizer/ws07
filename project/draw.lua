@@ -35,7 +35,9 @@ local function draw(o)
 		drawDoor(DoorsOfRoom[i])
 	end
     for i = #o, 1, -1 do
-        drawUnit(o[i])
+        if o[i].name~="Oboltus" then
+			drawUnit(o[i])
+		end
     end
 	if Hero.hit.visibility==true then
 		love.graphics.setColor(Hero.hit.colour[1],Hero.hit.colour[2],Hero.hit.colour[3],Hero.hit.colour[4])
