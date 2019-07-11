@@ -35,33 +35,21 @@ local function control(TypeControl, person, speed, GrowthSpeed)
         end
 		heroSprite.curAnim = "Down"
     end
-    --[[if love.keyboard.isDown(TypeControl[5]) then
-        if person.Type == "circle" then
-            person.radius = person.radius + GrowthSpeed
-        elseif person.Type == "rectangle" then
-            person.width, person.height = person.width + GrowthSpeed, person.height + GrowthSpeed * person.height / person.width
-        end
-        if collide.CollideWith(person.name) then
-            if person.Type == "circle" then
-                person.radius = person.radius - GrowthSpeed
-            elseif person.Type == "rectangle" then
-                person.width, person.height = person.width - GrowthSpeed, person.height - GrowthSpeed * person.height / person.width
-            end
-        end
-    end
-    if love.keyboard.isDown(TypeControl[6]) then
-        if person.Type == "circle" and person.radius > GrowthSpeed then
-            person.radius = person.radius - GrowthSpeed
-        elseif person.Type == "rectangle" and person.width > GrowthSpeed and person.height > GrowthSpeed then
-            person.width, person.height = person.width - GrowthSpeed, person.height - GrowthSpeed * person.height / person.width
-        end
-        if collide.CollideWith(person.name) then
-            if person.Type == "circle" then
-                person.radius = person.radius + GrowthSpeed
-            elseif person.Type == "rectangle" then
-                person.width, person.height = person.width + GrowthSpeed, person.height + GrowthSpeed * person.height / person.width
-            end
-        end
-    end--]]
+	if not love.keyboard.isDown("space") then
+		pressed=false
+	end
+    if love.keyboard.isDown("space") and Hero.hit.cd<timer-Hero.lastTime and pressed==false then
+		pressed=true
+		Hero.lastTime=timer
+		Hero.hit.visibility=true
+		for i=1,#Objects do
+			if Objects[i].name~="Hero" and Objects[i].name~="wall" and roomCollision.containElem(v,Objects[i].id) and collide.collide(Objects[i],Hero.hit)then
+				Objects[i].HP=Objects[i].HP-Hero.hit.damage
+				if Objects[i].HP<=0 then
+			        Objects[i]={name="Oboltus"}
+				end
+			end
+		end
+	end
 end
 return { control = control }

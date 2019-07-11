@@ -16,16 +16,17 @@ local function drawInventory()
 		until not love.mouse.isDown(1)
 	end--]]
 	love.graphics.setColor(0, 0, 0, 255)
-	love.graphics.print("INVENTORY", 600 ,60 ,0 ,3 ,3)
+	local mapHeight=love.graphics.getHeight()/6
+	love.graphics.print("INVENTORY", love.graphics.getWidth()-2*mapHeight ,mapHeight-15)
 	for y = 1, 5 do
 		for x = 1, 2 do
 		    love.graphics.setColor(0, 0, 0, 255)
-		    love.graphics.rectangle("line", 500 + x * 100, y * 100, 100, 100)
-			love.graphics.rectangle("line", 505 + x * 100, y * 100 + 5, 90, 90)
+		    love.graphics.rectangle("line", love.graphics.getWidth()-3*mapHeight + x * mapHeight, y * mapHeight, mapHeight, mapHeight)
+			love.graphics.rectangle("line", love.graphics.getWidth()-3*mapHeight + x * mapHeight+5, y * mapHeight + 5, mapHeight-10, mapHeight-10)
 			local inventoryID=(x-1)*5+y
 			if Inventory[inventoryID]~=nil then
 			    love.graphics.setColor(0,0,0, 255)
-		        love.graphics.print(Inventory[inventoryID], 505 + x * 100, y * 100 + 5)
+		        love.graphics.print(Inventory[inventoryID], love.graphics.getWidth()-3*mapHeight + x * mapHeight+5, y * mapHeight + 5)
 			end
 		end
 	end

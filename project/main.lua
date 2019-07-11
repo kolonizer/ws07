@@ -18,9 +18,12 @@ function love.load()
     loot = require "loot"
     DoorsOfRoom = {}
     --загрузка ресурсов
-    heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3, { 1, 2, 3, 2 })
+    heroSprite = newSpr("spr/mainHero", 50, 50, 0.3, 4, 3, { 1, 2, 3, 2 })
+    bossSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3, { 1, 2, 3, 2 })
+
     --монстры
     skeletSprite = newSpr("spr/mobSkelet", 51, 51, 0.4, 4, 1, { 1 })
+    enemyUnknownSprite = newSpr("spr/enemyUnknown", 51, 51, 23, 1, 1)
     --вещи
     woodTable = newSpr("spr/woodTable", 50, 50, 0, 1, 1, nil)
     candle = newSpr("spr/candles", 30, 30, 0.2, 1, 2, { 1, 2 })
@@ -94,7 +97,7 @@ function love.load()
     --X = 400
 
     --гриб на месте
-
+	
     --призрак через стены
 
     --волк догоняет
@@ -114,20 +117,22 @@ function love.load()
         end
     end
     --print(inspect( castl, { depth = 4 } ) )
-    Hero = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 } }
-    Inventory = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
+	timer=0
+	pressed=false
+    Hero = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 },HP=5,hit={cd=0.6,visCd=0.2,radius=40,colour={255,255,255,255},visibility=false,x=0,y=0,Type="circle",damage=1},lastTime=0}
+	Inventory = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
     Objects = { Hero }
-    monster.CreateMonster(max_vert2, 'Wolf')
+    monster.CreateMonster(max_vert2, 'Slime')
     cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
-    cam:setWindow(0, 0, 800, 600)
-    cam:setScale(1.2)
+    cam:setWindow(0, 0, 1600, 900)
+    cam:setScale(1.6)
 end
 function love.draw()
     love.graphics.clear(0, 0, 0)
     if love.keyboard.isDown("tab") then
         drawMiniMap.drawMiniMap(Rooms)
         MousX, MousY = love.mouse.getPosition()
-        if love.mouse.isDown(1) and MousX < 600 then
+        if love.mouse.isDown(1) and MousX < love.graphics.getHeight() then
             Hero.cellX = math.floor(MousX / mapSize) + 2
             Hero.cellY = math.floor(MousY / mapSize) + 2
             Hero.id = (Hero.cellY - 1) * n + Hero.cellX
@@ -141,11 +146,13 @@ function love.draw()
             love.graphics.setColor(255, 255, 255, 255)
             spawn.drawLoot(v, Rooms)
             love.graphics.print(math.floor(fps), l, t)
+			love.graphics.print(Hero.HP, l, t+10)
             draw.draw(Objects)
         end)
     end
 end
 function love.update(dt)
+	timer=timer+dt
     fps = 1 / dt
     local lenObjects = #Objects
     for i = lenObjects, 1, -1 do
@@ -158,6 +165,10 @@ function love.update(dt)
     Hero.cellX = (Hero.x - (Hero.x % size)) / size
     Hero.cellY = (Hero.y - (Hero.y % size)) / size
     Hero.id = (Hero.cellY - 1) * n + Hero.cellX
+	Hero.hit.x,Hero.hit.y=Hero.x,Hero.y
+	if Hero.hit.visibility==true and Hero.hit.visCd<timer-Hero.lastTime then
+		Hero.hit.visibility=false
+	end
     roomCollision.dfs(graph, Hero.id, n, Hero.cellX * size + size / 2, Hero.cellY * size + size / 2, size, 5, 3, { 255, 255, 255, 255 })
     v = visited
     loot.takeTool()

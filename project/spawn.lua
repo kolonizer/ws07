@@ -9,7 +9,6 @@ local function AddLotLoot(id, rooms)
     Q.y = collide.XYFromID(id)[2] * size
     Q.x = collide.XYFromID(id)[1] * size
     Q.h = size      -- длина
-    local T = {}
     local rand100 = math.random(1, 100)
     local d = math.random(((size - 2 * ws) / Ls) * ((size - 2 * ws) / Ls))
     while (rooms[id].T[d] == 1) do
