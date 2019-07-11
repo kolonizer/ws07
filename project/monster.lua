@@ -42,7 +42,7 @@ function CreateMonster(id, tip)
     end
 end
 
-function UpdateMonster()
+function UpdateMonster(dt)
     --print('qqq')
     --print(inspect( Objects, { depth = 2 } ) )
     for i = 1, #Objects do
@@ -65,12 +65,12 @@ function UpdateMonster()
                 --for i=1,#Objects do
                 --	print(Objects[i].name)
                 --end
-                local u_x = ((Objects[i].speed * DT) / math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) * (x1 - x2))
+                local u_x = ((Objects[i].speed * dt) / math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) * (x1 - x2))
                 Objects[i].x = Objects[i].x + u_x
                 if collide.CollideWith(Objects[i]) then
                     Objects[i].x = Objects[i].x - u_x
                 end
-                local u_y = ((Objects[i].speed * DT) / math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) * (y1 - y2))
+                local u_y = ((Objects[i].speed * dt) / math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) * (y1 - y2))
                 Objects[i].y = Objects[i].y + u_y
                 if collide.CollideWith(Objects[i]) then
                     Objects[i].y = Objects[i].y - u_y
@@ -88,9 +88,9 @@ function UpdateMonster()
 
             x2 = Objects[i].x
             y2 = Objects[i].y
-            local u_x = ((Objects[i].speed * DT) / math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) * (x1 - x2))
+            local u_x = ((Objects[i].speed * dt) / math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) * (x1 - x2))
             Objects[i].x = Objects[i].x + u_x
-            local u_y = ((Objects[i].speed * DT) / math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) * (y1 - y2))
+            local u_y = ((Objects[i].speed * dt) / math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) * (y1 - y2))
             Objects[i].y = Objects[i].y + u_y
         end
 
@@ -115,12 +115,12 @@ function UpdateMonster()
                 --for i=1,#Objects do
                 --	print(Objects[i].name)
                 --end
-                local u_x = ((Objects[i].speed * DT) / math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) * (x1 - x2))
+                local u_x = ((Objects[i].speed * dt) / math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) * (x1 - x2))
                 Objects[i].x = Objects[i].x + u_x
                 if collide.CollideWith(Objects[i]) then
                     Objects[i].x = Objects[i].x - u_x
                 end
-                local u_y = ((Objects[i].speed * DT) / math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) * (y1 - y2))
+                local u_y = ((Objects[i].speed * dt) / math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) * (y1 - y2))
                 Objects[i].y = Objects[i].y + u_y
                 if collide.CollideWith(Objects[i]) then
                     Objects[i].y = Objects[i].y - u_y
