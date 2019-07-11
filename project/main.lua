@@ -57,26 +57,26 @@ function love.load()
               { KeyBlue, 'KeyBlue', 0 },
               { KeyGreen, 'KeyGreen', 0 },
               { KeyRed, 'KeyRed', 0 },
-              { Gold, 'Gold', 10 },
-              { MP, 'MP', 5 },
-              { Quiver1, 'Quiver1', 5 },
+              { Gold, 'Gold', 0 },
+              { MP, 'MP', 0 },
+              { Quiver1, 'Quiver1', 0 },
               { Shield1, 'Shield1', 5 },
               { Ax1, 'Ax1', 5 },
-              { Bow1, 'Bow1', 5 },
-              { HP1, 'HP1', 5 },
-              { LongSword1, 'LongSword1', 5 },
-              { Rod1, 'Rod1', 5 },
-              { Rod2, 'Rod2', 5 },
-              { Shield2, 'Shield2', 5 },
-              { Shield3, 'Shield3', 5 },
-              { Sword1, 'Sword1', 5 },
-              { Sword2, 'Sword2', 5 },
-              { IronHelmet, 'IronHelmet', 5 },
-              { IronJacket, 'IronJacket', 4 },
-              { IronPants, 'IronPants', 4 },
-              { MailHelmet, 'MailHelmet', 4 },
-              { MailJacket, 'MailJacket', 4 },
-              { MailPants, 'MailPants', 4 } }
+              { Bow1, 'Bow1', 6 },
+              { HP1, 'HP1', 6 },
+              { LongSword1, 'LongSword1', 6 },
+              { Rod1, 'Rod1', 6 },
+              { Rod2, 'Rod2', 6 },
+              { Shield2, 'Shield2', 6 },
+              { Shield3, 'Shield3', 6 },
+              { Sword1, 'Sword1', 6 },
+              { Sword2, 'Sword2', 6 },
+              { IronHelmet, 'IronHelmet', 6 },
+              { IronJacket, 'IronJacket', 6 },
+              { IronPants, 'IronPants', 6 },
+              { MailHelmet, 'MailHelmet', 6 },
+              { MailJacket, 'MailJacket', 6 },
+              { MailPants, 'MailPants', 6 } }
 
     rand = {}
     for ch = 1, #chans do
@@ -111,7 +111,7 @@ function love.load()
     for p = 1, #Rooms do
         --print(p,castl[p].tip)
         if Rooms[p].tip == 'treasure' then
-            for i = 1, 169, 1 do
+            for i = 1, 2, 1 do
                 spawn.AddLotLoot(p, Rooms)
             end
         end
@@ -122,10 +122,54 @@ function love.load()
     Hero = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 },HP=5,hit={cd=0.6,visCd=0.2,radius=40,colour={255,255,255,255},visibility=false,x=0,y=0,Type="circle",damage=1},lastTime=0}
 	Inventory = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
     Objects = { Hero }
-    monster.CreateMonster(max_vert2, 'Slime')
+	for r=1,#Rooms do
+		if Rooms[r].use then
+			if Rooms[r].tip=='' then
+				m = { { 'Ghost', 20 },
+                { 'Wolf', 20 },
+                { 'Skelet', 20 },
+                { 'Mushroom', 20 },
+                { 'Snake', 10 },
+                { 'Slime', 10}}
+					
+			
+				mobs = {}
+				for ch = 1, #m do
+					for f = 1, m[ch][2] do
+						mobs[#mobs + 1] = m[ch]
+					end
+				end
+				for i=1,math.random(1,4) do
+					monster.CreateMonster(r,mobs[math.random(1,100)][1])
+				end
+			end
+			if Rooms[r].tip=='boss' then
+				monster.CreateMonster(max_vert2, 'Drakula')
+			end
+			if Rooms[r].tip=='treasure' then
+				m = { { 'Ghost', 20 },
+                { 'Wolf', 20 },
+                { 'Skelet', 20 },
+                { 'Mushroom', 20 },
+                { 'Snake', 10 },
+                { 'Slime', 10}}
+					
+				mobs = {}
+				for ch = 1, #m do
+					for f = 1, m[ch][2] do
+						mobs[#mobs + 1] = m[ch]
+					end
+				end
+				for i=1,math.random(1,4) do
+					monster.CreateMonster(r,mobs[math.random(1,100)][1])
+				end
+			end
+		end
+	end
     cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
     cam:setWindow(0, 0, 1600, 900)
     cam:setScale(1.6)
+	--
 end
 function love.draw()
     love.graphics.clear(0, 0, 0)
