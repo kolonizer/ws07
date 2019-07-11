@@ -38,6 +38,7 @@ local function control(TypeControl, person, speed, GrowthSpeed)
 	if not love.keyboard.isDown("space") then
 		pressed=false
 	end
+	--
     if love.keyboard.isDown("space") and Hero.hit.cd<timer-Hero.lastTime and pressed==false then
 		pressed=true
 		Hero.lastTime=timer
