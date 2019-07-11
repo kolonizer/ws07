@@ -120,7 +120,11 @@ function love.load()
 	timer=0
 	pressed=false
     Hero = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 },HP=5,hit={cd=0.6,visCd=0.2,radius=40,colour={255,255,255,255},visibility=false,x=0,y=0,Type="circle",damage=1},lastTime=0}
-	Inventory = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
+	Inventory = {}
+  for i = 1,10 do
+    Inventory[i] = {}
+  end
+
     Objects = { Hero }
 	for r=1,#Rooms do
 		if Rooms[r].use then
@@ -167,7 +171,7 @@ function love.load()
 		end
 	end
     cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
-    cam:setWindow(0, 0, 1600, 900)
+    cam:setWindow(0, 0, 1300, 750)
     cam:setScale(1.6)
 	--
 end
