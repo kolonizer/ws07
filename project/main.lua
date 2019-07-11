@@ -160,6 +160,7 @@ function love.update(dt)
     Hero.id = (Hero.cellY - 1) * n + Hero.cellX
     roomCollision.dfs(graph, Hero.id, n, Hero.cellX * size + size / 2, Hero.cellY * size + size / 2, size, 5, 3, { 255, 255, 255, 255 })
     v = visited
+    loot.takeTool()
     local A = roomCollision.neighbours(visited, graph)
     for i = 1, #A do
         visited = {}
