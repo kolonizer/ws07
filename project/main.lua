@@ -121,8 +121,8 @@ function love.load()
     Objects = { Hero }
     monster.CreateMonster(max_vert2, 'Slime')
     cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
-    cam:setWindow(0, 0, 800, 600)
-    cam:setScale(1.2)
+    cam:setWindow(0, 0, 1600, 900)
+    cam:setScale(1.6)
 end
 function love.draw()
     love.graphics.clear(0, 0, 0)

@@ -67,7 +67,7 @@ function UpdateMonster(dt)
             Objects[i].cellX = (Objects[i].x - (Objects[i].x % size)) / size
             Objects[i].cellY = (Objects[i].y - (Objects[i].y % size)) / size
             Objects[i].id = (Objects[i].cellY - 1) * n + Objects[i].cellX
-            if Hero.id ~= Objects[i].id then
+            if not roomCollision.containElem(v,Objects[i].id) then
 
             else
                 --x1=collide.XYFromID(Hero.id)[1] * size + size / 2
