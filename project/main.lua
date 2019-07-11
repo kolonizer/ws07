@@ -119,16 +119,12 @@ function love.load()
     Hero = { damage=1,id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 },hit={cd=0.6,visCd=0.2,radius=40,colour={255,255,255,255},visibility=false,x=0,y=0,Type="circle"}}
 	Inventory = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
     Objects = { Hero }
-<<<<<<< HEAD
-    monster.CreateMonster(max_vert2, 'Wolf')
-=======
 	for t=1,169 do
 		monster.CreateMonster(max_vert2, 'Wolf')
 	end
->>>>>>> bd2dd4dee3e894b379e633d5eebebea841319cad
     cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
-    cam:setWindow(0, 0, 800, 600)
-    cam:setScale(1.2)
+    cam:setWindow(0, 0, 1600, 900)
+    cam:setScale(1.6)
 end
 function love.draw()
     love.graphics.clear(0, 0, 0)
