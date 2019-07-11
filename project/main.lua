@@ -15,6 +15,7 @@ function love.load()
     drawMiniMap = require "drawMiniMap"
     spawn = require "spawn"
     monster = require "monster"
+    loot = require "loot"
     DoorsOfRoom = {}
     --загрузка ресурсов
     heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3, { 1, 2, 3, 2 })
