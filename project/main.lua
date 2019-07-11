@@ -14,7 +14,7 @@ function love.load()
     roomCollision = require "roomCollision"
     drawMiniMap = require "drawMiniMap"
 	spawn = require "spawn"
-	monstor= require "Monstor"
+	monster = require "monster"
 	DoorsOfRoom={}
 	--загрузка ресурсов
     heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3, {1, 2, 3, 2})
@@ -117,7 +117,7 @@ chans={{Key,'Key',0},
     Hero = {id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name="Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 } }
     Inventory = {1,2,3,4,5,6,7,8,9,10}
 	Objects={Hero}
-	monstor.CreateMonstr(max_vert2,'Wolf')
+	monster.CreateMonster(max_vert2,'Wolf')
 	cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
     cam:setWindow(0, 0, 800, 600)
     cam:setScale(1.2)
@@ -167,7 +167,7 @@ function love.update(dt)
         roomCollision.dfs(graph, A[i], n, (collide.XYFromID(A[i])[1] + 0) * size + size / 2, (collide.XYFromID(A[i])[2] + 2) * size + size / 2, size, 5, 3, { 50, 50, 50, 255 })
     end
     control.control({"a","w","s","d","q","e"}, Hero, 300 * dt, 100 * dt)
-	monstor.UpdateMonstr()
+	monster.UpdateMonster()
     updateSpr(heroSprite, dt)
     cam:setPosition(Hero.x, Hero.y)
 end
