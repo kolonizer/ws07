@@ -113,8 +113,10 @@ function love.load()
         end
     end
     --print(inspect( castl, { depth = 4 } ) )
-    Hero = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 } }
-    Inventory = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
+	timer=0
+	lastTime=0
+    Hero = { damage=1,id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 },hit={cd=0.6,visCd=0.2,radius=40,colour={255,255,255,255},visibility=false,x=0,y=0,Type="circle"}}
+	Inventory = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
     Objects = { Hero }
 	for t=1,169 do
 		monster.CreateMonster(max_vert2, 'Wolf')
@@ -147,6 +149,7 @@ function love.draw()
     end
 end
 function love.update(dt)
+	timer=timer+dt
     fps = 1 / dt
     local lenObjects = #Objects
     for i = lenObjects, 1, -1 do
@@ -159,6 +162,10 @@ function love.update(dt)
     Hero.cellX = (Hero.x - (Hero.x % size)) / size
     Hero.cellY = (Hero.y - (Hero.y % size)) / size
     Hero.id = (Hero.cellY - 1) * n + Hero.cellX
+	Hero.hit.x,Hero.hit.y=Hero.x,Hero.y
+	if Hero.hit.visibility==true and Hero.hit.visCd<timer-lastTime then
+		Hero.hit.visibility=false
+	end
     roomCollision.dfs(graph, Hero.id, n, Hero.cellX * size + size / 2, Hero.cellY * size + size / 2, size, 5, 3, { 255, 255, 255, 255 })
     v = visited
     local A = roomCollision.neighbours(visited, graph)
