@@ -12,9 +12,9 @@ function CreateMonster(id, tip)
                                   x = collide.XYFromID(id)[1] * size + size / 2, y = (collide.XYFromID(id)[2] + 2) * size + size / 2,
                                   radius = 30, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, Hit = 1, Range = 30, speed = 50 }
     end
-    if tip == 'Ghoust' then
+    if tip == 'Ghost' then
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
-                                  name = "Ghoust", Type = "circle", mode = "line", sprite = heroSprite,
+                                  name = "Ghost", Type = "circle", mode = "line", sprite = heroSprite,
                                   x = collide.XYFromID(id)[1] * size + size / 2, y = (collide.XYFromID(id)[2] + 2) * size + size / 2,
                                   radius = 15, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, Hit = 1, Range = 30, speed = 100 }
         --print(inspect( Objects[#Objects], { depth = 2 } ) )
@@ -77,7 +77,7 @@ function UpdateMonster(dt)
                 end
             end
         end
-        if Objects[i].name == "Ghoust" then
+        if Objects[i].name == "Ghost" then
             Objects[i].cellX = (Objects[i].x - (Objects[i].x % size)) / size
             Objects[i].cellY = (Objects[i].y - (Objects[i].y % size)) / size
             Objects[i].id = (Objects[i].cellY - 1) * n + Objects[i].cellX
