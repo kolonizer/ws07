@@ -1,43 +1,43 @@
 function CreateMonster(id, tip)
     if tip == 'Skelet' then
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
-                                  name = "Skelet", Type = "circle", mode = "line", sprite = heroSprite,
-                                  x = collide.XYFromID(id)[1] * size + size / 2, y = (collide.XYFromID(id)[2] + 2) * size + size / 2,
-                                  radius = 10, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, Hit = 1, Range = 30, speed = 100 }
+		name = "Skelet", Type = "circle", mode = "line", sprite = heroSprite,
+		x = collide.XYFromID(id)[1] * size + size / 2, y = (collide.XYFromID(id)[2] + 2) * size + size / 2,
+		radius = 10, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, Hit = 1, Range = 30, speed = 100,cooldawn=1,Time=0 }
         --print(inspect( Objects[#Objects], { depth = 2 } ) )
     end
     if tip == 'Slime' then
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
-                                  name = "Slime", Type = "circle", mode = "line", sprite = heroSprite,
-                                  x = collide.XYFromID(id)[1] * size + size / 2, y = (collide.XYFromID(id)[2] + 2) * size + size / 2,
-                                  radius = 30, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, Hit = 1, Range = 30, speed = 50 }
+		name = "Slime", Type = "circle", mode = "line", sprite = heroSprite,
+		x = collide.XYFromID(id)[1] * size + size / 2, y = (collide.XYFromID(id)[2] + 2) * size + size / 2,
+		radius = 30, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, Hit = 1, Range = 30, speed = 50,cooldawn=1,Time=0  }
     end
     if tip == 'Ghost' then
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
-                                  name = "Ghost", Type = "circle", mode = "line", sprite = heroSprite,
-                                  x = collide.XYFromID(id)[1] * size + size / 2, y = (collide.XYFromID(id)[2] + 2) * size + size / 2,
-                                  radius = 15, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, Hit = 1, Range = 30, speed = 100 }
+		name = "Ghost", Type = "circle", mode = "line", sprite = heroSprite,
+		x = collide.XYFromID(id)[1] * size + size / 2, y = (collide.XYFromID(id)[2] + 2) * size + size / 2,
+		radius = 15, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, Hit = 1, Range = 30, speed = 100,cooldawn=1,Time=0  }
         --print(inspect( Objects[#Objects], { depth = 2 } ) )
     end
     if tip == 'Snake' then
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
-                                  name = "Snake", Type = "circle", mode = "line", sprite = heroSprite,
-                                  x = collide.XYFromID(id)[1] * size + size / 2, y = (collide.XYFromID(id)[2] + 2) * size + size / 2,
-                                  radius = 15, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, Hit = 1, Range = 30, speed = 10 }
+		name = "Snake", Type = "circle", mode = "line", sprite = heroSprite,
+		x = collide.XYFromID(id)[1] * size + size / 2, y = (collide.XYFromID(id)[2] + 2) * size + size / 2,
+		radius = 15, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, Hit = 1, Range = 30, speed = 10,cooldawn=1,Time=0  }
         --print(inspect( Objects[#Objects], { depth = 2 } ) )
     end
     if tip == 'Wolf' then
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
-                                  name = "Wolf", Type = "circle", mode = "line", sprite = heroSprite,
-                                  x = collide.XYFromID(id)[1] * size + size / 2, y = (collide.XYFromID(id)[2] + 2) * size + size / 2,
-                                  radius = 25, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, Hit = 1, Range = 30, speed = 200, active = false }
+		name = "Wolf", Type = "circle", mode = "line", sprite = heroSprite,
+		x = collide.XYFromID(id)[1] * size + size / 2, y = (collide.XYFromID(id)[2] + 2) * size + size / 2,
+		radius = 25, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, Hit = 1, Range = 30, speed = 290, active = false,cooldawn=1,Time=0 }
         --print(inspect( Objects[#Objects], { depth = 2 } ) )
     end
     if tip == 'Mushroom' then
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
-                                  name = "Mushroom", Type = "circle", mode = "line", sprite = heroSprite,
-                                  x = collide.XYFromID(id)[1] * size + size / 2, y = (collide.XYFromID(id)[2] + 2) * size + size / 2,
-                                  radius = 5, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, Hit = 1, Range = 30, speed = 0 }
+		name = "Mushroom", Type = "circle", mode = "line", sprite = heroSprite,
+		x = collide.XYFromID(id)[1] * size + size / 2, y = (collide.XYFromID(id)[2] + 2) * size + size / 2,
+		radius = 5, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, Hit = 1, Range = 30, speed = 0,cooldawn=1,Time=0 }
         --print(inspect( Objects[#Objects], { depth = 2 } ) )
     end
 end
@@ -46,6 +46,7 @@ function UpdateMonster(dt)
     --print('qqq')
     --print(inspect( Objects, { depth = 2 } ) )
     for i = 1, #Objects do
+		--if Objects[i].name
         --print(Objects[i].x,Objects[i].y)
         --print(Objects[i].name)
         if Objects[i].name == "Skelet" or Objects[i].name == "Slime" or Objects[i].name == "Mushroom" or Objects[i].name == "Snake" then
@@ -62,9 +63,6 @@ function UpdateMonster(dt)
 
                 x2 = Objects[i].x
                 y2 = Objects[i].y
-                --for i=1,#Objects do
-                --	print(Objects[i].name)
-                --end
                 local u_x = ((Objects[i].speed * dt) / math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) * (x1 - x2))
                 Objects[i].x = Objects[i].x + u_x
                 if collide.CollideWith(Objects[i]) then
@@ -112,9 +110,6 @@ function UpdateMonster(dt)
                 end
                 x2 = Objects[i].x
                 y2 = Objects[i].y
-                --for i=1,#Objects do
-                --	print(Objects[i].name)
-                --end
                 local u_x = ((Objects[i].speed * dt) / math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) * (x1 - x2))
                 Objects[i].x = Objects[i].x + u_x
                 if collide.CollideWith(Objects[i]) then
