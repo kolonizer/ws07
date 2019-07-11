@@ -18,6 +18,9 @@ function love.load()
     DoorsOfRoom = {}
     --загрузка ресурсов
     heroSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3, { 1, 2, 3, 2 })
+    --монстры
+    skeletSprite = newSpr("spr/mobSkelet", 51, 51, 0.4, 4, 1, { 1 })
+    --вещи
     woodTable = newSpr("spr/woodTable", 50, 50, 0, 1, 1, nil)
     candle = newSpr("spr/candles", 30, 30, 0.2, 1, 2, { 1, 2 })
     MP = newSpr("spr/item.MP", 31, 31, 1, 1, 1)
