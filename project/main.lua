@@ -146,7 +146,6 @@ function love.draw()
     end
 end
 function love.update(dt)
-    DT = dt
     fps = 1 / dt
     local lenObjects = #Objects
     for i = lenObjects, 1, -1 do
@@ -167,7 +166,7 @@ function love.update(dt)
         roomCollision.dfs(graph, A[i], n, (collide.XYFromID(A[i])[1] + 0) * size + size / 2, (collide.XYFromID(A[i])[2] + 2) * size + size / 2, size, 5, 3, { 50, 50, 50, 255 })
     end
     control.control({ "a", "w", "s", "d", "q", "e" }, Hero, 300 * dt, 100 * dt)
-    monster.UpdateMonster()
+    monster.UpdateMonster(dt)
     updateSpr(heroSprite, dt)
     cam:setPosition(Hero.x, Hero.y)
 end
