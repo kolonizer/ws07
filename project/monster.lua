@@ -30,7 +30,7 @@ function CreateMonster(id, tip)
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
                                   name = "Wolf", Type = "circle", mode = "line", sprite = heroSprite,
                                   x = collide.XYFromID(id)[1] * size + size / 2, y = (collide.XYFromID(id)[2] + 2) * size + size / 2,
-                                  radius = 25, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, Hit = 1, Range = 30, speed = 290, active = false }
+                                  radius = 25, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, Hit = 1, Range = 30, speed = 200, active = false }
         --print(inspect( Objects[#Objects], { depth = 2 } ) )
     end
     if tip == 'Mushroom' then
