@@ -26,7 +26,8 @@ function CreateMonster(id, tip)
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
 		name = "Drakula", Type = "circle", mode = "line", sprite = heroSprite,
 		x = collide.XYFromID(id)[1] * size + e_x, y = (collide.XYFromID(id)[2] + 2) * size + e_y,
-		radius = 30, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, Hit = 1, Range = 30, speed = 50,cooldawn=1,Time=0  }
+		radius = 30, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, speed = 50, lastTime=0,
+		hit={cd=2,radius=40,x=0,y=0,Type="circle",damage=1}}
     end
     if tip == 'Ghost' then
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
