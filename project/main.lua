@@ -110,7 +110,7 @@ function love.load()
     for p = 1, #Rooms do
         --print(p,castl[p].tip)
         if Rooms[p].tip == 'treasure' then
-            for i = 1, 169, 1 do
+            for i = 1, 5, 1 do
                 spawn.AddLotLoot(p, Rooms)
             end
         end
