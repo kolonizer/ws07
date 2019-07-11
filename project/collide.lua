@@ -1,9 +1,17 @@
 -- проверка на столкновение
 local function CollideWith(person)
-	for i = 1, #Objects do
-        if collide.collide(Objects[i], person) then
-		    return true
-		end
+	if person.name=="Hero" then
+		for i = 1, #Objects do
+            if collide.collide(Objects[i], person) then
+		        return true
+		    end
+	    end
+	else
+		for i = 1, #Objects do
+            if (Objects[i].name=="wall" or Objects[i].name=="Hero") and collide.collide(Objects[i], person) then
+		        return true
+		    end
+	    end
 	end
 	return false
 end
