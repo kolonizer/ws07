@@ -2,12 +2,13 @@
 -- ws07 мастерская № 7. ЛШЮП 2019
 
 function love.load()
+	love.window.setTitle( "Граф ДРАКУЛА. Мастерская № 7. ЛШЮП 2019. Управление WASD и Tab" )
     love.graphics.setDefaultFilter("nearest", "nearest")
-	inspect = require "inspect"
-    gamera = require "gamera"
-    sprite = require "sprite"
-    collide = require "collide"
-    control = require "control"
+	inspect = require "inspect"	-- для печати в консоли содержимого таблиц
+    gamera = require "gamera" -- библиотека камеры (показывать фрагмент уровня)
+    sprite = require "sprite" -- загрузка картинок, рисование спрайтов
+    collide = require "collide" --
+    control = require "control"	-- управление с клавиатуры
     draw = require "draw"
     gra = require "generate"
     RoomCollision = require "RoomCollision"
@@ -45,30 +46,30 @@ function love.load()
 	KeyGreen=newSpr("spr/itemKeyGreen", 31, 31, 1, 1, 1)
 	KeyRed=newSpr("spr/itemKeyRed", 31, 31, 1, 1, 1)
 	
-chans={{Key,'Key',20},
-	{KeyBlue,'KeyBlue',20},
-	{KeyGreen,'KeyGreen',20},
-	{KeyRed,'KeyRed',20},
-	{Gold,'Gold',20}}
---	{MP,'MP',5},
---	{Quiver1,'Quiver1',5},
---	{Shield1,'Shield1',5},
---	{Ax1,'Ax1',5},
---	{Bow1,'Bow1',5},
---	{HP1,'HP1',5},
---	{LongSword1,'LongSword1',5},
---	{Rod1,'Rod1',5},
---	{Rod2,'Rod2',5},
---	{Shield2,'Shield2',5},
---	{Shield3,'Shield3',5},
---	{Sword1,'Sword1',5},
---	{Sword2,'Sword2',5},
---	{IronHelmet,'IronHelmet',5},
---	{IronJacket,'IronJacket',6},
---	{IronPants,'IronPants',6},
---	{MailHelmet,'MailHelmet',6},
---	{MailJacket,'MailJacket',6},
---	{MailPants,'MailPants',6}
+chans={{Key,'Key',0},
+	{KeyBlue,'KeyBlue',0},
+	{KeyGreen,'KeyGreen',0},
+	{KeyRed,'KeyRed',0},
+	{Gold,'Gold',10},
+	{MP,'MP',5},
+	{Quiver1,'Quiver1',5},
+	{Shield1,'Shield1',5},
+	{Ax1,'Ax1',5},
+	{Bow1,'Bow1',5},
+	{HP1,'HP1',5},
+	{LongSword1,'LongSword1',5},
+	{Rod1,'Rod1',5},
+	{Rod2,'Rod2',5},
+	{Shield2,'Shield2',5},
+	{Shield3,'Shield3',5},
+	{Sword1,'Sword1',5},
+	{Sword2,'Sword2',5},
+	{IronHelmet,'IronHelmet',5},
+	{IronJacket,'IronJacket',4},
+	{IronPants,'IronPants',4},
+	{MailHelmet,'MailHelmet',4},
+	{MailJacket,'MailJacket',4},
+	{MailPants,'MailPants',4}}
 	
 	rand={}
 	for ch=1,#chans do
@@ -82,7 +83,7 @@ chans={{Key,'Key',20},
 	Ls=31
 	ws=3
     size = 403+2*ws
-    n = 10						
+    n = 7					
 	mapSize = love.graphics.getHeight() / n
     doorSize = mapSize / 5
     --загрузка ресурсов
@@ -91,22 +92,32 @@ chans={{Key,'Key',20},
 	candle = newSpr("spr/candels", 30, 30, 0.2, 1, 2, {1, 2})
     -- таблица главного героя
     --X = 400
+	
+	--гриб на месте
+		
+	--призрак через стены
+	
+	--волк догоняет
+	
+	--змея так змея
+	
+	--орк 
     --Y = 300
-    castl, graph, Doors = gra.generate()
+    Rooms, graph, Doors = gra.generate()
 	id = max_vert1
-	for p=1,#castl do
+	for p=1,#Rooms do
 		--print(p,castl[p].tip)
-		if castl[p].tip=='treasure' then
-			for i=1,math.random(3,5),1 do
-				spawn.AddLotLoot(p,castl)
+		if Rooms[p].tip=='treasure' then
+			for i=1,169,1 do
+				spawn.AddLotLoot(p, Rooms)
 			end
 		end
 	end
 	--print(inspect( castl, { depth = 4 } ) )
     Hero = {id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name="Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 } }
-    Inventory = {1,2,3,4,5,6,7,8,9}
+    Inventory = {1,2,3,4,5,6,7,8,9,10}
 	Objects={Hero}
-	monstor.CreateMonstr(max_vert2,'Skelet')
+	monstor.CreateMonstr(max_vert2,'Wolf')
 	cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
     cam:setWindow(0, 0, 800, 600)
     cam:setScale(1.2)
@@ -114,7 +125,7 @@ end
 function love.draw()
 	love.graphics.clear(0,0,0)
     if love.keyboard.isDown("tab") then
-        drawMiniMap.drawMiniMap(castl)
+        drawMiniMap.drawMiniMap(Rooms)
 		MousX, MousY = love.mouse.getPosition()
 		if love.mouse.isDown(1) and MousX < 600 then
 			Hero.cellX = math.floor(MousX / mapSize) + 2
@@ -125,9 +136,10 @@ function love.draw()
 		end
     else
         cam:draw(function(l, t, w, h)
-			spawn.drawLoot(v,castl)
+			draw.drawFloor()
+			spawn.drawLoot(v, Rooms)
             love.graphics.setColor(255, 255, 255, 255)
-			spawn.drawLoot(v,castl)
+			spawn.drawLoot(v, Rooms)
             love.graphics.print(math.floor(fps), l, t)
             draw.draw(Objects)
         end)
