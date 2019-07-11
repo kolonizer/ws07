@@ -113,7 +113,7 @@ local function distantRoom(q, graph, castl)
             break
         end
         distantRooms = {}
-        distantRooms=RoomCollision.neighbours(A,graph)
+        distantRooms= roomCollision.neighbours(A,graph)
     end
     return distantRooms[math.random(#distantRooms)]
 end
