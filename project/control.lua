@@ -35,11 +35,15 @@ local function control(TypeControl, person, speed, GrowthSpeed)
         end
 		heroSprite.curAnim = "Down"
     end
-    if love.keyboard.isDown("space") and Hero.hit.cd<timer-lastTime then
+	if not love.keyboard.isDown("space") then
+		pressed=false
+	end
+    if love.keyboard.isDown("space") and Hero.hit.cd<timer-lastTime and pressed==false then
+		pressed=true
 		lastTime=timer
 		Hero.hit.visibility=true
 		for i=1,#Objects do
-			if Objects[i].name~="Hero" and Objects[i].name~="wall" and collide.collide(Objects[i],Hero.hit)then
+			if Objects[i].name~="Hero" and Objects[i].name~="wall" and roomCollision.containElem(v,Objects[i].id) and collide.collide(Objects[i],Hero.hit)then
 				Objects[i].HP=Objects[i].HP-Hero.damage
 				if Objects[i].HP<=0 then
 			        Objects[i]={name="Oboltus"}

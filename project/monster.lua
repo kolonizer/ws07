@@ -43,6 +43,7 @@ function CreateMonster(id, tip)
 end
 
 function UpdateMonster(dt)
+	roomCollision=require "roomCollision"
     --print('qqq')
     --print(inspect( Objects, { depth = 2 } ) )
     for i = 1, #Objects do
@@ -98,7 +99,7 @@ function UpdateMonster(dt)
             Objects[i].cellY = (Objects[i].y - (Objects[i].y % size)) / size
             Objects[i].id = (Objects[i].cellY - 1) * n + Objects[i].cellX
             --print(Objects[i].id,Hero.id)
-            if Objects[i].id == Hero.id then
+            if roomCollision.containElem(v,Objects[i].id) then
                 Objects[i].active = true
             end
             if Objects[i].active then

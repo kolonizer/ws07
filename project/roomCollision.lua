@@ -67,4 +67,4 @@ local function dfs(graph, id, n, x, y, size, w, q, colour)
         dfs(graph, id + n, n, x, y + size, size, w, q, colour)
     end
 end
-return { dfs = dfs, neighbours=neighbours}
+return { dfs = dfs, neighbours=neighbours, containElem=containElem}
