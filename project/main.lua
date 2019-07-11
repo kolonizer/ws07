@@ -22,6 +22,7 @@ function love.load()
 
     --монстры
     skeletSprite = newSpr("spr/mobSkelet", 51, 51, 0.4, 4, 1, { 1 })
+    enemyUnknownSprite = newSpr("spr/enemyUnknown", 51, 51, 23, 1, 1)
     --вещи
     woodTable = newSpr("spr/woodTable", 50, 50, 0, 1, 1, nil)
     candle = newSpr("spr/candles", 30, 30, 0.2, 1, 2, { 1, 2 })
