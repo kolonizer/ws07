@@ -82,7 +82,7 @@ chans={{Key,'Key',20},
 	Ls=31
 	ws=3
     size = 403+2*ws
-    n = 10						
+    n = 7				
 	mapSize = love.graphics.getHeight() / n
     doorSize = mapSize / 5
     --загрузка ресурсов
