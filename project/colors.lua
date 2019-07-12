@@ -1,10 +1,14 @@
 --- определение цветов для поддержки love 0.10.2 и новой 11.0
 
 local colors = {
+    white = { 1, 1, 1},
     black = {0, 0, 0},
     red = {1, 0, 0},
+    green = {0, 1, 0},
+    blue = {0, 0, 1},
     purple = {1, 0, 1},
-    gray = { 0.5, 0.5, 0.5},
+    lightGray = { 0.25, 0.25, 0.25},
+    gray = { 0.75, 0.75, 0.75},
 }
 
 local function set( c )
@@ -20,6 +24,6 @@ local function set( c )
     -- LOVE 11.x
         love.graphics.setColor( colors[c][1],colors[c][2],colors[c][3]  )
     end
-    end
+end
 
 return { set = set }

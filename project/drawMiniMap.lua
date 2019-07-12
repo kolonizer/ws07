@@ -1,7 +1,7 @@
 -- отрисовка мини-карты
 
 local function drawInventory()
-	love.graphics.setColor(0, 0, 0, 255)
+	colors.set("black")
 	local mapHeight=love.graphics.getHeight()/6
 	if not love.mouse.isDown(1) then
 		mous1=false
@@ -40,13 +40,13 @@ local function drawInventory()
 		for x = 1, 2 do
 			local w=love.graphics.getWidth()-3*mapHeight + x * mapHeight
 			local inventoryID=(x-1)*5+y
-		    love.graphics.setColor(0, 0, 0, 255)
+			colors.set("black")
 		    love.graphics.rectangle("line", w, y * mapHeight, mapHeight, mapHeight)
 			love.graphics.rectangle("line", w+5, y * mapHeight + 5, mapHeight-10, mapHeight-10)
 			if Inventory[inventoryID]~=nil then
-			    love.graphics.setColor(255,255,255, 255)
+				colors.set("white")
 		        drawSpr(Inventory[inventoryID].t, love.graphics.getWidth()-3*mapHeight + (x+0.5) * mapHeight, (y+0.5) * mapHeight)
-				love.graphics.setColor(0,0,0, 255)
+				colors.set("black")
 				love.graphics.print(Inventory[inventoryID].tip, love.graphics.getWidth()-3*mapHeight + x * mapHeight+5, y * mapHeight+5)
 			end
 		end
@@ -77,18 +77,18 @@ local function drawMiniMap(castl)
         for x = 0, (n - 1) * mapSize, mapSize do
             q = q + 1
             if castl[q].use then
-                love.graphics.setColor(200, 200, 200, 255)
+				colors.set("gray")
                 love.graphics.rectangle("fill", x, y, mapSize, mapSize)
-                love.graphics.setColor(0, 0, 0, 255)
+				colors.set("black")
                 love.graphics.rectangle("line", x, y, mapSize, mapSize)
             end
         end
     end
-    love.graphics.setColor(200, 200, 200, 255)
+	colors.set("gray")
     for i = 1, #Doors do
         drawDoor(Doors[i].v1, Doors[i].v2, Doors[i].Type)
     end
-    love.graphics.setColor(0, 0, 0, 255)
+	colors.set("black")
     q = 0
     for y = 0, (n - 1) * mapSize, mapSize do
         for x = 0, (n - 1) * mapSize, mapSize do
@@ -99,11 +99,11 @@ local function drawMiniMap(castl)
             end
         end
     end
-    love.graphics.setColor(0, 0, 0, 50)
+	colors.set("black")
     love.graphics.circle("fill", Hero.cellX * mapSize - mapSize / 2, Hero.cellY * mapSize - mapSize / 2, mapSize / 4)
-    love.graphics.setColor(0, 255, 0, 100)
+	colors.set("green")
     love.graphics.circle("fill", collide.XYFromID(max_vert1)[1] * mapSize - mapSize / 2, (collide.XYFromID(max_vert1)[2] + 2) * mapSize - mapSize / 2, mapSize / 4)
-    love.graphics.setColor(255, 0, 0, 100)
+	colors.set("red")
     love.graphics.circle("fill", collide.XYFromID(max_vert2)[1] * mapSize - mapSize / 2, (collide.XYFromID(max_vert2)[2] + 2) * mapSize - mapSize / 2, mapSize / 4)
 	drawInventory()
 end
