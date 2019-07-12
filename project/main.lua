@@ -92,6 +92,7 @@ function love.load()
     n = 7
     mapSize = love.graphics.getHeight() / n
     doorSize = mapSize / 5
+	gameMode=1
     -- таблица главного героя
     Rooms, graph, Doors = gra.generate()
     id = max_vert1
@@ -108,9 +109,9 @@ function love.load()
 	pressed=false
     Hero = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 },HP=500,hit={cd=0.5,visCd=0.2,radius=50,colour={255,255,255,255},visibility=false,x=0,y=0,Type="circle",damage=20},lastTime=0}
 	Inventory = {}
-  for i = 1,10 do
-    Inventory[i] = {}
-  end
+	for i = 1,10 do
+        Inventory[i] = {}
+    end
 
     Objects = { Hero }
 	for r=1,#Rooms do
@@ -163,28 +164,52 @@ function love.load()
 	--
 end
 function love.draw()
-    love.graphics.clear(0, 0, 0)
-    if love.keyboard.isDown("tab") then
-        drawMiniMap.drawMiniMap(Rooms)
-        MousX, MousY = love.mouse.getPosition()
-        if love.mouse.isDown(1) and MousX < love.graphics.getHeight() then
-            Hero.cellX = math.floor(MousX / mapSize) + 2
-            Hero.cellY = math.floor(MousY / mapSize) + 2
-            Hero.id = (Hero.cellY - 1) * n + Hero.cellX
-            Hero.x = Hero.cellX * size - size / 2
-            Hero.y = Hero.cellY * size - size / 2
+	if gameMode==1 then
+		love.graphics.clear(0, 0, 0)
+		love.graphics.setColor(255, 255, 255, 255)
+		love.graphics.print("A - Left",0,0,0,5)
+		love.graphics.print("W - Up",0,50,0,5)
+		love.graphics.print("S - Down",0,100,0,5)
+		love.graphics.print("D - Right",0,150,0,5)
+		love.graphics.print("Space - Hit",0,200,0,5)
+		love.graphics.print("Q - Pick a thing",0,250,0,5)
+		love.graphics.print("Escape - Leave the game",0,300,0,5)
+		love.graphics.print("Tab - Mimimap and inventory",0,350,0,5)
+		love.graphics.print("Press enter or space to start the game",0,450,0,5)
+		if love.keyboard.isDown("enter","space") then
+			gameMode=2
+		end
+	elseif gameMode==2 then
+        love.graphics.clear(0, 0, 0)
+        if love.keyboard.isDown("tab") then
+            drawMiniMap.drawMiniMap(Rooms)
+            MousX, MousY = love.mouse.getPosition()
+            if love.mouse.isDown(1) and MousX < love.graphics.getHeight() then
+                Hero.cellX = math.floor(MousX / mapSize) + 2
+                Hero.cellY = math.floor(MousY / mapSize) + 2
+                Hero.id = (Hero.cellY - 1) * n + Hero.cellX
+                Hero.x = Hero.cellX * size - size / 2
+                Hero.y = Hero.cellY * size - size / 2
+            end
+        else
+            cam:draw(function(l, t, w, h)
+                draw.drawFloor()
+                spawn.drawLoot(v, Rooms)
+                love.graphics.setColor(255, 255, 255, 255)
+                spawn.drawLoot(v, Rooms)
+                love.graphics.print(math.floor(love.timer.getFPS()), l, t)
+		    	love.graphics.print(Hero.HP, l, t+10)
+                draw.draw(Objects)
+            end)
         end
-    else
-        cam:draw(function(l, t, w, h)
-            draw.drawFloor()
-            spawn.drawLoot(v, Rooms)
-            love.graphics.setColor(255, 255, 255, 255)
-            spawn.drawLoot(v, Rooms)
-            love.graphics.print(math.floor( love.timer.getFPS() ), l, t)
-			love.graphics.print(Hero.HP, l, t+10)
-            draw.draw(Objects)
-        end)
-    end
+		if Hero.HP<=0 then
+			gameMode=3
+		end
+    elseif gameMode==3 then
+		love.graphics.clear(0, 0, 0)
+		love.graphics.setColor(255, 0, 0, 255)
+		love.graphics.print("You died",0,0,0,5,5)
+	end
 end
 function love.update(dt)
 	timer=timer+dt
