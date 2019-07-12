@@ -269,8 +269,6 @@ function love.update(dt)
 		end
 		control.control({ "a", "w", "s", "d", "q", "e" }, Hero, 250 * dt, 100 * dt)
 		monster.UpdateMonster(dt)
-		updateSpr(heroSprite, dt)
-		--print(inspect( equipment.sword, { depth = 2 } ) )
 		Hero.Def=Hero.bazDef
 		Hero.hit.damage=Hero.hit.bazDamage
 		Hero.hit.cd=Hero.hit.bazCd

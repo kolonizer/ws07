@@ -70,14 +70,11 @@ function direction(deltaX,deltaY)
 	end
 end
 function UpdateMonster(dt)
-	roomCollision=require "roomCollision"
-    --print('qqq')
     --print(inspect( Objects, { depth = 2 } ) )
     for i = 1, #Objects do
-		--if Objects[i].name
-        --print(Objects[i].x,Objects[i].y)
-        --print(Objects[i].name)
-		--
+        if Objects[i].sprite then
+            updateSpr(Objects[i].sprite, dt)
+        end
         if Objects[i].name == "Skelet" or Objects[i].name == "Slime" or Objects[i].name == "Mushroom" or Objects[i].name == "Snake" or Objects[i].name=='Drakula' then
             Objects[i].cellX = (Objects[i].x - (Objects[i].x % size)) / size
             Objects[i].cellY = (Objects[i].y - (Objects[i].y % size)) / size
