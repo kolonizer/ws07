@@ -175,8 +175,8 @@ function love.draw()
 		love.graphics.print("Q - Pick a thing",0,250,0,5)
 		love.graphics.print("Escape - Leave the game",0,300,0,5)
 		love.graphics.print("Tab - Mimimap and inventory",0,350,0,5)
-		love.graphics.print("Press enter or space to start the game",0,450,0,5)
-		if love.keyboard.isDown("enter","space") then
+		love.graphics.print("Press space to start the game",0,450,0,5)
+		if love.keyboard.isDown("space") then
 			gameMode=2
 		end
 	elseif gameMode==2 then
@@ -209,35 +209,41 @@ function love.draw()
 		love.graphics.clear(0, 0, 0)
 		love.graphics.setColor(255, 0, 0, 255)
 		love.graphics.print("You died",0,0,0,5,5)
+	elseif gameMode==4 then
+		love.graphics.clear(0, 0, 0)
+		love.graphics.setColor(0, 0, 255, 255)
+		love.graphics.print("You win",0,0,0,5,5)
 	end
 end
 function love.update(dt)
-	timer=timer+dt
-    local lenObjects = #Objects
-    for i = lenObjects, 1, -1 do
-        if Objects[i].name == "wall" then
-            table.remove(Objects, i)
+	if gameMode==2 then 
+		timer=timer+dt
+        local lenObjects = #Objects
+        for i = lenObjects, 1, -1 do
+            if Objects[i].name == "wall" then
+                table.remove(Objects, i)
+            end
         end
-    end
-    DoorsOfRoom = {}
-    visited = {}
-    Hero.cellX = (Hero.x - (Hero.x % size)) / size
-    Hero.cellY = (Hero.y - (Hero.y % size)) / size
-    Hero.id = (Hero.cellY - 1) * n + Hero.cellX
-	Hero.hit.x,Hero.hit.y=Hero.x,Hero.y
-	if Hero.hit.visibility==true and Hero.hit.visCd<timer-Hero.lastTime then
-		Hero.hit.visibility=false
+        DoorsOfRoom = {}
+		visited = {}
+		Hero.cellX = (Hero.x - (Hero.x % size)) / size
+		Hero.cellY = (Hero.y - (Hero.y % size)) / size
+		Hero.id = (Hero.cellY - 1) * n + Hero.cellX
+		Hero.hit.x,Hero.hit.y=Hero.x,Hero.y
+		if Hero.hit.visibility==true and Hero.hit.visCd<timer-Hero.lastTime then
+			Hero.hit.visibility=false
+		end
+		roomCollision.dfs(graph, Hero.id, n, Hero.cellX * size + size / 2, Hero.cellY * size + size / 2, size, 5, 3, { 255, 255, 255, 255 })
+		v = visited
+		loot.takeTool()
+		local A = roomCollision.neighbours(visited, graph)
+		for i = 1, #A do
+			visited = {}
+			roomCollision.dfs(graph, A[i], n, (collide.XYFromID(A[i])[1] + 0) * size + size / 2, (collide.XYFromID(A[i])[2] + 2) * size + size / 2, size, 5, 3, { 50, 50, 50, 255 })
+		end
+		control.control({ "a", "w", "s", "d", "q", "e" }, Hero, 300 * dt, 100 * dt)
+		monster.UpdateMonster(dt)
+		updateSpr(heroSprite, dt)
+		cam:setPosition(Hero.x, Hero.y)
 	end
-    roomCollision.dfs(graph, Hero.id, n, Hero.cellX * size + size / 2, Hero.cellY * size + size / 2, size, 5, 3, { 255, 255, 255, 255 })
-    v = visited
-    loot.takeTool()
-    local A = roomCollision.neighbours(visited, graph)
-    for i = 1, #A do
-        visited = {}
-        roomCollision.dfs(graph, A[i], n, (collide.XYFromID(A[i])[1] + 0) * size + size / 2, (collide.XYFromID(A[i])[2] + 2) * size + size / 2, size, 5, 3, { 50, 50, 50, 255 })
-    end
-    control.control({ "a", "w", "s", "d", "q", "e" }, Hero, 300 * dt, 100 * dt)
-    monster.UpdateMonster(dt)
-    updateSpr(heroSprite, dt)
-    cam:setPosition(Hero.x, Hero.y)
 end
