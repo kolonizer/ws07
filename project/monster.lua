@@ -58,7 +58,17 @@ function CreateMonster(id, tip)
 		hit={cd=2,radius=15,x=0,y=0,Type="circle",damage=1}}
     end
 end
-
+function direction(deltaX,deltaY)
+	if deltaY>0 and deltaY>math.abs(deltaX) then
+		return "UP"
+	elseif deltaY<0 and math.abs(deltaY)>math.abs(deltaX) then
+		return "DOWN"
+	elseif deltaX>0 and deltaX>math.abs(deltaY) then
+		return "RIGHT"
+	elseif deltaX<0 and math.abs(deltaX)>math.abs(deltaY) then
+		return "LEFT"
+	end
+end
 function UpdateMonster(dt)
 	roomCollision=require "roomCollision"
     --print('qqq')
