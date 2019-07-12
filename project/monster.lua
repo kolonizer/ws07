@@ -12,8 +12,8 @@ function CreateMonster(id, tip)
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
 		name = "Skelet", Type = "circle", mode = "line", sprite = newSpr("spr/mobSkelet", 51, 51, 0.4, 4, 1, { 1 }),
 		x = collide.XYFromID(id)[1] * size + e_x, y = (collide.XYFromID(id)[2] + 2) * size + e_y,
-		radius = 10, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, speed = 100,lastTime=0,
-		hit={cd=2,radius=25,x=0,y=0,Type="circle",damage=1}}
+		radius = 10, colour = { 255, 255, 255, 0 }, HP = 80, Def = 1, speed = 100,lastTime=0,
+		hit={cd=2,radius=25,x=0,y=0,Type="circle",damage=25}}
     end
     if tip == 'Slime' then
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
@@ -26,36 +26,36 @@ function CreateMonster(id, tip)
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
 		name = "Drakula", Type = "circle", mode = "line", sprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3, { 1, 2, 3, 2 }),
 		x = collide.XYFromID(id)[1] * size + e_x, y = (collide.XYFromID(id)[2] + 2) * size + e_y,
-		radius = 30, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, speed = 50, lastTime=0,
-		hit={cd=2,radius=40,x=0,y=0,Type="circle",damage=1}}
+		radius = 30, colour = { 255, 255, 255, 0 }, HP = 600 , Def = 1, speed = 50, lastTime=0,
+		hit={cd=3.5,radius=40,x=0,y=0,Type="circle",damage=40}}
     end
     if tip == 'Ghost' then
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
-		name = "Ghost", Type = "circle", mode = "line", sprite = newSpr("spr/enemyUnknown", 51, 51, 23, 1, 1),
+		name = "Ghost", Type = "circle", mode = "line", sprite = newSpr("spr/modelGost", 51, 51, 0.7, 1, 2),
 		x = collide.XYFromID(id)[1] * size + e_x, y = (collide.XYFromID(id)[2] + 2) * size + e_y,
-		radius = 15, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, speed = 100,lastTime=0,
-		hit={cd=2,radius=25,x=0,y=0,Type="circle",damage=1}}
+		radius = 15, colour = { 255, 255, 255, 0 }, HP = 60 , Def = 1, speed = 100,lastTime=0,
+		hit={cd=3,radius=25,x=0,y=0,Type="circle",damage=30}}
     end
     if tip == 'Snake' then
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
-		name = "Snake", Type = "circle", mode = "line", sprite = newSpr("spr/enemyUnknown", 51, 51, 23, 1, 1),
+		name = "Snake", Type = "circle", mode = "line", sprite = newSpr("spr/modelSnake", 51, 51, 0.7, 1, 2),
 		x = collide.XYFromID(id)[1] * size + e_x, y = (collide.XYFromID(id)[2] + 2) * size + e_y,
 		radius = 15, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, speed = 10,lastTime=0,
-		hit={cd=2,radius=25,x=0,y=0,Type="circle",damage=1}}
+		hit={cd=2,radius=25,x=0,sy=0,Type="circle",damage=60}}
     end
     if tip == 'Wolf' then
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
-		name = "Wolf", Type = "circle", mode = "line", sprite = newSpr("spr/enemyUnknown", 51, 51, 23, 1, 1),
+		name = "Wolf", Type = "circle", mode = "line", sprite = newSpr("spr/modelWolf", 51, 51, 0.52, 1, 2),
 		x = collide.XYFromID(id)[1] * size + e_x, y = (collide.XYFromID(id)[2] + 2) * size + e_y,
-		radius = 5, colour = { 255, 255, 255, 0 }, HP = 1,Def=1, speed = 290, active = false,lastTime=0,
-		hit={cd=2,radius=15,x=0,y=0,Type="circle",damage=1}}
+		radius = 5, colour = { 255, 255, 255, 0 }, HP = 100,Def=1, speed = 180, active = false,lastTime=0,
+		hit={cd=1,radius=15 ,x=0,y=0,Type="circle",damage=20}}
     end
     if tip == 'Mushroom' then
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
-		name = "Mushroom", Type = "circle", mode = "line", sprite = newSpr("spr/enemyUnknown", 51, 51, 23, 1, 1),
+		name = "Mushroom", Type = "circle", mode = "line", sprite = newSpr("spr/modelMushroom", 51, 51, 0.7, 1, 2),
 		x = collide.XYFromID(id)[1] * size + e_x, y = (collide.XYFromID(id)[2] + 2) * size + e_y,
 		radius = 5, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, speed = 0, lastTime=0,
-		hit={cd=2,radius=15,x=0,y=0,Type="circle",damage=1}}
+		hit={cd=2,radius=150,x=0,y=0,Type="circle",damage=15}}
     end
 end
 function direction(deltaX,deltaY)
