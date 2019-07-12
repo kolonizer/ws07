@@ -3,7 +3,7 @@
 
 function love.load()
     love.window.setTitle("Граф ДРАКУЛА. Мастерская № 7. ЛШЮП 2019. Управление WASD и Tab")
-    love.graphics.setDefaultFilter("nearest", "nearest")
+    love.graphics.setDefaultFilter("nearest", "nearest") -- чтоб не сглаживались спрайты при отрисовке и оставались пиксельными
 	source = love.audio.newSource( "sound/13.ogg", "stream")
     colors = require "colors"    -- для совместимости разных версий Love
     inspect = require "inspect"    -- для печати в консоли содержимого таблиц
