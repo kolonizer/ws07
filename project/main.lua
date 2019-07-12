@@ -84,7 +84,6 @@ function love.load()
             rand[#rand + 1] = chans[ch]
         end
     end
-    --print(inspect( range, { depth = 4 } ) )
 
     math.randomseed(os.time())
     Ls = 31
@@ -94,18 +93,6 @@ function love.load()
     mapSize = love.graphics.getHeight() / n
     doorSize = mapSize / 5
     -- таблица главного героя
-    --X = 400
-
-    --гриб на месте
-	
-    --призрак через стены
-
-    --волк догоняет
-
-    --змея так змея
-
-    --орк
-    --Y = 300
     Rooms, graph, Doors = gra.generate()
     id = max_vert1
     for p = 1, #Rooms do
@@ -129,7 +116,7 @@ function love.load()
 	for r=1,#Rooms do
 		if Rooms[r].use then
 			if Rooms[r].tip=='' then
-				m = { { 'Ghost', 20 },
+				local m = { { 'Ghost', 20 },
                 { 'Wolf', 20 },
                 { 'Skelet', 20 },
                 { 'Mushroom', 20 },
@@ -137,7 +124,7 @@ function love.load()
                 { 'Slime', 10}}
 					
 			
-				mobs = {}
+				local mobs = {}
 				for ch = 1, #m do
 					for f = 1, m[ch][2] do
 						mobs[#mobs + 1] = m[ch]
@@ -171,7 +158,7 @@ function love.load()
 		end
 	end
     cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
-    cam:setWindow(0, 0, 1300, 750)
+    cam:setWindow(0, 0, love.graphics.getWidth(),love.graphics.getHeight())
     cam:setScale(1.6)
 	--
 end
