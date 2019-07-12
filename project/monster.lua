@@ -57,6 +57,10 @@
 		radius = 20, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, speed = 0, lastTime=0,
 		hit={cd=2,radius=40,x=0,y=0,Type="circle",damage=20}}
     end
+    if Objects[#Objects] then
+        -- это условие для того, чтобы спрайты
+        Objects[#Objects].sprite.curDelay = math.random()
+    end
 end
 function direction(deltaX,deltaY)
 	if deltaY>0 and deltaY>math.abs(deltaX) then
