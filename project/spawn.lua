@@ -25,7 +25,8 @@ local function AddLotLoot(id, rooms)
             e_y = e_y + rooms[id].y_pix + 2 * ws
 			
     rooms[id].T[d] = 1  --If you dont know English ask for translate your master PLZ
-    rooms[id].loot[#rooms[id].loot + 1] = { id = d, number = rand100, tip = rand[rand100][2],x=e_x, y=e_y,Type='rectangle', width = 31, height = 31, taken = 0 }
+	loot[#loot+1]={room=id, id = d, number = rand100, tip = rand[rand100][2],x=e_x, y=e_y,Type='rectangle', width = 31, height = 31, taken = 0 }
+    rooms[id].loot[#rooms[id].loot + 1] = {room=id, id = d, number = rand100, tip = rand[rand100][2],x=e_x, y=e_y,Type='rectangle', width = 31, height = 31, taken = 0 }
 end
 local function drawLoot(tab, rooms)
     local k = (size - 2 * ws) / Ls

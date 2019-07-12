@@ -117,12 +117,12 @@ function love.load()
 	for r=1,#Rooms do
 		if Rooms[r].use then
 			if Rooms[r].tip=='' then
-				local m = { { 'Ghost', 20 },
-                { 'Wolf', 20 },
+				local m = { { 'Ghost', 5 },
+                { 'Wolf', 10 },
                 { 'Skelet', 20 },
-                { 'Mushroom', 20 },
-                { 'Snake', 10 },
-                { 'Slime', 10}}
+                { 'Mushroom', 30 },
+                { 'Snake', 15 },
+                { 'Slime', 20}}
 					
 			
 				local mobs = {}
@@ -139,12 +139,12 @@ function love.load()
 				monster.CreateMonster(max_vert2, 'Drakula')
 			end
 			if Rooms[r].tip=='treasure' then
-				m = { { 'Ghost', 20 },
-                { 'Wolf', 20 },
+				m = { { 'Ghost', 5 },
+                { 'Wolf', 10 },
                 { 'Skelet', 20 },
-                { 'Mushroom', 20 },
-                { 'Snake', 10 },
-                { 'Slime', 10}}
+                { 'Mushroom', 30 },
+                { 'Snake', 15 },
+                { 'Slime', 20}}
 					
 				mobs = {}
 				for ch = 1, #m do
