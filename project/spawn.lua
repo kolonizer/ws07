@@ -25,15 +25,18 @@ local function AddLotLoot(id, rooms)
             e_y = e_y + rooms[id].y_pix + 2 * ws
 			
     rooms[id].T[d] = 1  --If you dont know English ask for translate your master PLZ
-	loot[#loot+1]={room=id, id = d, number = rand100, tip = rand[rand100][2],x=e_x, y=e_y,Type='rectangle', width = 31, height = 31, taken = 0 }
-    rooms[id].loot[#rooms[id].loot + 1] = {room=id, id = d, number = rand100, tip = rand[rand100][2],x=e_x, y=e_y,Type='rectangle', width = 31, height = 31, taken = 0 }
+	--loot[#loot+1]={room=id, id = d, number = rand100, tip = rand[rand100][2],x=e_x, y=e_y,Type='rectangle', width = 31, height = 31, taken = 0 }
+    rooms[id].loot[#rooms[id].loot + 1] = {t=rand[rand100][1],room=id, id = d, number = rand100, tip = rand[rand100][2],x=e_x, y=e_y,Type='rectangle', width = 31, height = 31, taken = 0 }
 end
 local function drawLoot(tab, rooms)
     local k = (size - 2 * ws) / Ls
     for i = 1, #tab do
         for o = 1, #rooms[tab[i]].loot do
-            drawSpr(rand[rooms[tab[i]].loot[o].number][1], rooms[tab[i]].loot[o].x+15, rooms[tab[i]].loot[o].y+15)
-        end
+			--print(inspect( rooms[tab[i]].loot[o], { depth = 2 } ) )
+			if rooms[tab[i]].loot[o]~=nil then
+				drawSpr(rand[rooms[tab[i]].loot[o].number][1], rooms[tab[i]].loot[o].x+15, rooms[tab[i]].loot[o].y+15)
+			end
+		end
     end
 end
 return { AddLotLoot = AddLotLoot, drawLoot = drawLoot }

@@ -1,6 +1,6 @@
 function CreateMonster(id, tip)
-	local k = (size - 2 * ws) / Ls -- кол-во клеток в высоту комнаты, в которые спавнят вещи
-	local d=math.random((k-5)*(k-5))
+	local k = (size - 2 * ws) / Ls-3 -- кол-во клеток в высоту комнаты, в которые спавнят вещи
+	local d=math.random(k*k)
 	Rooms[id].T[d]=1
 	local e_x = (d % k)  --x
 	if e_x == 0 then

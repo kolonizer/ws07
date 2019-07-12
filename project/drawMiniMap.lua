@@ -11,8 +11,26 @@ local function drawInventory()
 		local mousX=love.mouse.getX()
 		local mousY=love.mouse.getY()
 		if mousX>love.graphics.getWidth()-2*mapHeight and mousY>mapHeight then
-		    local inventoryID=math.floor(mousX/mapHeight)*5+math.floor(mousY/mapHeight)
+		    local inventoryID=math.floor((mousX-love.graphics.getWidth()+2*mapHeight)/mapHeight)*5+math.floor(mousY/mapHeight)
 			if Inventory[inventoryID]~=nil then
+				local q= Inventory[inventoryID].tip
+				if q=='Shield1' or q=='Shield2' or q=='Shield3' then
+					equipment.shield=q
+				elseif q=='Sword1' or q=='Sword2' or q=='LongSword1' or q=='Bow1' or q=='Rod1' or q=='Rod2' or q=='Ax1' then
+					equipment.sword=q
+				elseif q=='IronHelmet' or q=='MailHelmet' then
+					equipment.helmet=q
+				elseif q=='IronJacket' or q=='MailJacket' then
+					equipment.jacket=q
+				elseif q=='MailPants' or q=='IronPants' then
+					equipment.pants=q
+				elseif q=='HP1' then
+					Hero.HP=Hero.HP+100
+					if Hero.HP>500 then
+						Hero.HP=500
+					end
+				end
+				print(inspect( equipment, { depth = 2 } ) )
 				table.remove(Inventory,inventoryID)
 			end
 		end
@@ -26,8 +44,10 @@ local function drawInventory()
 		    love.graphics.rectangle("line", w, y * mapHeight, mapHeight, mapHeight)
 			love.graphics.rectangle("line", w+5, y * mapHeight + 5, mapHeight-10, mapHeight-10)
 			if Inventory[inventoryID]~=nil then
-			    love.graphics.setColor(0,0,0, 255)
-		        --drawSpr(Inventory[inventoryID].t, love.graphics.getWidth()-3*mapHeight + x * mapHeight+5, y * mapHeight + 5)
+			    love.graphics.setColor(255,255,255, 255)
+		        drawSpr(Inventory[inventoryID].t, love.graphics.getWidth()-3*mapHeight + (x+0.5) * mapHeight, (y+0.5) * mapHeight)
+				love.graphics.setColor(0,0,0, 255)
+				love.graphics.print(Inventory[inventoryID].tip, love.graphics.getWidth()-3*mapHeight + x * mapHeight+5, y * mapHeight+5)
 			end
 		end
 	end

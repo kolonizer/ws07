@@ -2,7 +2,7 @@
 -- ws07 мастерская № 7. ЛШЮП 2019
 
 function love.load()
-    love.window.setTitle("Граф ДРАКУЛА. Мастерская № 7. ЛШЮП 2019.")
+    love.window.setTitle("Граф ДРАКУЛА. Мастерская № 7. ЛШЮП 2019. Управление WASD и Tab")
     love.graphics.setDefaultFilter("nearest", "nearest")
     inspect = require "inspect"    -- для печати в консоли содержимого таблиц
     gamera = require "gamera" -- библиотека камеры (показывать фрагмент уровня)
@@ -106,13 +106,11 @@ function love.load()
     end
     --print(inspect( castl, { depth = 4 } ) )
 	timer=0
+	mous1=false
 	pressed=false
     Hero = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 },HP=500,hit={cd=0.5,visCd=0.2,radius=50,colour={255,255,255,255},visibility=false,x=0,y=0,Type="circle",damage=20},lastTime=0}
 	Inventory = {}
-	for i = 1,10 do
-        Inventory[i] = {}
-    end
-
+	equipment={shield='',sword='',helmet='',jaket='',pants=''}
     Objects = { Hero }
 	for r=1,#Rooms do
 		if Rooms[r].use then
@@ -174,9 +172,9 @@ function love.draw()
 		love.graphics.print("Space - Hit",0,200,0,5)
 		love.graphics.print("Q - Pick a thing",0,250,0,5)
 		love.graphics.print("Escape - Leave the game",0,300,0,5)
-		love.graphics.print("Tab - Minimap and inventory",0,350,0,5)
-		love.graphics.print("Press space to start the game",0,450,0,5)
-		if love.keyboard.isDown("space") then
+		love.graphics.print("Tab - Mimimap and inventory",0,350,0,5)
+		love.graphics.print("Press enter or space to start the game",0,450,0,5)
+		if love.keyboard.isDown("enter","space") then
 			gameMode=2
 		end
 	elseif gameMode==2 then
@@ -218,13 +216,13 @@ end
 function love.update(dt)
 	if gameMode~=1 then 
 		timer=timer+dt
-        local lenObjects = #Objects
-        for i = lenObjects, 1, -1 do
-            if Objects[i].name == "wall" then
-                table.remove(Objects, i)
-            end
-        end
-        DoorsOfRoom = {}
+		local lenObjects = #Objects
+		for i = lenObjects, 1, -1 do
+			if Objects[i].name == "wall" then
+				table.remove(Objects, i)
+			end
+		end
+		DoorsOfRoom = {}
 		visited = {}
 		Hero.cellX = (Hero.x - (Hero.x % size)) / size
 		Hero.cellY = (Hero.y - (Hero.y % size)) / size
