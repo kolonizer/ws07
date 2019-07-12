@@ -6,9 +6,10 @@ local colors = {
     red = {1, 0, 0, 1},
     green = {0, 1, 0, 1},
     blue = {0, 0, 1, 1},
-    purple = {1, 0, 1, 1},
+    purple = {0.6, 0.4, 0.7, 1},
     lightGray = { 0.25, 0.25, 0.25, 1},
     gray = { 0.75, 0.75, 0.75, 1},
+    transparent = {1, 1, 1, 0.25},
 }
 
 local function set( c )

@@ -15,7 +15,7 @@ local function drawUnit(u)
 end
 local function drawDoor(x)
 	if collide.collide(x,Hero)==false then
-	    if x.colour == "white" then
+	    if x.colour then --== "white" then
 			colors.set( "purple" )
 		else
 			colors.set( x.colour )
