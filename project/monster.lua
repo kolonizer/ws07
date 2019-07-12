@@ -1,4 +1,4 @@
-function CreateMonster(id, tip)
+  function CreateMonster(id, tip)
 	local k = (size - 2 * ws) / Ls-3 -- кол-во клеток в высоту комнаты, в которые спавнят вещи
 	local d=math.random(k*k)
 	Rooms[id].T[d]=1
