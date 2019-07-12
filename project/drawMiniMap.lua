@@ -30,7 +30,7 @@ local function drawInventory()
 						Hero.HP=500
 					end
 				end
-				print(inspect( equipment, { depth = 2 } ) )
+				--print(inspect( equipment, { depth = 2 } ) )
 				table.remove(Inventory,inventoryID)
 			end
 		end

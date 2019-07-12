@@ -55,6 +55,9 @@ function love.load()
     KeyBlue = newSpr("spr/itemKeyBlue", 31, 31, 1, 1, 1)
     KeyGreen = newSpr("spr/itemKeyGreen", 31, 31, 1, 1, 1)
     KeyRed = newSpr("spr/itemKeyRed", 31, 31, 1, 1, 1)
+	
+	YouWin = newSpr("spr/YOU WIN", 298,250, 1, 1, 1)
+	YouDied = newSpr("spr/YOU DIED", 265,231, 1, 1, 1)
 
     chans = { { Key, 'Key', 0 },
               { KeyBlue, 'KeyBlue', 0 },
@@ -232,12 +235,12 @@ function love.draw()
     elseif gameMode==3 then
 		love.audio.play( Die )
 		love.graphics.clear(0, 0, 0)
-        colors.set("red")
-		love.graphics.print("You died",0,0,0,5,5)
+        colors.set("white")
+		drawSpr(YouDied, love.graphics.getWidth()/2,love.graphics.getHeight()/2)
 	elseif gameMode==4 then
 		love.graphics.clear(0, 0, 0)
-        colors.set("blue")
-		love.graphics.print("You win",0,0,0,5,5)
+        colors.set("white")
+		drawSpr(YouWin, love.graphics.getWidth()/2,love.graphics.getHeight()/2)
 	end
 end
 function love.update(dt)
