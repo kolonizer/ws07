@@ -19,7 +19,7 @@ function love.load()
     spawn = require "spawn"
     monster = require "monster"
     loot = require "loot"
-    DoorsOfRoom = {}
+    DoorsOfRoom = {}        
     --загрузка ресурсов
     heroSprite = newSpr("spr/mainHero", 50, 50, 0.3, 4, 3, { 1, 2, 3, 2 })
     bossSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3, { 1, 2, 3, 2 })

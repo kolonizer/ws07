@@ -68,7 +68,7 @@ function direction(deltaX,deltaY)
 	elseif deltaX<0 and math.abs(deltaX)>math.abs(deltaY) then
 		return "Left"
 	end
-end
+end --FFFF 
 function UpdateMonster(dt)
     --print(inspect( Objects, { depth = 2 } ) )
     for i = 1, #Objects do
@@ -79,7 +79,7 @@ function UpdateMonster(dt)
             Objects[i].cellX = (Objects[i].x - (Objects[i].x % size)) / size
             Objects[i].cellY = (Objects[i].y - (Objects[i].y % size)) / size
             Objects[i].id = (Objects[i].cellY - 1) * n + Objects[i].cellX
-			Objects[i].hit.x,Objects[i].hit.y=Objects[i].x,Objects[i].y
+            Objects[i].hit.x, Objects[i].hit.y = Objects[i].x, Objects[i].y
             if roomCollision.containElem(v,Objects[i].id) then
                 --x1=collide.XYFromID(Hero.id)[1] * size + size / 2
                 --y1=(collide.XYFromID(Hero.id)[2] + 2) * size + size / 2
