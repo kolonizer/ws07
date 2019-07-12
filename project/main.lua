@@ -4,7 +4,8 @@
 function love.load()
     love.window.setTitle("Граф ДРАКУЛА. Мастерская № 7. ЛШЮП 2019. Управление WASD и Tab")
     love.graphics.setDefaultFilter("nearest", "nearest")
-	source = love.audio.newSource( "13.ogg", "stream") 
+	source = love.audio.newSource( "13.ogg", "stream")
+    colors = require "colors"    -- для совместимости разных версий Love
     inspect = require "inspect"    -- для печати в консоли содержимого таблиц
     gamera = require "gamera" -- библиотека камеры (показывать фрагмент уровня)
     sprite = require "sprite" -- загрузка картинок, рисование спрайтов
@@ -218,7 +219,7 @@ function love.draw()
 end
 function love.update(dt)
 	love.audio.play( source )
-	if gameMode~=1 then 
+	if gameMode~=1 then
 		timer=timer+dt
 		local lenObjects = #Objects
 		for i = lenObjects, 1, -1 do
