@@ -86,6 +86,25 @@ function love.load()
         end
     end
 
+
+	state={
+	Shield1={Def=10 },
+	Ax1={Range=10,Damage=10,Cd=0},
+	Bow1={Range=50,Damage=0,Cd=0.5},
+	LongSword1={Range=20,Damage=10,Cd=0},
+	Rod1={Range=20,Damage=20,Cd=0},
+	Rod2={Range=20,Damage=30,Cd=0},
+	Shield2={Def=10 },
+	Shield3={Def=20 },
+	Sword1={Range=10,Damage=20,Cd=0},
+	Sword2={Range=10,Damage=30,Cd=0},
+	IronHelmet={Def=15 },
+	IronJacket={Def=15 },
+	IronPants={Def=15 },
+	MailHelmet={Def=10 },
+	MailJacket={Def=10 },
+	MailPants={Def=10 }
+	}
     math.randomseed(os.time())
     Ls = 31
     ws = 3
@@ -109,12 +128,12 @@ function love.load()
 	timer=0
 	mous1=false
 	pressed=false
-    Hero = { Def=30,id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 },HP=500,hit={cd=0.5,visCd=0.2,radius=50,colour={255,255,255,255},visibility=false,x=0,y=0,Type="circle",damage=20},lastTime=0}
+    Hero = { bazDef=0, Def=0,id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 },HP=500,hit={bazCd=0.5,bazRadius=50,bazDamage=20,cd=0.5,visCd=0.2,radius=50,colour={255,255,255,255},visibility=false,x=0,y=0,Type="circle",damage=20},lastTime=0}
 	Inventory = {}
-	equipment={shield='',sword='',helmet='',jaket='',pants=''}
+	equipment={shield='',sword='',helmet='',jacket='',pants=''}
     Objects = { Hero }
 	for r=1,#Rooms do
-		if Rooms[r].use then
+	   	if Rooms[r].use then
 			if Rooms[r].tip=='' then
 				local m = { { 'Ghost', 5 },
                 { 'Wolf', 10 },
@@ -174,7 +193,7 @@ function love.draw()
 		love.graphics.print("Q - Pick a thing",0,250,0,5)
 		love.graphics.print("Escape - Leave the game",0,300,0,5)
 		love.graphics.print("Tab - Minimap and inventory",0,350,0,5)
-		love.graphics.print("Press enter or space to start the game",0,450,0,5)
+		love.graphics.print("Press space to start the game",0,450,0,5)
 		if love.keyboard.isDown("enter","space") then
 			gameMode=2
 		end
@@ -200,6 +219,8 @@ function love.draw()
 		    	love.graphics.print("HP "..Hero.HP, l, t+10)
 				love.graphics.print("Damage "..Hero.hit.damage, l, t+20)
 				love.graphics.print("Defense "..Hero.Def, l, t+30)
+				love.graphics.print("Range "..Hero.hit.radius, l, t+40)
+				love.graphics.print("Cooldown "..Hero.hit.cd, l, t+50)
                 draw.draw(Objects)
             end)
         end
@@ -246,6 +267,30 @@ function love.update(dt)
 		control.control({ "a", "w", "s", "d", "q", "e" }, Hero, 300 * dt, 100 * dt)
 		monster.UpdateMonster(dt)
 		updateSpr(heroSprite, dt)
+		print(inspect( equipment.sword, { depth = 2 } ) )
+		Hero.Def=Hero.bazDef
+		Hero.hit.damage=Hero.hit.bazDamage
+		Hero.hit.cd=Hero.hit.bazCd
+		Hero.hit.radius=Hero.hit.bazRadius
+		Hero.Def,Hero.hit.damage,Hero.hit.radius,Hero.hit.cd=Hero.bazDef,Hero.hit.bazDamage,Hero.hit.bazRadius,Hero.hit.bazCd
+		if equipment.sword~='' then
+			Hero.hit.damage=Hero.hit.damage+state[equipment.sword].Damage
+			Hero.hit.radius=Hero.hit.radius+state[equipment.sword].Range
+			Hero.hit.cd=Hero.hit.cd+state[equipment.sword].Cd
+		end
+		if equipment.helmet~='' then
+			Hero.Def=Hero.Def+state[equipment.helmet].Def
+		end
+		if equipment.shield~='' then
+			Hero.Def=Hero.Def+state[equipment.shield].Def
+		end
+		if equipment.jacket~='' then
+			Hero.Def=Hero.Def+state[equipment.jacket].Def
+		end
+		
+		if equipment.pants~='' then
+			Hero.Def=Hero.Def+state[equipment.pants].Def
+		end--shield='',sword='',helmet='',jaket='',pants=''
 		cam:setPosition(Hero.x, Hero.y)
 	end
 end
