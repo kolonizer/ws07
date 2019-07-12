@@ -180,7 +180,7 @@ function love.draw()
             spawn.drawLoot(v, Rooms)
             love.graphics.setColor(255, 255, 255, 255)
             spawn.drawLoot(v, Rooms)
-            love.graphics.print(math.floor(fps), l, t)
+            love.graphics.print(math.floor( love.timer.getFPS() ), l, t)
 			love.graphics.print(Hero.HP, l, t+10)
             draw.draw(Objects)
         end)
@@ -188,7 +188,6 @@ function love.draw()
 end
 function love.update(dt)
 	timer=timer+dt
-    fps = 1 / dt
     local lenObjects = #Objects
     for i = lenObjects, 1, -1 do
         if Objects[i].name == "wall" then
