@@ -216,7 +216,7 @@ function love.draw()
 	end
 end
 function love.update(dt)
-	if gameMode==2 then 
+	if gameMode~=1 then 
 		timer=timer+dt
         local lenObjects = #Objects
         for i = lenObjects, 1, -1 do
