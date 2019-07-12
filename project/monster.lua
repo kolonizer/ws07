@@ -161,7 +161,7 @@ function UpdateMonster(dt)
             end
 			if collide.collide(Hero,Objects[i].hit) and Objects[i].hit.cd<timer-Objects[i].lastTime then
 				Objects[i].lastTime=timer
-                Hero.HP=Hero.HP-Objects[i].hit.damage
+                Hero.HP=Hero.HP-Objects[i].hit.damage*(100-Hero.Def)/100
             end
         end
     end

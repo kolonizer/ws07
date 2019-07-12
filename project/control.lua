@@ -1,5 +1,8 @@
 -- Ввод данных и управление с клавиатуры
 collide = require "collide"
+hit = love.audio.newSource( "hit1.ogg", "stream")
+deathZ = love.audio.newSource( "deathZombie.ogg", "stream")
+fin = love.audio.newSource( "end.ogg", "stream")
 local function control(TypeControl, person, speed)
     if love.keyboard.isDown("escape") then
         love.event.quit()
@@ -43,10 +46,17 @@ local function control(TypeControl, person, speed)
 		pressed=true
 		Hero.lastTime=timer
 		Hero.hit.visibility=true
+		love.audio.play(hit)
 		for i=1,#Objects do
 			if Objects[i].name~="Hero" and Objects[i].name~="wall" and roomCollision.containElem(v,Objects[i].id) and collide.collide(Objects[i],Hero.hit)then
 				Objects[i].HP=Objects[i].HP-Hero.hit.damage
 				if Objects[i].HP<=0 then
+					if Objects[i].name == "Drakula" then
+						love.audio.play( fin )
+						gameMode = 4
+					else	
+						love.audio.play( deathZ )
+					end
 			        Objects[i]={name="Oboltus"}
 				end
 			end
