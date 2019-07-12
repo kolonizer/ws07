@@ -1,13 +1,13 @@
 function CreateMonster(id, tip)
 	local k = (size - 2 * ws) / Ls -- кол-во клеток в высоту комнаты, в которые спавнят вещи
-	local d=math.random(((size - 2 * ws) / Ls) * ((size - 2 * ws) / Ls))
+	local d=math.random((k-5)*(k-5))
 	Rooms[id].T[d]=1
 	local e_x = (d % k)  --x
 	if e_x == 0 then
 		e_x = k
 	end
 	local e_y = ((d - e_x - 1) / k) * Ls+36       --y
-	e_x = (e_x - 1) * Ls+15
+	e_x = (e_x - 1) * Ls+36
     if tip == 'Skelet' then
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
 		name = "Skelet", Type = "circle", mode = "line", sprite = newSpr("spr/mobSkelet", 51, 51, 0.4, 4, 1, { 1 }),
