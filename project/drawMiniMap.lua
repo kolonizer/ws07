@@ -3,16 +3,31 @@
 local function drawInventory()
 	love.graphics.setColor(0, 0, 0, 255)
 	local mapHeight=love.graphics.getHeight()/6
+	if not love.mouse.isDown(1) then
+		mous1=false
+	end
+	if love.mouse.isDown(1) and not mous1 then
+		mous1=true
+		local mousX=love.mouse.getX()
+		local mousY=love.mouse.getY()
+		if mousX>love.graphics.getWidth()-2*mapHeight and mousY>mapHeight then
+		    local inventoryID=math.floor(mousX/mapHeight)*5+math.floor(mousY/mapHeight)
+			if Inventory[inventoryID]~=nil then
+				table.remove(Inventory,inventoryID)
+			end
+		end
+	end
 	love.graphics.print("INVENTORY", love.graphics.getWidth()-2*mapHeight ,mapHeight-15)
 	for y = 1, 5 do
 		for x = 1, 2 do
-		    love.graphics.setColor(0, 0, 0, 255)
-		    love.graphics.rectangle("line", love.graphics.getWidth()-3*mapHeight + x * mapHeight, y * mapHeight, mapHeight, mapHeight)
-			love.graphics.rectangle("line", love.graphics.getWidth()-3*mapHeight + x * mapHeight+5, y * mapHeight + 5, mapHeight-10, mapHeight-10)
+			local w=love.graphics.getWidth()-3*mapHeight + x * mapHeight
 			local inventoryID=(x-1)*5+y
+		    love.graphics.setColor(0, 0, 0, 255)
+		    love.graphics.rectangle("line", w, y * mapHeight, mapHeight, mapHeight)
+			love.graphics.rectangle("line", w+5, y * mapHeight + 5, mapHeight-10, mapHeight-10)
 			if Inventory[inventoryID]~=nil then
 			    love.graphics.setColor(0,0,0, 255)
-		        love.graphics.print(Inventory[inventoryID], love.graphics.getWidth()-3*mapHeight + x * mapHeight+5, y * mapHeight + 5)
+		        --drawSpr(Inventory[inventoryID].t, love.graphics.getWidth()-3*mapHeight + x * mapHeight+5, y * mapHeight + 5)
 			end
 		end
 	end

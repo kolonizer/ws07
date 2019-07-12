@@ -2,7 +2,7 @@
 -- ws07 мастерская № 7. ЛШЮП 2019
 
 function love.load()
-    love.window.setTitle("Граф ДРАКУЛА. Мастерская № 7. ЛШЮП 2019. Управление WASD и Tab")
+    love.window.setTitle("Граф ДРАКУЛА. Мастерская № 7. ЛШЮП 2019.")
     love.graphics.setDefaultFilter("nearest", "nearest")
     inspect = require "inspect"    -- для печати в консоли содержимого таблиц
     gamera = require "gamera" -- библиотека камеры (показывать фрагмент уровня)
@@ -174,7 +174,7 @@ function love.draw()
 		love.graphics.print("Space - Hit",0,200,0,5)
 		love.graphics.print("Q - Pick a thing",0,250,0,5)
 		love.graphics.print("Escape - Leave the game",0,300,0,5)
-		love.graphics.print("Tab - Mimimap and inventory",0,350,0,5)
+		love.graphics.print("Tab - Minimap and inventory",0,350,0,5)
 		love.graphics.print("Press space to start the game",0,450,0,5)
 		if love.keyboard.isDown("space") then
 			gameMode=2
