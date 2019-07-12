@@ -38,7 +38,7 @@
     end
     if tip == 'Snake' then
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
-		name = "Snake", Type = "circle", mode = "line", sprite = newSpr("spr/modelSnake", 51, 51, 0.7, 1, 2, {1, 2}),
+		name = "Snake", Type = "circle", mode = "line", sprite = newSpr("spr/modelSnake", 51, 51, 0.37, 1, 2, {1, 2}),
 		x = collide.XYFromID(id)[1] * size + e_x, y = (collide.XYFromID(id)[2] + 2) * size + e_y,
 		radius = 20, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, speed = 10,lastTime=0,
 		hit={cd=2,radius=30,x=0,sy=0,Type="circle",damage=60}}
@@ -52,7 +52,7 @@
     end
     if tip == 'Mushroom' then
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
-		name = "Mushroom", Type = "circle", mode = "line", sprite = newSpr("spr/modelMushroom", 51, 51, 0.7, 1, 2, {1, 2}),
+		name = "Mushroom", Type = "circle", mode = "line", sprite = newSpr("spr/modelMushroom", 51, 51, 1.1, 1, 2, {1, 2}),
 		x = collide.XYFromID(id)[1] * size + e_x, y = (collide.XYFromID(id)[2] + 2) * size + e_y,
 		radius = 20, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, speed = 0, lastTime=0,
 		hit={cd=2,radius=40,x=0,y=0,Type="circle",damage=20}}
