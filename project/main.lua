@@ -3,8 +3,9 @@
 
 function love.load()
     love.window.setTitle("Граф ДРАКУЛА. Мастерская № 7. ЛШЮП 2019. Управление WASD и Tab")
-    love.graphics.setDefaultFilter("nearest", "nearest")
-	source = love.audio.newSource( "13.ogg", "stream") 
+    love.graphics.setDefaultFilter("nearest", "nearest") -- чтоб не сглаживались спрайты при отрисовке и оставались пиксельными
+	source = love.audio.newSource( "sound/13.ogg", "stream")
+    colors = require "colors"    -- для совместимости разных версий Love
     inspect = require "inspect"    -- для печати в консоли содержимого таблиц
     gamera = require "gamera" -- библиотека камеры (показывать фрагмент уровня)
     sprite = require "sprite" -- загрузка картинок, рисование спрайтов
@@ -128,7 +129,16 @@ function love.load()
 	timer=0
 	mous1=false
 	pressed=false
+<<<<<<< HEAD
     Hero = { bazDef=0, Def=0,id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 },HP=500,hit={bazCd=0.5,bazRadius=50,bazDamage=20,cd=0.5,visCd=0.2,radius=50,colour={255,255,255,255},visibility=false,x=0,y=0,Type="circle",damage=20},lastTime=0}
+=======
+    Hero = { Def=30,id = id,
+             cellX = id % n, cellY = math.floor(id / n) + 1,
+             name = "Hero", Type = "circle", mode = "line",
+             sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2,
+             radius = 10, colour = "white", HP=500,
+             hit={cd=0.5,visCd=0.2, radius=50, colour = "blue", visibility=false, x=0, y=0, Type="circle", damage=20}, lastTime=0}
+>>>>>>> 2f1ef5ebb8e839d2ea2610788f34c7e470aa6b44
 	Inventory = {}
 	equipment={shield='',sword='',helmet='',jacket='',pants=''}
     Objects = { Hero }
@@ -184,7 +194,7 @@ end
 function love.draw()
 	if gameMode==1 then
 		love.graphics.clear(0, 0, 0)
-		love.graphics.setColor(255, 255, 255, 255)
+        colors.set("white")
 		love.graphics.print("A - Left",0,0,0,5)
 		love.graphics.print("W - Up",0,50,0,5)
 		love.graphics.print("S - Down",0,100,0,5)
@@ -213,7 +223,7 @@ function love.draw()
             cam:draw(function(l, t, w, h)
                 draw.drawFloor()
                 spawn.drawLoot(v, Rooms)
-                love.graphics.setColor(255, 255, 255, 255)
+                colors.set("white")
                 spawn.drawLoot(v, Rooms)
                 love.graphics.print("FPS "..math.floor(love.timer.getFPS()), l, t)
 		    	love.graphics.print("HP "..Hero.HP, l, t+10)
@@ -229,17 +239,17 @@ function love.draw()
 		end
     elseif gameMode==3 then
 		love.graphics.clear(0, 0, 0)
-		love.graphics.setColor(255, 0, 0, 255)
+        colors.set("red")
 		love.graphics.print("You died",0,0,0,5,5)
 	elseif gameMode==4 then
 		love.graphics.clear(0, 0, 0)
-		love.graphics.setColor(0, 0, 255, 255)
+        colors.set("blue")
 		love.graphics.print("You win",0,0,0,5,5)
 	end
 end
 function love.update(dt)
 	love.audio.play( source )
-	if gameMode~=1 then 
+	if gameMode~=1 then
 		timer=timer+dt
 		local lenObjects = #Objects
 		for i = lenObjects, 1, -1 do
