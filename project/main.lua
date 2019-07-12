@@ -84,7 +84,6 @@ function love.load()
             rand[#rand + 1] = chans[ch]
         end
     end
-    --print(inspect( range, { depth = 4 } ) )
 
     math.randomseed(os.time())
     Ls = 31
@@ -95,18 +94,6 @@ function love.load()
     doorSize = mapSize / 5
 	gameMode=1
     -- таблица главного героя
-    --X = 400
-
-    --гриб на месте
-	
-    --призрак через стены
-
-    --волк догоняет
-
-    --змея так змея
-
-    --орк
-    --Y = 300
     Rooms, graph, Doors = gra.generate()
     id = max_vert1
     for p = 1, #Rooms do
@@ -130,7 +117,7 @@ function love.load()
 	for r=1,#Rooms do
 		if Rooms[r].use then
 			if Rooms[r].tip=='' then
-				m = { { 'Ghost', 20 },
+				local m = { { 'Ghost', 20 },
                 { 'Wolf', 20 },
                 { 'Skelet', 20 },
                 { 'Mushroom', 20 },
@@ -138,7 +125,7 @@ function love.load()
                 { 'Slime', 10}}
 					
 			
-				mobs = {}
+				local mobs = {}
 				for ch = 1, #m do
 					for f = 1, m[ch][2] do
 						mobs[#mobs + 1] = m[ch]
@@ -172,7 +159,7 @@ function love.load()
 		end
 	end
     cam = gamera.new(0, 0, size * (n + 2), size * (n + 2))
-    cam:setWindow(0, 0, 1300, 750)
+    cam:setWindow(0, 0, love.graphics.getWidth(),love.graphics.getHeight())
     cam:setScale(1.6)
 	--
 end
@@ -190,7 +177,7 @@ function love.draw()
 		love.graphics.print("Tab - Mimimap and inventory",0,350,0,5)
 		love.graphics.print("Press enter or space to start the game",0,450,0,5)
 		if love.keyboard.isDown("enter","space") then
-			gameMode=3
+			gameMode=2
 		end
 	elseif gameMode==2 then
         love.graphics.clear(0, 0, 0)
@@ -210,13 +197,13 @@ function love.draw()
                 spawn.drawLoot(v, Rooms)
                 love.graphics.setColor(255, 255, 255, 255)
                 spawn.drawLoot(v, Rooms)
-                love.graphics.print(math.floor(fps), l, t)
+                love.graphics.print(math.floor(love.timer.getFPS()), l, t)
 		    	love.graphics.print(Hero.HP, l, t+10)
                 draw.draw(Objects)
             end)
         end
 		if Hero.HP<=0 then
-			gameMode=2
+			gameMode=3
 		end
     elseif gameMode==3 then
 		love.graphics.clear(0, 0, 0)
@@ -226,7 +213,6 @@ function love.draw()
 end
 function love.update(dt)
 	timer=timer+dt
-    fps = 1 / dt
     local lenObjects = #Objects
     for i = lenObjects, 1, -1 do
         if Objects[i].name == "wall" then

@@ -1,6 +1,6 @@
 -- Ввод данных и управление с клавиатуры
 collide = require "collide"
-local function control(TypeControl, person, speed, GrowthSpeed)
+local function control(TypeControl, person, speed)
     if love.keyboard.isDown("escape") then
         love.event.quit()
     end
