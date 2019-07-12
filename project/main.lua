@@ -130,7 +130,7 @@ function love.load()
 	timer=0
 	mous1=false
 	pressed=false
-    Hero = { bazDef=0, Def=0,id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 },HP=500,hit={bazCd=1,bazRadius=30,bazDamage=20,cd=1,visCd=0.2,radius=30,colour={255,255,255,255},visibility=false,x=0,y=0,Type="circle",damage=20},lastTime=0}
+    Hero = { bazDef=0, Def=0,id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = "transparent",HP=500,hit={bazCd=1,bazRadius=30,bazDamage=20,cd=1,visCd=0.2,radius=30,colour="green",visibility=false,x=0,y=0,Type="circle",damage=20},lastTime=0}
 	Inventory = {}
 	equipment={shield='',sword='',helmet='',jacket='',pants=''}
     Objects = { Hero }
