@@ -4,7 +4,7 @@
 function love.load()
     love.window.setTitle("Граф ДРАКУЛА. Мастерская № 7. ЛШЮП 2019. Управление WASD и Tab")
     love.graphics.setDefaultFilter("nearest", "nearest")
-	source = love.audio.newSource( "13.ogg", "stream")
+	source = love.audio.newSource( "sound/13.ogg", "stream")
     colors = require "colors"    -- для совместимости разных версий Love
     inspect = require "inspect"    -- для печати в консоли содержимого таблиц
     gamera = require "gamera" -- библиотека камеры (показывать фрагмент уровня)
