@@ -1,20 +1,6 @@
 -- отрисовка мини-карты
 
 local function drawInventory()
-	--[[if love.mouse.isDown(1) and MousX > 600 and MousY > 100 then
-		local inventoryID=math.floor((MousX-600)/100)*5+math.floor(MousY/100)
-		Inventory[inventoryID]=nil
-		for i=inventoryID,9 do
-			if Inventory[i+1]==nil then
-				break
-			else
-				Inventory[i]=Inventory[i+1]
-				Inventory[i+1]=nil
-			end
-		end
-		repeat
-		until not love.mouse.isDown(1)
-	end--]]
 	love.graphics.setColor(0, 0, 0, 255)
 	local mapHeight=love.graphics.getHeight()/6
 	love.graphics.print("INVENTORY", love.graphics.getWidth()-2*mapHeight ,mapHeight-15)
