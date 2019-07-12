@@ -5,6 +5,7 @@ function love.load()
     love.window.setTitle("Граф ДРАКУЛА. Мастерская № 7. ЛШЮП 2019. Управление WASD и Tab")
     love.graphics.setDefaultFilter("nearest", "nearest") -- чтоб не сглаживались спрайты при отрисовке и оставались пиксельными
 	source = love.audio.newSource( "sound/13.ogg", "stream")
+	Die = love.audio.newSource( "sound/MainHeroDeath.ogg", "stream")
     colors = require "colors"    -- для совместимости разных версий Love
     inspect = require "inspect"    -- для печати в консоли содержимого таблиц
     gamera = require "gamera" -- библиотека камеры (показывать фрагмент уровня)
@@ -91,10 +92,10 @@ function love.load()
 	state={
 	Shield1={Def=10 },
 	Ax1={Range=10,Damage=10,Cd=0},
-	Bow1={Range=50,Damage=0,Cd=0.5},
+	Bow1={Range=50,Damage=-10,Cd=0.5},
 	LongSword1={Range=20,Damage=10,Cd=0},
-	Rod1={Range=20,Damage=20,Cd=0},
-	Rod2={Range=20,Damage=30,Cd=0},
+	Rod1={Range=20,Damage=15,Cd=1},
+	Rod2={Range=20,Damage=30,Cd=1.5},
 	Shield2={Def=10 },
 	Shield3={Def=20 },
 	Sword1={Range=10,Damage=20,Cd=0},
@@ -120,7 +121,7 @@ function love.load()
     for p = 1, #Rooms do
         --print(p,castl[p].tip)
         if Rooms[p].tip == 'treasure' then
-            for i = 1, 2, 1 do
+            for i = 1, math.random(2,4), 1 do
                 spawn.AddLotLoot(p, Rooms)
             end
         end
@@ -129,16 +130,7 @@ function love.load()
 	timer=0
 	mous1=false
 	pressed=false
-<<<<<<< HEAD
-    Hero = { bazDef=0, Def=0,id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 },HP=500,hit={bazCd=0.5,bazRadius=50,bazDamage=20,cd=0.5,visCd=0.2,radius=50,colour={255,255,255,255},visibility=false,x=0,y=0,Type="circle",damage=20},lastTime=0}
-=======
-    Hero = { Def=30,id = id,
-             cellX = id % n, cellY = math.floor(id / n) + 1,
-             name = "Hero", Type = "circle", mode = "line",
-             sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2,
-             radius = 10, colour = "white", HP=500,
-             hit={cd=0.5,visCd=0.2, radius=50, colour = "blue", visibility=false, x=0, y=0, Type="circle", damage=20}, lastTime=0}
->>>>>>> 2f1ef5ebb8e839d2ea2610788f34c7e470aa6b44
+    Hero = { bazDef=0, Def=0,id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 },HP=500,hit={bazCd=1,bazRadius=30,bazDamage=20,cd=1,visCd=0.2,radius=30,colour={255,255,255,255},visibility=false,x=0,y=0,Type="circle",damage=20},lastTime=0}
 	Inventory = {}
 	equipment={shield='',sword='',helmet='',jacket='',pants=''}
     Objects = { Hero }
@@ -238,6 +230,7 @@ function love.draw()
 			gameMode=3
 		end
     elseif gameMode==3 then
+		love.audio.play( Die )
 		love.graphics.clear(0, 0, 0)
         colors.set("red")
 		love.graphics.print("You died",0,0,0,5,5)
@@ -274,10 +267,10 @@ function love.update(dt)
 			visited = {}
 			roomCollision.dfs(graph, A[i], n, (collide.XYFromID(A[i])[1] + 0) * size + size / 2, (collide.XYFromID(A[i])[2] + 2) * size + size / 2, size, 5, 3, { 50, 50, 50, 255 })
 		end
-		control.control({ "a", "w", "s", "d", "q", "e" }, Hero, 300 * dt, 100 * dt)
+		control.control({ "a", "w", "s", "d", "q", "e" }, Hero, 250 * dt, 100 * dt)
 		monster.UpdateMonster(dt)
 		updateSpr(heroSprite, dt)
-		print(inspect( equipment.sword, { depth = 2 } ) )
+		--print(inspect( equipment.sword, { depth = 2 } ) )
 		Hero.Def=Hero.bazDef
 		Hero.hit.damage=Hero.hit.bazDamage
 		Hero.hit.cd=Hero.hit.bazCd

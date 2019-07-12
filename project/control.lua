@@ -46,9 +46,9 @@ local function control(TypeControl, person, speed)
 		pressed=true
 		Hero.lastTime=timer
 		Hero.hit.visibility=true
-		love.audio.play(hit)
 		for i=1,#Objects do
 			if Objects[i].name~="Hero" and Objects[i].name~="wall" and roomCollision.containElem(v,Objects[i].id) and collide.collide(Objects[i],Hero.hit)then
+				love.audio.play(hit)
 				Objects[i].HP=Objects[i].HP-Hero.hit.damage
 				if Objects[i].HP<=0 then
 					if Objects[i].name == "Drakula" then
