@@ -17,7 +17,7 @@ function CreateMonster(id, tip)
     end
     if tip == 'Slime' then
         Objects[#Objects + 1] = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1,
-		name = "Slime", Type = "circle", mode = "line", sprite = newSpr("spr/modelSlime", 51, 51, 23, 1, 2),
+		name = "Slime", Type = "circle", mode = "line", sprite = newSpr("spr/modelSlime", 51, 51, 0.23, 1, 2),
 		x = collide.XYFromID(id)[1] * size + e_x, y = (collide.XYFromID(id)[2] + 2) * size + e_y,
 		radius = 30, colour = { 255, 255, 255, 0 }, HP = 1, Def = 1, speed = 50,lastTime=0,
 		hit={cd=2,radius=40,x=0,y=0,Type="circle",damage=1}}
