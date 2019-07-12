@@ -5,7 +5,7 @@ function love.load()
     love.window.setTitle("Граф ДРАКУЛА. Мастерская № 7. ЛШЮП 2019. Управление WASD и Tab")
     love.graphics.setDefaultFilter("nearest", "nearest") -- чтоб не сглаживались спрайты при отрисовке и оставались пиксельными
 	source = love.audio.newSource( "sound/13.ogg", "stream")
-	Die = love.audio.newSource( "sound/MainHeroDeath.ogg", "stream")
+	Die = love.audio.newSource( "sound/Dark Souls - You Died Sound Effect.mp3", "stream")
     colors = require "colors"    -- для совместимости разных версий Love
     inspect = require "inspect"    -- для печати в консоли содержимого таблиц
     gamera = require "gamera" -- библиотека камеры (показывать фрагмент уровня)
@@ -233,7 +233,7 @@ function love.draw()
 		love.audio.play( Die )
 		love.graphics.clear(0, 0, 0)
         colors.set("red")
-		love.graphics.print("You died",0,0,0,5,5)
+		love.graphics.print("You died",520,300,0,5,5)
 	elseif gameMode==4 then
 		love.graphics.clear(0, 0, 0)
         colors.set("blue")
