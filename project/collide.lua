@@ -2,7 +2,7 @@
 local function CollideWith(person)
 	if person.name=="Hero" then
 		for i = 1, #Objects do
-            if collide.collide(Objects[i], person) then
+            if Objectsda[i].name~="Ghost" and collide.collide(Objects[i], person) then
 		        return true
 		    end
 	    end

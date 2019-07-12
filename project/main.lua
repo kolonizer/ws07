@@ -106,7 +106,7 @@ function love.load()
     --print(inspect( castl, { depth = 4 } ) )
 	timer=0
 	pressed=false
-    Hero = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 },HP=5,hit={cd=0.6,visCd=0.2,radius=40,colour={255,255,255,255},visibility=false,x=0,y=0,Type="circle",damage=1},lastTime=0}
+    Hero = { id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 },HP=500,hit={cd=0.5,visCd=0.2,radius=50,colour={255,255,255,255},visibility=false,x=0,y=0,Type="circle",damage=20},lastTime=0}
 	Inventory = {}
   for i = 1,10 do
     Inventory[i] = {}
