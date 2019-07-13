@@ -263,7 +263,7 @@ function love.update(dt)
 		if Hero.hit.visibility==true and Hero.hit.visCd<timer-Hero.lastTime then
 			Hero.hit.visibility=false
 		end
-		roomCollision.dfs(graph, Hero.id, n, Hero.cellX * size + size / 2, Hero.cellY * size + size / 2, size, 5, 3, { 255, 255, 255, 255 })
+		roomCollision.dfs(graph, Hero.id, n, Hero.cellX * size + size / 2, Hero.cellY * size + size / 2, size, 5, 3, "white")
 		v = visited
 		loot.takeTool()
 		local A = roomCollision.neighbours(visited, graph)

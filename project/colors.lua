@@ -10,6 +10,7 @@ local colors = {
     lightGray = { 0.25, 0.25, 0.25, 1},
     gray = { 0.75, 0.75, 0.75, 1},
     transparent = {1, 1, 1, 0.25},
+    transparentRed = {1, 0, 0, 0.25},
 }
 
 local function set( c )
