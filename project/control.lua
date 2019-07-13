@@ -2,7 +2,7 @@
 collide = require "collide"
 hit = love.audio.newSource( "sound/hit1.ogg", "stream")
 deathZ = love.audio.newSource( "sound/deathZombie.ogg", "stream")
---fin = love.audio.newSource( "sound/end.ogg", "stream")
+win = love.audio.newSource( "sound/end.ogg", "stream")
 local function control(TypeControl, person, speed)
     if love.keyboard.isDown("escape") then
         love.event.quit()
@@ -52,7 +52,7 @@ local function control(TypeControl, person, speed)
 				Objects[i].HP=Objects[i].HP-Hero.hit.damage
 				if Objects[i].HP<=0 then
 					if Objects[i].name == "Drakula" then
-						love.audio.play( fin )
+						love.audio.play( win )
 						gameMode = 4
 					else	
 						love.audio.play( deathZ )
