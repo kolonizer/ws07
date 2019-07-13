@@ -5,7 +5,7 @@ function love.load()
     love.window.setTitle("Граф ДРАКУЛА. Мастерская № 7. ЛШЮП 2019. Управление WASD и Tab")
     love.graphics.setDefaultFilter("nearest", "nearest") -- чтоб не сглаживались спрайты при отрисовке и оставались пиксельными
 	source = love.audio.newSource( "sound/13.ogg", "stream")
-	Die = love.audio.newSource( "sound/MainHeroDeath.ogg", "stream")
+	Die = love.audio.newSource( "sound/Dark Souls - You Died Sound Effect.mp3", "stream")
     colors = require "colors"    -- для совместимости разных версий Love
     inspect = require "inspect"    -- для печати в консоли содержимого таблиц
     gamera = require "gamera" -- библиотека камеры (показывать фрагмент уровня)
@@ -19,7 +19,7 @@ function love.load()
     spawn = require "spawn"
     monster = require "monster"
     loot = require "loot"
-    DoorsOfRoom = {}
+    DoorsOfRoom = {}        
     --загрузка ресурсов
     heroSprite = newSpr("spr/mainHero", 50, 50, 0.3, 4, 3, { 1, 2, 3, 2 })
     bossSprite = newSpr("spr/dracula", 31, 80, 0.3, 4, 3, { 1, 2, 3, 2 })
@@ -133,7 +133,7 @@ function love.load()
 	timer=0
 	mous1=false
 	pressed=false
-    Hero = { bazDef=0, Def=0,id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = { 255, 255, 255, 0 },HP=500,hit={bazCd=1,bazRadius=30,bazDamage=20,cd=1,visCd=0.2,radius=30,colour={255,255,255,255},visibility=false,x=0,y=0,Type="circle",damage=20},lastTime=0}
+    Hero = { bazDef=0, Def=0,id = id, cellX = id % n, cellY = math.floor(id / n) + 1, name = "Hero", Type = "circle", mode = "line", sprite = heroSprite, x = collide.XYFromID(max_vert1)[1] * size + size / 2, y = (collide.XYFromID(max_vert1)[2] + 2) * size + size / 2, radius = 10, colour = "transparent",HP=500,hit={bazCd=1,bazRadius=30,bazDamage=20,cd=1,visCd=0.2,radius=30,colour="green",visibility=false,x=0,y=0,Type="circle",damage=20},lastTime=0}
 	Inventory = {}
 	equipment={shield='',sword='',helmet='',jacket='',pants=''}
     Objects = { Hero }
@@ -272,8 +272,6 @@ function love.update(dt)
 		end
 		control.control({ "a", "w", "s", "d", "q", "e" }, Hero, 250 * dt, 100 * dt)
 		monster.UpdateMonster(dt)
-		updateSpr(heroSprite, dt)
-		--print(inspect( equipment.sword, { depth = 2 } ) )
 		Hero.Def=Hero.bazDef
 		Hero.hit.damage=Hero.hit.bazDamage
 		Hero.hit.cd=Hero.hit.bazCd
