@@ -115,7 +115,7 @@ function love.load()
     Ls = 31
     ws = 3
     size = 403 + 2 * ws
-    n = 7
+    n = 10
     mapSize = love.graphics.getHeight() / n
     doorSize = mapSize / 5
 	gameMode=1
