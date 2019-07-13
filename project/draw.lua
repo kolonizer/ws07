@@ -26,7 +26,8 @@ end
 local function drawFloor()
 	colors.set("lightGray")
 	for i=1,#v do
-		love.graphics.rectangle("fill",(collide.XYFromID(v[i])[1])*size-2.5,(collide.XYFromID(v[i])[2]+2)*size-2.5,size+5,size+5)
+		drawSpr(ModelFloor, (collide.XYFromID(v[i])[1]+0.5)*size,(collide.XYFromID(v[i])[2]+2.5)*size)
+		--love.graphics.rectangle("fill",(collide.XYFromID(v[i])[1])*size-2.5,(collide.XYFromID(v[i])[2]+2)*size-2.5,size+5,size+5)
 	end
 end
 local function draw(o)

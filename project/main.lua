@@ -58,6 +58,7 @@ function love.load()
 	
 	YouWin = newSpr("spr/YOU WIN", 298,250, 1, 1, 1)
 	YouDied = newSpr("spr/YOU DIED", 265,231, 1, 1, 1)
+	ModelFloor = newSpr("spr/modelFloor1",403,403,1,1,1)
 
     chans = { { Key, 'Key', 0 },
               { KeyBlue, 'KeyBlue', 0 },
